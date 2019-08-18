@@ -1,0 +1,245 @@
+{
+    "validActions": [
+        "none",
+        "talk",
+        "search",
+        "treat",
+        "hack",
+        "defuse",
+        "wild"
+    ],
+    "dice": [
+        {
+            "name": "normal",
+            "faces": [
+                {
+                    "action": "none",
+                    "value": 0
+                },
+                {
+                    "action": "none",
+                    "value": 0
+                },
+                {
+                    "action": "talk",
+                    "value": 1
+                },
+                {
+                    "action": "talk",
+                    "value": 2
+                },
+                {
+                    "action": "search",
+                    "value": 1
+                },
+                {
+                    "action": "search",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "name": "medic",
+            "faces": [
+                {
+                    "action": "none",
+                    "value": 0
+                },
+                {
+                    "action": "talk",
+                    "value": 1
+                },
+                {
+                    "action": "talk",
+                    "value": 2
+                },
+                {
+                    "action": "treat",
+                    "value": 2
+                },
+                {
+                    "action": "treat",
+                    "value": 3
+                },
+                {
+                    "action": "wild",
+                    "value": 3
+                }
+            ]
+        },
+        {
+            "name": "hacker",
+            "faces": [
+                {
+                    "action": "none",
+                    "value": 0
+                },
+                {
+                    "action": "search",
+                    "value": 1
+                },
+                {
+                    "action": "search",
+                    "value": 2
+                },
+                {
+                    "action": "hack",
+                    "value": 2
+                },
+                {
+                    "action": "hack",
+                    "value": 3
+                },
+                {
+                    "action": "wild",
+                    "value": 3
+                }
+            ]
+        },
+        {
+            "name": "bomb specialist",
+            "faces": [
+                {
+                    "action": "none",
+                    "value": 0
+                },
+                {
+                    "action": "search",
+                    "value": 1
+                },
+                {
+                    "action": "defuse",
+                    "value": 2
+                },
+                {
+                    "action": "defuse",
+                    "value": 2
+                },
+                {
+                    "action": "defuse",
+                    "value": 3
+                },
+                {
+                    "action": "wild",
+                    "value": 3
+                }
+            ]
+        },
+        {
+            "name": "medic/bomb specialist",
+            "faces": [
+                {
+                    "action": "defuse",
+                    "value": 2
+                },
+                {
+                    "action": "treat",
+                    "value": 2
+                },
+                {
+                    "action": "defuse",
+                    "value": 2
+                },
+                {
+                    "action": "treat",
+                    "value": 2
+                },
+                {
+                    "action": "talk",
+                    "value": 3
+                },
+                {
+                    "action": "none",
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "name": "hacker/bomb specialist",
+            "faces": [
+                {
+                    "action": "defuse",
+                    "value": 2
+                },
+                {
+                    "action": "hack",
+                    "value": 2
+                },
+                {
+                    "action": "defuse",
+                    "value": 2
+                },
+                {
+                    "action": "hack",
+                    "value": 2
+                },
+                {
+                    "action": "none",
+                    "value": 0
+                },
+                {
+                    "action": "search",
+                    "value": 3
+                }
+            ]
+        },
+        {
+            "name": "medic/hacker",
+            "faces": [
+                {
+                    "action": "hack",
+                    "value": 2
+                },
+                {
+                    "action": "treat",
+                    "value": 2
+                },
+                {
+                    "action": "hack",
+                    "value": 2
+                },
+                {
+                    "action": "treat",
+                    "value": 2
+                },
+                {
+                    "action": "talk",
+                    "value": 3
+                },
+                {
+                    "action": "none",
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "name": "generalist",
+            "faces": [
+                {
+                    "action": "none",
+                    "value": 0
+                },
+                {
+                    "action": "defuse",
+                    "value": 2
+                },
+                {
+                    "action": "hack",
+                    "value": 2
+                },
+                {
+                    "action": "treat",
+                    "value": 2
+                },
+                {
+                    "action": "wild",
+                    "value": 2
+                },
+                {
+                    "action": "wild",
+                    "value": 3
+                }
+            ]
+        }
+    ]
+}
