@@ -1,40 +1,43 @@
 # Indigo Storm
 
-_1-5 player cooperative game
-45 mins per normal episode, 90 min per finale episode, 25 mins per pilot episode
-7 episode campaign (1 pilot episode, 5 normal episodes, 1 finale episode)_
+_1-5 player cooperative game_
+
+_45 mins per normal episode, 90 min per finale episode, 25 mins per pilot episode_
+
+_7 episode campaign (1 pilot episode, 5 normal episodes, 1 finale episode)_
 
 ## Theme & Feel
 
-Law enforcement agents (like the FBI) protecting the populace, discovering information, and preventing national disaster.
-Thriller TV show with a serial element in board game form
-Gameplay should evoke the following: investigation, urgency, speed, stealth, tension
+- Law enforcement agents (like the FBI) protecting the populace, discovering information, and preventing national disaster.
+- Thriller TV show with a serial element in board game form
+- Gameplay should evoke the following: investigation, urgency, speed, stealth, tension
 
 ## Components
 
-7 miniatures - one for each of the characters
-15 normal action dice
-14 special character dice (2 per character)
+- 7 miniatures - one for each of the characters
+- 15 normal action dice
+- 14 special character dice (2 per character)
 
 Each episode comes with a set of square tiles that make up the board.
 
 ### Characters
 
-Medic - male
-Hacker - female Asian
-Bomb Specialist - female
-Medic/hacker - female African American
-Hacker/bomb specialist - male
-Medic/bomb specialist - male
-Generalist - male
+- Medic - male
+- Hacker - female Asian
+- Bomb Specialist - female
+- Medic/hacker - female African American
+- Hacker/bomb specialist - male
+- Medic/bomb specialist - male
+- Generalist - male
 
 ### Actions
-Move (any die can be used to move one tile)
-Talk
-Search
-Treat
-Hack
-Defuse (explosives)
+
+- Move (any die can be used to move one tile)
+- Talk
+- Search
+- Treat
+- Hack
+- Defuse (explosives)
 
 ## Gameplay
 
@@ -76,12 +79,14 @@ Plot points:
   - Go to where the general is being held and confront the kidnappers.
 
 ### Thoughts on changing plot points:
-Things later on could depend on how you treat the hacker during the interrogation.
-Which agent gets captured could possibly change (though this would make feeling the pain of losing the agent that would be particularly good at base infiltration less real)
-Base could be purposely detonated once everyone is out or earlier when people are still in there
-Bomb threat could be real or it could be totally fake
-The antagonists could be forcing a recorded/public confession from the general or killing him in order to get revenge
+
+- Things later on could depend on how you treat the hacker during the interrogation.
+- Which agent gets captured could possibly change (though this would make feeling the pain of losing the agent that would be particularly good at base infiltration less real)
+- Base could be purposely detonated once everyone is out or earlier when people are still in there
+- Bomb threat could be real or it could be totally fake
+- The antagonists could be forcing a recorded/public confession from the general or killing him in order to get revenge
 
 ### Random Thoughts:
-Maybe the serum was for immunity to a chemical weapon that another country was developing
-Maybe the experiments were done a long time ago overseas and the general is now someone with a much more secretive schedule/location/protocol (President?, high ranking CIA official? Maybe they don’t hack or don’t just hack the FBI but the CIA and/or NSA too?) so they have to hack in to find these things out.
+
+- Maybe the serum was for immunity to a chemical weapon that another country was developing
+- Maybe the experiments were done a long time ago overseas and the general is now someone with a much more secretive schedule/location/protocol (President?, high ranking CIA official? Maybe they don’t hack or don’t just hack the FBI but the CIA and/or NSA too?) so they have to hack in to find these things out.
