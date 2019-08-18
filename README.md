@@ -8,26 +8,25 @@ _1-5 player cooperative game
 
 Law enforcement agents (like the FBI) protecting the populace, discovering information, and preventing national disaster.
 Thriller TV show with a serial element in board game form
-Gameplay should evoke the following: urgency, speed, stealth, tension
+Gameplay should evoke the following: investigation, urgency, speed, stealth, tension
 
 ## Components
 
-8 miniatures - one for each of the characters
+7 miniatures - one for each of the characters
 15 normal action dice
-16 special character dice (2 per character)
+14 special character dice (2 per character)
 
 Each episode comes with a set of square tiles that make up the board.
 
 ### Characters
 
-Investigator/Surveillance Specialist - female African American
-Sniper - male
-Hacker - female Asian
-Negotiator/Interrogator - male
-Assault Specialist - male
-Bomb Specialist - female
 Medic - male
-Undercover/Close Combat Specialist - female
+Hacker - female Asian
+Bomb Specialist - female
+Medic/hacker - female African American
+Hacker/bomb specialist - male
+Medic/bomb specialist - male
+Generalist - male
 
 ### Actions
 Move (any die can be used to move one tile)
@@ -39,18 +38,20 @@ Defuse (explosives)
 
 ## Gameplay
 
-- At the beginning of each mission, players choose which characters to send on the mission and one item per character from the available unlocked items.
-- Each die face has an investigation value (a number between 0 and 5) and an action.
-- Each character comes with two dice with special actions on them and  three normal dice.
+- At the beginning of each mission, players choose which characters to send on the mission (there are sometimes some required characters/skills) and one item per character from the available unlocked items.
+- Each die face has an observation value (a number between 0 and 5) and an action.
+- Each character comes with two dice with special actions on them and three normal dice.
 - Roll each character’s five dice individually at the beginning of each round.
+- At the beginning of each round a timer (30s?) is started and all players roll their dice simultaneously. Players may re-roll as many or as few of their dice as many times as they would like while the timer is still running. If a die lands on a "0/none" face, then it cannot be re-rolled any further and will not be usable for the round.
 - If players are on the same tile, they may share dice when investigating for clues or when activating a clue.
-- Each POI on the board has an investigation value required to interact with that POI. A player on the same tile as the POI chooses to investigate that POI by using any number of unactivated dice available to them (either theirs or shared with them from players on the same tile) where the total value on the dice matches or exceeds the investigation value on the POI. The player will then draw the associated card (each card and POI has a unique number), play it face down in the play area, and mark the spent dice as activated/unavailable (until the next round).
-- Once the clue card is drawn, there are further action/value costs on the card to activate it. Players on the same tile as the card’s associated POI may satisfy these costs by placing one or more of their available dice on the card. Dice remain on cards until they are activated, at which point they return to their respective players for use in the following round. When a clue card is activated, flip it over to reveal the clue (flavor text) and any possible special bonuses/keys for future clues.
+- Each POI on the board has an observation value required to interact with that POI. A player on the same tile as the POI chooses to investigate that POI by using any number of unactivated dice available to them (either theirs or shared with them from players on the same tile) where the total value on the dice matches or exceeds the observation value on the POI. The player will then draw the associated card (each card and POI has a unique number), play it face down in the play area, and mark the spent dice as activated/unavailable (until the next round).
+- Once the clue card is drawn, there are further action costs on the card to activate it. Players on the same tile as the card’s associated POI may satisfy these costs by placing one or more of their available dice on the card. Dice remain on cards until they are activated, at which point they return to their respective players for use in the following round. When a clue card is activated, flip it over to reveal the clue (flavor text) and any possible special bonuses/keys for future clues.
 - Players decide turn order each round. In turn order, each player will perform all actions they want to perform (possibly saving dice to give to another player on their turn later in the round) and then, if the event deck is active, draw an event card and follow any instructions on it.
 - Each episode has an event deck. If the event deck ever runs out, the mission has been lost. The event deck is either activated at the beginning of the episode or during the episode by a particular clue card (clue cards may also deactivate the event deck). 
 - To accomplish a mission, the primary and secondary objectives must be met (in the variant “easy” mode, only the primary objective must be met). 
 - Each mission also has bonus objectives that do not have to be met to complete the episode.
 - When a secondary or bonus objective is met, players receive a reward, either items or abilities that can be used for the remainder of the campaign
+- A typical objective will be to collect a certain number of clues (of a type or in some other category; this will be shown on the clue card on the front but not shown on the POI on the map so players won't be able to know at the map level what exactly to go for, but will know before investigating/activating the clue so they don't waste actions on that if it isn't what they want to do).
 
 ## Storyline
 
