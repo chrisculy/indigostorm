@@ -1,8 +1,8 @@
 .vs/
-/bin
-/dist
-/node_modules
-/obj
+bin/
+dist/
+node_modules/
+obj/
 
 .DS_Store
 npm-debug.log*
