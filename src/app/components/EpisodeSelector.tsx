@@ -1,12 +1,17 @@
 import React from 'react';
-import { Select, MenuItem } from '@material-ui/core';
-import Episode from '../models/Episode';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { Select, MenuItem, Grid, Button } from '@material-ui/core';
 import Episodes from '../episodes/episodes';
+import Episode from '../models/Episode';
+import { playEpisode } from '../state/game';
 
-interface EpisodeSelectorProps {}
+interface EpisodeSelectorProps {
+	dispatch: Dispatch;
+}
 
 interface EpisodeSelectorState {
-	episodeName: string;
+	episodeIndex: number;
 }
 
 class EpisodeSelector extends React.Component<EpisodeSelectorProps, EpisodeSelectorState> {
@@ -14,7 +19,7 @@ class EpisodeSelector extends React.Component<EpisodeSelectorProps, EpisodeSelec
 		super(props);
 
 		this.state = {
-			episodeName: Episodes[0].name,
+			episodeIndex: 0,
 		};
 	}
 
@@ -25,33 +30,54 @@ class EpisodeSelector extends React.Component<EpisodeSelectorProps, EpisodeSelec
 		}>,
 		_: React.ReactNode
 	) {
-		const episode: Episode = Episodes.filter(x => x.name === event.target.value)[0];
-		this.setState({ ...this.state, episodeName: episode.name });
-		console.log(episode);
+		const episodeIndex: number = event.target.value as number;
+		this.setState({ ...this.state, episodeIndex });
 	}
 
 	render() {
-		const episodeMenuItems = Episodes.map(episode => {
+		const episodeMenuItems = Episodes.map((episode: Episode, index: number) => {
 			return (
-				<MenuItem key={episode.name} value={episode.name}>
+				<MenuItem key={episode.name} value={index}>
 					{episode.name}
 				</MenuItem>
 			);
 		});
 
 		return (
-			<Select
-				value={this.state.episodeName}
-				onChange={(event, child) => this.onEpisodeChanged(event, child)}
-				inputProps={{
-					name: 'episode',
-					id: 'episode-selector',
-				}}
-			>
-				{episodeMenuItems}
-			</Select>
+			<Grid container direction="row" justify="center" alignItems="center">
+				<Grid item>
+					<Select
+						value={this.state.episodeIndex}
+						onChange={(event, child) => this.onEpisodeChanged(event, child)}
+						inputProps={{
+							name: 'episode',
+							id: 'episode-selector',
+						}}
+					>
+						{episodeMenuItems}
+					</Select>
+				</Grid>
+				<Grid item>
+					<Button variant="contained" color="primary" onClick={() => this.props.dispatch(playEpisode(this.state.episodeIndex))}>
+						Play Episode
+					</Button>
+				</Grid>
+			</Grid>
 		);
 	}
 }
 
-export default EpisodeSelector;
+const mapStateToProps = () => {
+	return {};
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+	return {
+		dispatch
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(EpisodeSelector);
