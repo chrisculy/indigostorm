@@ -16,12 +16,12 @@ const EpisodeDisplay: React.StatelessComponent<EpisodeDisplayProps> = (props: Ep
 	const pois = episode.pointsOfInterest.filter(poi => episode.areas[props.activeAreaIndex].pointOfInterestIds.some(poiId => poi.id === poiId));
 	return (
 		<Container>
-			<Typography variant="h4">{episode.name}</Typography>
-			<Typography variant="h6" color="textSecondary">
+			<Typography variant="h6">{episode.name}</Typography>
+			<Typography variant="subtitle2" color="textSecondary">
 				{episode.mission.description}
 			</Typography>
-			<Typography variant="h5">{`Objective: ${episode.mission.primaryObjective}`}</Typography>
-			<Typography variant="h5" color="textSecondary">{`Optional: ${episode.mission.auxiliaryObjective}`}</Typography>
+			<Typography variant="subtitle1">{`Primary Objective: ${episode.mission.primaryObjective}`}</Typography>
+			<Typography variant="subtitle1" color="textSecondary">{`Auxiliary Objective: ${episode.mission.auxiliaryObjective}`}</Typography>
 			<Grid container>
 				<Grid item xs={12}>
 					<AreaDisplay activeAreaIndex={props.activeAreaIndex} areas={episode.areas} dispatch={props.dispatch} />
