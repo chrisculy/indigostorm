@@ -2,7 +2,6 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Container, Grid } from '@material-ui/core';
-import Episodes from '../episodes/episodes';
 import { GameState, ReduxStore } from '../state/store';
 import HandDisplay from './HandDisplay';
 import DiceDisplay from './DiceDisplay';
