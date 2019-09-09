@@ -1,17 +1,18 @@
 import React from 'react';
+import { observePoi } from '../state/game';
 import PointOfInterest from '../models/PointOfInterest';
 import { Typography, Grid, Card, CardContent, CardActions, Button } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 
 export interface PointsOfInterestDisplayProps {
 	pointsOfInterest: PointOfInterest[];
+	observePoi: (pointOfInterest: PointOfInterest) => void;
 }
 
 const PointsOfInterestDisplay: React.StatelessComponent<PointsOfInterestDisplayProps> = (props: PointsOfInterestDisplayProps) => {
 	return (
 		<Grid container>
 			{props.pointsOfInterest.map((pointOfInterest: PointOfInterest, index: number) => {
-				const typeDisplay = pointOfInterest.type ? <Typography variant="body2" align="right">{pointOfInterest.type}</Typography> : null;
 				return (
 					<Grid item xs={3} key={`poi_${pointOfInterest.id}`}>
 						<Card>
@@ -23,13 +24,10 @@ const PointsOfInterestDisplay: React.StatelessComponent<PointsOfInterestDisplayP
 									<Grid item xs={2}>
 										<Typography align="right">{pointOfInterest.observationCost}</Typography>
 									</Grid>
-									<Grid item xs={8}>
-										{typeDisplay}
-									</Grid>
 								</Grid>
 							</CardContent>
 							<CardActions>
-								<Button>{'Observe'}</Button>
+								<Button onClick={_ => props.observePoi(pointOfInterest)}>{'Observe'}</Button>
 							</CardActions>
 						</Card>
 					</Grid>

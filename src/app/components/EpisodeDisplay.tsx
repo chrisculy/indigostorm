@@ -6,6 +6,8 @@ import Episodes from '../episodes/episodes';
 import AreaDisplay from './AreaDisplay';
 import { GameState, ReduxStore } from '../state/store';
 import PointsOfInterestDisplay from './PointsOfInterestDisplay';
+import { observePoi } from '../state/game';
+import PointOfInterest from '../models/PointOfInterest';
 
 export type EpisodeDisplayProps = GameState & {
 	dispatch: Dispatch;
@@ -27,7 +29,7 @@ const EpisodeDisplay: React.StatelessComponent<EpisodeDisplayProps> = (props: Ep
 					<AreaDisplay activeAreaIndex={props.activeAreaIndex} areas={episode.areas} dispatch={props.dispatch} />
 				</Grid>
 				<Grid item xs={12}>
-					<PointsOfInterestDisplay pointsOfInterest={pois} />
+					<PointsOfInterestDisplay pointsOfInterest={pois} observePoi={(poi: PointOfInterest) => props.dispatch(observePoi(poi))} />
 				</Grid>
 			</Grid>
 		</Container>
@@ -42,7 +44,7 @@ const mapStateToProps = (store: ReduxStore) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
 	return {
-		dispatch
+		dispatch,
 	};
 };
 
