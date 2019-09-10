@@ -1,6 +1,6 @@
 import { createAction, getType, ActionType } from 'typesafe-actions';
 import { GameState } from './store';
-import PointOfInterest from '../models/PointOfInterest';
+import Episodes from '../episodes/episodes';
 
 export const playEpisode = createAction('GAME/PLAY_EPISODE', action => {
 	return (episodeIndex: number) => action({ episodeIndex });
@@ -15,7 +15,7 @@ export const investigatePoi = createAction('GAME/INVESTIGATE_POI', action => {
 })
 
 export const observePoi = createAction('GAME/OBSERVE_POI', action => {
-	return (pointOfInterest: PointOfInterest) => action({ pointOfInterest });
+	return (poiId: number) => action({ poiId });
 })
 
 const GameActions = {
@@ -29,7 +29,7 @@ type GameAction = ActionType<typeof GameActions>;
 
 const initialState: GameState = {
 	activeAreaIndex: 0,
-	episodeIndex: 0,
+	episode: Episodes[0],
 	hand: {
 		investigated: [
 		],
@@ -41,13 +41,16 @@ const initialState: GameState = {
 export const gameReducer = (state: GameState = initialState, action: GameAction): GameState => {
 	switch (action.type) {
 		case getType(GameActions.playEpisode):
-			return { ...state, episodeIndex: action.payload.episodeIndex };
+			return { ...state, episode: Episodes[action.payload.episodeIndex] };
 		case getType(GameActions.setActiveArea):
 			return { ...state, activeAreaIndex: action.payload.activeAreaIndex };
 		case getType(GameActions.observePoi):
 		{
 			const hand = { ...state.hand };
-			hand.observed.push(action.payload.pointOfInterest);
+			const episode = { ...state.episode };
+			const poi = episode.pointsOfInterest.filter(x => x.id === action.payload.poiId)[0];
+			hand.observed.push(poi);
+			episode.areas[state.activeAreaIndex].pointOfInterestIds = episode.areas[state.activeAreaIndex].pointOfInterestIds.filter(poiId => poiId !== action.payload.poiId);
 			return { ...state, hand };
 		}
 		case getType(GameActions.investigatePoi):

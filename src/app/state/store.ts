@@ -1,6 +1,7 @@
 import { createStore } from "redux";
 import { combineReducers } from "redux";
 import { gameReducer } from "./game";
+import Episode from "../models/Episode";
 import PointOfInterest from "../models/PointOfInterest";
 
 export interface PlayerHand {
@@ -9,7 +10,7 @@ export interface PlayerHand {
 }
 
 export interface GameState {
-	episodeIndex: number;
+	episode: Episode;
 	activeAreaIndex: number;
 	hand: PlayerHand;
 };
