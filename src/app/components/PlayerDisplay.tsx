@@ -14,12 +14,12 @@ export type PlayerDisplayProps = GameState & {
 const PlayerDisplay: React.StatelessComponent<PlayerDisplayProps> = (props: PlayerDisplayProps) => {
 	return (
 		<Container>
-			<Grid container>
-				<Grid item xs={4}>
-					<DiceDisplay />
-				</Grid>
-				<Grid item xs={8}>
+			<Grid container spacing={2}>
+				<Grid item xs={12}>
 					<HandDisplay hand={props.hand} investigatePoi={(observedPoiIndex: number) => props.dispatch(investigatePoi(observedPoiIndex))} />
+				</Grid>
+				<Grid item xs={12}>
+					<DiceDisplay />
 				</Grid>
 			</Grid>
 		</Container>

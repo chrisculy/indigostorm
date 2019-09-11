@@ -22,7 +22,7 @@ const EpisodeSelector : React.StatelessComponent<EpisodeSelectorProps> = (props:
 	const [episodeIndex, setEpisodeIndex] = useState(0);
 
 	return (
-		<Grid container direction="row" justify="center" alignItems="center">
+		<Grid container direction="row" justify="center" alignItems="center" spacing={4}>
 			<Grid item>
 				<Select
 					value={episodeIndex}

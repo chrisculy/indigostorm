@@ -10,7 +10,7 @@ export interface PointsOfInterestDisplayProps {
 
 const PointsOfInterestDisplay: React.StatelessComponent<PointsOfInterestDisplayProps> = (props: PointsOfInterestDisplayProps) => {
 	return (
-		<Grid container>
+		<Grid container spacing={2}>
 			{props.pointsOfInterest.map((pointOfInterest: PointOfInterest) => {
 				return (
 					<Grid item xs={3} key={`poi_${pointOfInterest.id}`}>
