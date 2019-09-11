@@ -80,7 +80,7 @@ const Episode5: Episode = {
         "investigationCosts": [
             "none"
         ],
-        "description": "There is an air of precision to the layout of the base, reminiscent of an instituion of some kind..."
+        "description": "There is an air of precision to the layout of the base, reminiscent of an institution of some kind..."
     }, {
         "id": 8,
         "type": "C",
