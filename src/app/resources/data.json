@@ -1,0 +1,274 @@
+{
+	"dice": [
+		{
+			"name": "normal",
+			"color": "white",
+			"faces": [
+				{
+					"action": "none",
+					"value": 0
+				},
+				{
+					"action": "none",
+					"value": 0
+				},
+				{
+					"action": "talk",
+					"value": 1
+				},
+				{
+					"action": "talk",
+					"value": 2
+				},
+				{
+					"action": "search",
+					"value": 1
+				},
+				{
+					"action": "search",
+					"value": 2
+				}
+			]
+		},
+		{
+			"name": "medic",
+			"color": "blue",
+			"faces": [
+				{
+					"action": "none",
+					"value": 0
+				},
+				{
+					"action": "talk",
+					"value": 1
+				},
+				{
+					"action": "talk",
+					"value": 2
+				},
+				{
+					"action": "treat",
+					"value": 2
+				},
+				{
+					"action": "treat",
+					"value": 3
+				},
+				{
+					"action": "wild",
+					"value": 3
+				}
+			]
+		},
+		{
+			"name": "hacker",
+			"color": "green",
+			"faces": [
+				{
+					"action": "none",
+					"value": 0
+				},
+				{
+					"action": "search",
+					"value": 1
+				},
+				{
+					"action": "search",
+					"value": 2
+				},
+				{
+					"action": "hack",
+					"value": 2
+				},
+				{
+					"action": "hack",
+					"value": 3
+				},
+				{
+					"action": "wild",
+					"value": 3
+				}
+			]
+		},
+		{
+			"name": "bomb specialist",
+			"color": "red",
+			"faces": [
+				{
+					"action": "none",
+					"value": 0
+				},
+				{
+					"action": "search",
+					"value": 1
+				},
+				{
+					"action": "defuse",
+					"value": 2
+				},
+				{
+					"action": "defuse",
+					"value": 2
+				},
+				{
+					"action": "defuse",
+					"value": 3
+				},
+				{
+					"action": "wild",
+					"value": 3
+				}
+			]
+		},
+		{
+			"name": "medic/bomb specialist",
+			"color": "orange",
+			"faces": [
+				{
+					"action": "defuse",
+					"value": 2
+				},
+				{
+					"action": "treat",
+					"value": 2
+				},
+				{
+					"action": "defuse",
+					"value": 2
+				},
+				{
+					"action": "treat",
+					"value": 2
+				},
+				{
+					"action": "talk",
+					"value": 3
+				},
+				{
+					"action": "none",
+					"value": 0
+				}
+			]
+		},
+		{
+			"name": "hacker/bomb specialist",
+			"color": "yellow",
+			"faces": [
+				{
+					"action": "defuse",
+					"value": 2
+				},
+				{
+					"action": "hack",
+					"value": 2
+				},
+				{
+					"action": "defuse",
+					"value": 2
+				},
+				{
+					"action": "hack",
+					"value": 2
+				},
+				{
+					"action": "none",
+					"value": 0
+				},
+				{
+					"action": "search",
+					"value": 3
+				}
+			]
+		},
+		{
+			"name": "medic/hacker",
+			"color": "teal",
+			"faces": [
+				{
+					"action": "hack",
+					"value": 2
+				},
+				{
+					"action": "treat",
+					"value": 2
+				},
+				{
+					"action": "hack",
+					"value": 2
+				},
+				{
+					"action": "treat",
+					"value": 2
+				},
+				{
+					"action": "talk",
+					"value": 3
+				},
+				{
+					"action": "none",
+					"value": 0
+				}
+			]
+		},
+		{
+			"name": "generalist",
+			"color": "purple",
+			"faces": [
+				{
+					"action": "none",
+					"value": 0
+				},
+				{
+					"action": "defuse",
+					"value": 2
+				},
+				{
+					"action": "hack",
+					"value": 2
+				},
+				{
+					"action": "treat",
+					"value": 2
+				},
+				{
+					"action": "wild",
+					"value": 2
+				},
+				{
+					"action": "wild",
+					"value": 3
+				}
+			]
+		}
+	],
+	"characters": [
+		{
+			"name": "medic",
+			"dice": ["medic", "medic", "normal", "normal", "normal"]
+		},
+		{
+			"name": "hacker",
+			"dice": ["hacker", "hacker", "normal", "normal", "normal"]
+		},
+		{
+			"name": "bomb specialist",
+			"dice": ["bomb specialist", "bomb specialist", "normal", "normal", "normal"]
+		},
+		{
+			"name": "medic/bomb specialist",
+			"dice": ["medic", "bomb specialist", "normal", "normal", "normal"]
+		},
+		{
+			"name": "hacker/bomb specialist",
+			"dice": ["hacker", "bomb specialist", "normal", "normal", "normal"]
+		},
+		{
+			"name": "medic/hacker",
+			"dice": ["medic", "hacker", "normal", "normal", "normal"]
+		},
+		{
+			"name": "generalist",
+			"dice": ["generalist", "generalist", "normal", "normal", "normal"]
+		}
+	]
+}

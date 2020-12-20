@@ -1,3 +1,3 @@
-export default interface Event {
-  description: string;
+export interface Event {
+	description: string;
 }

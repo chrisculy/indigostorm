@@ -1,22 +1,25 @@
 import { createAction, getType, ActionType } from 'typesafe-actions';
-import { GameState } from './store';
-import Episodes from '../episodes/episodes';
+import { Episodes } from '../episodes/episodes';
+import { Dice } from '../models/Dice';
+import { Episode } from '../models/Episode';
+import { getInitialDiceForCharacter } from '../models/GameData';
+import { PointOfInterest } from '../models/PointOfInterest';
 
 export const playEpisode = createAction('GAME/PLAY_EPISODE', action => {
 	return (episodeIndex: number) => action({ episodeIndex });
-})
+});
 
 export const setActiveArea = createAction('GAME/SET_ACTIVE_AREA', action => {
 	return (activeAreaIndex: number) => action({ activeAreaIndex });
-})
+});
 
 export const investigatePoi = createAction('GAME/INVESTIGATE_POI', action => {
 	return (observedPoiIndex: number) => action({ observedPoiIndex });
-})
+});
 
 export const observePoi = createAction('GAME/OBSERVE_POI', action => {
 	return (poiId: number) => action({ poiId });
-})
+});
 
 const GameActions = {
 	playEpisode,
@@ -27,15 +30,26 @@ const GameActions = {
 
 type GameAction = ActionType<typeof GameActions>;
 
+export interface PlayerHand {
+	investigated: PointOfInterest[];
+	observed: PointOfInterest[];
+}
+
+export interface GameState {
+	episode: Episode;
+	activeAreaIndex: number;
+	hand: PlayerHand;
+	dice: Dice[];
+}
+
 const initialState: GameState = {
 	activeAreaIndex: 0,
 	episode: Episodes[0],
 	hand: {
-		investigated: [
-		],
-		observed: [
-		],
+		investigated: [],
+		observed: [],
 	},
+	dice: getInitialDiceForCharacter('medic'),
 };
 
 export const gameReducer = (state: GameState = initialState, action: GameAction): GameState => {
@@ -44,17 +58,17 @@ export const gameReducer = (state: GameState = initialState, action: GameAction)
 			return { ...state, episode: Episodes[action.payload.episodeIndex] };
 		case getType(GameActions.setActiveArea):
 			return { ...state, activeAreaIndex: action.payload.activeAreaIndex };
-		case getType(GameActions.observePoi):
-		{
+		case getType(GameActions.observePoi): {
 			const hand = { ...state.hand };
 			const episode = { ...state.episode };
 			const poi = episode.pointsOfInterest.filter(x => x.id === action.payload.poiId)[0];
 			hand.observed.push(poi);
-			episode.areas[state.activeAreaIndex].pointOfInterestIds = episode.areas[state.activeAreaIndex].pointOfInterestIds.filter(poiId => poiId !== action.payload.poiId);
+			episode.areas[state.activeAreaIndex].pointOfInterestIds = episode.areas[state.activeAreaIndex].pointOfInterestIds.filter(
+				poiId => poiId !== action.payload.poiId
+			);
 			return { ...state, hand };
 		}
-		case getType(GameActions.investigatePoi):
-		{
+		case getType(GameActions.investigatePoi): {
 			const hand = { ...state.hand };
 			const poi = hand.observed[action.payload.observedPoiIndex];
 			hand.investigated.push(poi);
@@ -64,5 +78,4 @@ export const gameReducer = (state: GameState = initialState, action: GameAction)
 	}
 
 	return state;
-}
-
+};

@@ -1,12 +1,12 @@
-import Area from './Area';
-import Event from './Event';
-import Mission from './Mission';
-import PointOfInterest from './PointOfInterest';
+import { Area } from './Area';
+import { Event } from './Event';
+import { Mission } from './Mission';
+import { PointOfInterest } from './PointOfInterest';
 
-export default interface Episode {
-  name: string;
-  events: Event[];
-  mission: Mission;
-  pointsOfInterest: PointOfInterest[];
-  areas: Area[];
+export interface Episode {
+	name: string;
+	events: Event[];
+	mission: Mission;
+	pointsOfInterest: PointOfInterest[];
+	areas: Area[];
 }

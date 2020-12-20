@@ -1,5 +1,3 @@
-type InvestigationCost = 'none' | 'wild' | 'search' | 'talk' | 'hack' | 'treat' | 'defuse' |
-  'type:A' | 'type:B' | 'type:C' |
-	'special:allPlayers';
+import { Action } from './Action';
 
-export default InvestigationCost;
+export type InvestigationCost = Action | 'type:A' | 'type:B' | 'type:C' | 'special:allPlayers';

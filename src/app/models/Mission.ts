@@ -1,5 +1,5 @@
-export default interface Mission {
-  description: string;
-  primaryObjective: string;
-  auxiliaryObjective: string;
+export interface Mission {
+	description: string;
+	primaryObjective: string;
+	auxiliaryObjective: string;
 }

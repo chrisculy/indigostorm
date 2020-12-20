@@ -1,8 +1,8 @@
-import Area from '../models/Area';
 import React from 'react';
-import { MenuItem, Select } from '@material-ui/core';
-import { setActiveArea } from '../state/game';
 import { Dispatch } from 'redux';
+import { MenuItem, Select } from '@material-ui/core';
+import { Area } from '../models/Area';
+import { setActiveArea } from '../state/game';
 
 export interface AreaDisplayProps {
 	activeAreaIndex: number;

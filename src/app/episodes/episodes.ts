@@ -1,5 +1,3 @@
-import Episode5 from './episode_5';
+import { Episode5 } from './episode_5';
 
-export default [
-  Episode5
-];
+export const Episodes = [Episode5];

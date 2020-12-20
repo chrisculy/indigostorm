@@ -3,9 +3,9 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Container, Grid, Typography, Box } from '@material-ui/core';
 import AreaDisplay from './AreaDisplay';
-import { GameState, ReduxStore } from '../state/store';
+import { ReduxStore } from '../state/store';
 import PointsOfInterestDisplay from './PointsOfInterestDisplay';
-import { observePoi } from '../state/game';
+import { GameState, observePoi } from '../state/game';
 
 export type EpisodeDisplayProps = GameState & {
 	dispatch: Dispatch;
@@ -55,7 +55,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 	};
 };
 
-export default connect(
+const ConnectedEpisodeDisplay = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(EpisodeDisplay);
+
+export { ConnectedEpisodeDisplay as EpisodeDisplay };

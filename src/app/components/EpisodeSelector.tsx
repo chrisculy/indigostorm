@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Select, MenuItem, Grid, Button } from '@material-ui/core';
-import Episodes from '../episodes/episodes';
-import Episode from '../models/Episode';
+import { Episodes } from '../episodes/episodes';
+import { Episode } from '../models/Episode';
 import { playEpisode } from '../state/game';
 
 interface EpisodeSelectorProps {
 	dispatch: Dispatch;
 }
 
-const EpisodeSelector : React.StatelessComponent<EpisodeSelectorProps> = (props: EpisodeSelectorProps) => {
+const EpisodeSelector: React.StatelessComponent<EpisodeSelectorProps> = (props: EpisodeSelectorProps) => {
 	const episodeMenuItems = Episodes.map((episode: Episode, index: number) => {
 		return (
 			<MenuItem key={episode.name} value={index}>
@@ -37,12 +37,12 @@ const EpisodeSelector : React.StatelessComponent<EpisodeSelectorProps> = (props:
 			</Grid>
 			<Grid item>
 				<Button variant="contained" color="primary" onClick={() => props.dispatch(playEpisode(episodeIndex))}>
-					Play Episode
+					{'Play Episode'}
 				</Button>
 			</Grid>
 		</Grid>
 	);
-}
+};
 
 const mapStateToProps = () => {
 	return {};
@@ -50,11 +50,13 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
 	return {
-		dispatch
+		dispatch,
 	};
 };
 
-export default connect(
+const ConnectedEpisodeSelector = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(EpisodeSelector);
+
+export { ConnectedEpisodeSelector as EpisodeSelector };

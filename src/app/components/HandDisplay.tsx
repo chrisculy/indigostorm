@@ -1,8 +1,8 @@
 import React from 'react';
-import { Typography, Grid, Card, CardHeader, CardContent, Button, CardActions, Container } from '@material-ui/core';
-import { PlayerHand } from '../state/store';
-import PointOfInterest from '../models/PointOfInterest';
-import InvestigationCost from '../models/InvestigationCost';
+import { Typography, Grid, Card, CardContent, Button, CardActions, Container } from '@material-ui/core';
+import { PlayerHand } from '../state/game';
+import { PointOfInterest } from '../models/PointOfInterest';
+import { InvestigationCost } from '../models/InvestigationCost';
 
 interface HandDisplayProps {
 	hand: PlayerHand;
@@ -62,7 +62,7 @@ const renderInvestigatedPoi = (poi: PointOfInterest) => {
 	);
 };
 
-const HandDisplay: React.StatelessComponent<HandDisplayProps> = (props: HandDisplayProps) => {
+export const HandDisplay: React.FC<HandDisplayProps> = (props: HandDisplayProps) => {
 	return (
 		<Container>
 			<Grid container spacing={2}>
@@ -84,5 +84,3 @@ const HandDisplay: React.StatelessComponent<HandDisplayProps> = (props: HandDisp
 		</Container>
 	);
 };
-
-export default HandDisplay;

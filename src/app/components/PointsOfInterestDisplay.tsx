@@ -1,7 +1,7 @@
 import React from 'react';
-import PointOfInterest from '../models/PointOfInterest';
 import { Typography, Grid, Card, CardContent, CardActions, Button } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
+import { PointOfInterest } from '../models/PointOfInterest';
 
 export interface PointsOfInterestDisplayProps {
 	pointsOfInterest: PointOfInterest[];

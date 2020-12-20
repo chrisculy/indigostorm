@@ -1,7 +1,7 @@
-import AreaAdjacency from "./AreaAdjacency";
+import { AreaAdjacency } from './AreaAdjacency';
 
-export default interface Area {
-  name: string,
-  adjacentTo: AreaAdjacency[];
-  pointOfInterestIds: number[];
+export interface Area {
+	name: string;
+	adjacentTo: AreaAdjacency[];
+	pointOfInterestIds: number[];
 }
