@@ -7,6 +7,10 @@ export interface Dice {
 	currentFaceIndex?: number;
 }
 
+export const rollDice = (dice: Dice) => {
+	dice.currentFaceIndex = Math.floor(Math.random() * Math.floor(dice.faces.length));
+};
+
 export const getDisplayColorForDiceColor = (diceColor: DiceColor): string => {
 	switch (diceColor) {
 		case 'blue':
@@ -22,7 +26,7 @@ export const getDisplayColorForDiceColor = (diceColor: DiceColor): string => {
 		case 'teal':
 			return '#00b386';
 		case 'white':
-			return '#e6e6e6';
+			return '#cccccc';
 		case 'yellow':
 			return '#e6e600';
 	}

@@ -19,7 +19,7 @@ export const getInitialDiceForCharacter = (name: string): Dice[] => {
 			faces: dice.faces.map(face => {
 				return { action: face.action as Action, value: face.value };
 			}),
-			currentFaceIndex: Math.floor(Math.random() * Math.floor(6)),
+			currentFaceIndex: undefined,
 		};
 	});
 };
