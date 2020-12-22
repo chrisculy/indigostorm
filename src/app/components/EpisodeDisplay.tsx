@@ -4,17 +4,15 @@ import { connect } from 'react-redux';
 import { Container, Grid, Typography, Box } from '@material-ui/core';
 import AreaDisplay from './AreaDisplay';
 import { ReduxStore } from '../state/store';
-import PointsOfInterestDisplay from './PointsOfInterestDisplay';
-import { GameState, observePoi } from '../state/game';
+import LeadsDisplay from './LeadsDisplay';
+import { GameState, investigateLead } from '../state/game';
 
 export type EpisodeDisplayProps = GameState & {
 	dispatch: Dispatch;
 };
 
-const EpisodeDisplay: React.StatelessComponent<EpisodeDisplayProps> = (props: EpisodeDisplayProps) => {
-	const pois = props.episode.pointsOfInterest.filter(poi =>
-		props.episode.areas[props.activeAreaIndex].pointOfInterestIds.some(poiId => poi.id === poiId)
-	);
+const EpisodeDisplay: React.FC<EpisodeDisplayProps> = (props: EpisodeDisplayProps) => {
+	const leads = props.episode.leads.filter(lead => props.episode.areas[props.activeAreaIndex].leadIds.some(leadId => lead.id === leadId));
 	return (
 		<Container>
 			<Box my={2}>
@@ -29,14 +27,14 @@ const EpisodeDisplay: React.StatelessComponent<EpisodeDisplayProps> = (props: Ep
 				<Typography variant="subtitle1">{`Primary Objective: ${props.episode.mission.primaryObjective}`}</Typography>
 			</Box>
 			<Box my={1}>
-				<Typography variant="subtitle1" color="textSecondary">{`Auxiliary Objective: ${props.episode.mission.auxiliaryObjective}`}</Typography>
+				<Typography variant="subtitle1" color="textSecondary">{`Auxiliary Objective: ${props.episode.mission.secondaryObjective}`}</Typography>
 			</Box>
 			<Grid container spacing={2}>
 				<Grid item xs={12}>
 					<AreaDisplay activeAreaIndex={props.activeAreaIndex} areas={props.episode.areas} dispatch={props.dispatch} />
 				</Grid>
 				<Grid item xs={12}>
-					<PointsOfInterestDisplay pointsOfInterest={pois} observePoi={(poiId: number) => props.dispatch(observePoi(poiId))} />
+					<LeadsDisplay leads={leads} investigateLead={(leadId: number) => props.dispatch(investigateLead(leadId))} />
 				</Grid>
 			</Grid>
 		</Container>

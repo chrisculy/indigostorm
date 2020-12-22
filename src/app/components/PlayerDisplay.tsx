@@ -6,7 +6,7 @@ import { Button, Container, Grid } from '@material-ui/core';
 import { ReduxStore } from '../state/store';
 import { HandDisplay } from './HandDisplay';
 import { DiceDisplay } from './DiceDisplay';
-import { GameState, investigatePoi, rollAllDice, rollDice } from '../state/game';
+import { GameState, acquireClue, rollAllDice, rollDice } from '../state/game';
 import { Dice } from '../models/Dice';
 import { iconStyle } from '../utility';
 
@@ -38,7 +38,7 @@ const PlayerDisplay: React.FC<PlayerDisplayProps> = (props: PlayerDisplayProps) 
 		<Container>
 			<Grid container spacing={2}>
 				<Grid item xs={12}>
-					<HandDisplay hand={props.hand} investigatePoi={(observedPoiIndex: number) => props.dispatch(investigatePoi(observedPoiIndex))} />
+					<HandDisplay hand={props.hand} acquireClue={(observedPoiIndex: number) => props.dispatch(acquireClue(observedPoiIndex))} />
 				</Grid>
 				<Grid item xs={6}>
 					<Grid container spacing={2}>

@@ -1,34 +1,34 @@
 import React from 'react';
 import { Typography, Grid, Card, CardContent, Button, CardActions, Container } from '@material-ui/core';
 import { PlayerHand } from '../state/game';
-import { PointOfInterest } from '../models/PointOfInterest';
-import { InvestigationCost } from '../models/InvestigationCost';
+import { Lead } from '../models/Lead';
+import { ClueCost } from '../models/ClueCost';
 
 interface HandDisplayProps {
 	hand: PlayerHand;
-	investigatePoi: (observedPoiIndex: number) => void;
+	acquireClue: (investigatedLeadIndex: number) => void;
 }
 
-const renderPoiType = (poi: PointOfInterest) => {
+const renderLeadType = (lead: Lead) => {
 	return (
 		<Typography variant="body2" align="right">
-			{poi.type ? poi.type : '\u00a0'}
+			{lead.type ? lead.type : '\u00a0'}
 		</Typography>
 	);
 };
 
-const renderObservedPoi = (poi: PointOfInterest, poiIndex: number, investigatePoi: (observedPoiIndex: number) => void) => {
+const renderInvestigatedLead = (lead: Lead, leadIndex: number, acquireClue: (investigatedLeadIndex: number) => void) => {
 	return (
-		<Grid item xs={3} key={`poi_${poi.id}`}>
+		<Grid item xs={3} key={`lead_${lead.id}`}>
 			<Card>
 				<CardContent>
 					<Grid container spacing={1}>
 						<Grid item xs={12}>
-							{renderPoiType(poi)}
+							{renderLeadType(lead)}
 						</Grid>
-						{poi.investigationCosts.map((cost: InvestigationCost, index: number) => {
+						{lead.clueCosts.map((cost: ClueCost, index: number) => {
 							return (
-								<Grid key={`poi_${poi.id}_investigation_cost_${index}`} item xs={3}>
+								<Grid key={`lead_${lead.id}_clue_cost_${index}`} item xs={3}>
 									{cost !== 'none' ? cost : '\u00a0'}
 								</Grid>
 							);
@@ -36,24 +36,24 @@ const renderObservedPoi = (poi: PointOfInterest, poiIndex: number, investigatePo
 					</Grid>
 				</CardContent>
 				<CardActions>
-					<Button onClick={() => investigatePoi(poiIndex)}>{'Investigate'}</Button>
+					<Button onClick={() => acquireClue(leadIndex)}>{'Acquire Clue'}</Button>
 				</CardActions>
 			</Card>
 		</Grid>
 	);
 };
 
-const renderInvestigatedPoi = (poi: PointOfInterest) => {
+const renderClue = (lead: Lead) => {
 	return (
-		<Grid item xs={12} key={`poi_${poi.id}`}>
-			<Card key={`poi_${poi.id}`}>
+		<Grid item xs={12} key={`lead_${lead.id}`}>
+			<Card key={`lead_${lead.id}`}>
 				<CardContent>
 					<Grid container>
 						<Grid item xs={12}>
-							{renderPoiType(poi)}
+							{renderLeadType(lead)}
 						</Grid>
 						<Grid item xs={12}>
-							<Typography variant="body1">{poi.description}</Typography>
+							<Typography variant="body1">{lead.description}</Typography>
 						</Grid>
 					</Grid>
 				</CardContent>
@@ -68,18 +68,18 @@ export const HandDisplay: React.FC<HandDisplayProps> = (props: HandDisplayProps)
 			<Grid container spacing={2}>
 				<Grid item xs={12}>
 					<Typography variant="body2" color="textSecondary">
-						{'Observed POIs'}
+						{'Observed leads'}
 					</Typography>
 				</Grid>
-				{props.hand.observed.map((poi: PointOfInterest, index: number) => renderObservedPoi(poi, index, props.investigatePoi))}
+				{props.hand.leads.map((lead: Lead, index: number) => renderInvestigatedLead(lead, index, props.acquireClue))}
 			</Grid>
 			<Grid container spacing={2}>
 				<Grid item xs={12}>
 					<Typography variant="body2" color="textSecondary">
-						{'Investigated POIs'}
+						{'Investigated leads'}
 					</Typography>
 				</Grid>
-				{props.hand.investigated.map(renderInvestigatedPoi)}
+				{props.hand.clues.map(renderClue)}
 			</Grid>
 		</Container>
 	);

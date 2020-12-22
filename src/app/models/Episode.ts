@@ -1,12 +1,12 @@
 import { Area } from './Area';
 import { Event } from './Event';
 import { Mission } from './Mission';
-import { PointOfInterest } from './PointOfInterest';
+import { Lead } from './Lead';
 
 export interface Episode {
 	name: string;
 	events: Event[];
 	mission: Mission;
-	pointsOfInterest: PointOfInterest[];
+	leads: Lead[];
 	areas: Area[];
 }
