@@ -73,16 +73,16 @@ const getTooltipforActionType = (actionType: Action): string => {
 export const DiceDisplay: React.FC<DiceDisplayProps> = (props: DiceDisplayProps) => {
 	const icon = getIconForActionType(props.action);
 	const borderRadius = '4pt';
-	const width = '5em';
+	const diceExtents = '5em';
 	const style = {
 		backgroundColor: getDisplayColorForDiceColor(props.color),
 		color: getForegroundColorForDiceColor(props.color),
-		width: width,
-		height: '6em',
+		width: diceExtents,
+		height: diceExtents,
 		borderRadius: borderRadius,
 	};
 	return (
-		<Grid container spacing={1} style={{ width: width }}>
+		<Grid container spacing={1} style={{ width: diceExtents }}>
 			<Grid container spacing={1} className={`${props.rolled ? '' : 'disabled'}`} style={style}>
 				<Grid item xs={6}>
 					<Typography variant="h5">{props.value}</Typography>
@@ -93,7 +93,7 @@ export const DiceDisplay: React.FC<DiceDisplayProps> = (props: DiceDisplayProps)
 					{icon}
 				</Grid>
 			</Grid>
-			<Grid container spacing={1} style={{ width: width }}>
+			<Grid container spacing={1} style={{ width: diceExtents }}>
 				<Grid item xs={12}>
 					<Button onClick={() => props.rollDice()} style={{ width: '100%' }}>
 						<RiHandCoinFill style={iconStyle} />

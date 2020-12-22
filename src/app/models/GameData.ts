@@ -2,6 +2,8 @@ import * as GameData from '../resources/data.json';
 import { Action } from './Action';
 import { Dice, DiceColor } from './Dice';
 
+export const Characters = GameData.characters.map(x => x.name);
+
 export const getInitialDiceForCharacter = (name: string): Dice[] => {
 	if (!GameData.characters.some(x => x.name === name)) {
 		throw new Error(`Invalid character name ${name}; no such character exists.`);

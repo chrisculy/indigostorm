@@ -4,7 +4,7 @@ import { Typography, Container } from '@material-ui/core';
 import { EpisodeSelector } from './components/EpisodeSelector';
 import { EpisodeDisplay } from './components/EpisodeDisplay';
 import { store } from './state/store';
-import { PlayerDisplay } from './components/PlayerDisplay';
+import { PlayersDisplay } from './components/PlayersDisplay';
 
 const App: React.FC = () => {
 	return (
@@ -13,7 +13,7 @@ const App: React.FC = () => {
 				<Typography variant="h4">{'Indigo Storm'}</Typography>
 				<EpisodeSelector />
 				<EpisodeDisplay />
-				<PlayerDisplay />
+				<PlayersDisplay />
 			</Container>
 		</Provider>
 	);

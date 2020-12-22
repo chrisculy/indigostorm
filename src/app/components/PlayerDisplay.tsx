@@ -1,18 +1,18 @@
 import React from 'react';
 import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
 import { RiHandCoinFill } from 'react-icons/ri';
-import { Button, Container, Grid } from '@material-ui/core';
-import { ReduxStore } from '../state/store';
+import { Button, Container, Grid, Typography } from '@material-ui/core';
 import { HandDisplay } from './HandDisplay';
 import { DiceDisplay } from './DiceDisplay';
-import { GameState, acquireClue, rollAllDice, rollDice } from '../state/game';
+import { acquireClue, rollAllDice, rollDice, Player } from '../state/game';
 import { Dice } from '../models/Dice';
 import { iconStyle } from '../utility';
 
-export type PlayerDisplayProps = GameState & {
+export interface PlayerDisplayProps {
+	playerIndex: number;
+	player: Player;
 	dispatch: Dispatch;
-};
+}
 
 const mapDiceToDiceDisplay = (dice: Dice, index: number, onRollDiceClicked: (index: number) => void) => {
 	const rolled = !!dice.currentFaceIndex;
@@ -24,23 +24,31 @@ const mapDiceToDiceDisplay = (dice: Dice, index: number, onRollDiceClicked: (ind
 	);
 };
 
-const PlayerDisplay: React.FC<PlayerDisplayProps> = (props: PlayerDisplayProps) => {
+export const PlayerDisplay: React.FC<PlayerDisplayProps> = (props: PlayerDisplayProps) => {
 	const onRollDiceClicked = (index: number) => {
-		props.dispatch(rollDice(index));
+		props.dispatch(rollDice({ playerIndex: props.playerIndex, diceIndex: index }));
 	};
 
 	const onRollAllDiceClicked = () => {
-		props.dispatch(rollAllDice());
+		props.dispatch(rollAllDice({ playerIndex: props.playerIndex }));
 	};
 
-	const diceDisplays = props.dice.map((dice: Dice, index: number) => mapDiceToDiceDisplay(dice, index, onRollDiceClicked));
+	const diceDisplays = props.player.dice.map((dice: Dice, index: number) => mapDiceToDiceDisplay(dice, index, onRollDiceClicked));
 	return (
 		<Container>
 			<Grid container spacing={2}>
 				<Grid item xs={12}>
-					<HandDisplay hand={props.hand} acquireClue={(observedPoiIndex: number) => props.dispatch(acquireClue(observedPoiIndex))} />
+					<Typography variant="h5">{props.player.name}</Typography>
 				</Grid>
-				<Grid item xs={6}>
+				<Grid item xs={12}>
+					<HandDisplay
+						hand={props.player.hand}
+						acquireClue={(investigatedLeadIndex: number) =>
+							props.dispatch(acquireClue({ playerIndex: props.playerIndex, leadIndex: investigatedLeadIndex }))
+						}
+					/>
+				</Grid>
+				<Grid item xs={12}>
 					<Grid container spacing={2}>
 						{diceDisplays}
 						<Grid item xs={12}>
@@ -54,22 +62,3 @@ const PlayerDisplay: React.FC<PlayerDisplayProps> = (props: PlayerDisplayProps) 
 		</Container>
 	);
 };
-
-const mapStateToProps = (store: ReduxStore) => {
-	return {
-		...store.game,
-	};
-};
-
-const mapDispatchToProps = (dispatch: Dispatch) => {
-	return {
-		dispatch,
-	};
-};
-
-const ConnectedPlayerDisplay = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(PlayerDisplay);
-
-export { ConnectedPlayerDisplay as PlayerDisplay };

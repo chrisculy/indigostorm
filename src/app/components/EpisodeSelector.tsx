@@ -5,6 +5,7 @@ import { Select, MenuItem, Grid, Button } from '@material-ui/core';
 import { Episodes } from '../episodes/episodes';
 import { Episode } from '../models/Episode';
 import { playEpisode } from '../state/game';
+import { Characters } from '../models/GameData';
 
 interface EpisodeSelectorProps {
 	dispatch: Dispatch;
@@ -19,7 +20,17 @@ const EpisodeSelector: React.FC<EpisodeSelectorProps> = (props: EpisodeSelectorP
 		);
 	});
 
+	const characterMenuItems = Characters.map((character: string) => {
+		return (
+			<MenuItem key={character} value={character}>
+				{character}
+			</MenuItem>
+		);
+	});
+
 	const [episodeIndex, setEpisodeIndex] = useState(0);
+	const [characterOne, setCharacterOne] = useState(Characters[0]);
+	const [characterTwo, setCharacterTwo] = useState(Characters[1]);
 
 	return (
 		<Grid container direction="row" justify="center" alignItems="center" spacing={4}>
@@ -36,7 +47,31 @@ const EpisodeSelector: React.FC<EpisodeSelectorProps> = (props: EpisodeSelectorP
 				</Select>
 			</Grid>
 			<Grid item>
-				<Button variant="contained" color="primary" onClick={() => props.dispatch(playEpisode(episodeIndex))}>
+				<Select
+					value={characterOne}
+					onChange={(event, _) => setCharacterOne(event.target.value as string)}
+					inputProps={{
+						name: 'characterOne',
+						id: 'characterOne-selector',
+					}}
+				>
+					{characterMenuItems}
+				</Select>
+			</Grid>
+			<Grid item>
+				<Select
+					value={characterTwo}
+					onChange={(event, _) => setCharacterTwo(event.target.value as string)}
+					inputProps={{
+						name: 'characterTwo',
+						id: 'characterTwo-selector',
+					}}
+				>
+					{characterMenuItems}
+				</Select>
+			</Grid>
+			<Grid item>
+				<Button variant="contained" color="primary" onClick={() => props.dispatch(playEpisode({ episodeIndex, characterOne, characterTwo }))}>
 					{'Play Episode'}
 				</Button>
 			</Grid>

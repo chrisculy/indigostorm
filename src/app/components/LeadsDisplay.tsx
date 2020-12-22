@@ -1,14 +1,25 @@
-import React from 'react';
-import { Typography, Grid, Card, CardContent, CardActions, Button } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Typography, Grid, Card, CardContent, CardActions, Button, MenuItem, Select } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import { Lead } from '../models/Lead';
 
 export interface LeadDisplayProps {
 	leads: Lead[];
-	investigateLead: (leadId: number) => void;
+	characters: string[];
+	investigateLead: (playerIndex: number, leadId: number) => void;
 }
 
 const LeadsDisplay: React.FC<LeadDisplayProps> = (props: LeadDisplayProps) => {
+	const characterMenuItems = props.characters.map((character: string, index: number) => {
+		return (
+			<MenuItem key={character} value={index}>
+				{character}
+			</MenuItem>
+		);
+	});
+
+	const [playerIndex, setPlayerIndex] = useState(0);
+
 	return (
 		<Grid container spacing={2}>
 			{props.leads.map((lead: Lead) => {
@@ -26,7 +37,17 @@ const LeadsDisplay: React.FC<LeadDisplayProps> = (props: LeadDisplayProps) => {
 								</Grid>
 							</CardContent>
 							<CardActions>
-								<Button onClick={_ => props.investigateLead(lead.id)}>{'Investigate Lead'}</Button>
+								<Select
+									value={playerIndex}
+									onChange={(event, _) => setPlayerIndex(event.target.value as number)}
+									inputProps={{
+										name: 'player',
+										id: 'player-selector',
+									}}
+								>
+									{characterMenuItems}
+								</Select>
+								<Button onClick={_ => props.investigateLead(playerIndex, lead.id)}>{'Investigate Lead'}</Button>
 							</CardActions>
 						</Card>
 					</Grid>

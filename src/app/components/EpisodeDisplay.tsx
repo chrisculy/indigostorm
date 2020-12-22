@@ -34,7 +34,11 @@ const EpisodeDisplay: React.FC<EpisodeDisplayProps> = (props: EpisodeDisplayProp
 					<AreaDisplay activeAreaIndex={props.activeAreaIndex} areas={props.episode.areas} dispatch={props.dispatch} />
 				</Grid>
 				<Grid item xs={12}>
-					<LeadsDisplay leads={leads} investigateLead={(leadId: number) => props.dispatch(investigateLead(leadId))} />
+					<LeadsDisplay
+						leads={leads}
+						characters={props.players.map(x => x.name)}
+						investigateLead={(playerIndex: number, leadId: number) => props.dispatch(investigateLead({ playerIndex, leadId }))}
+					/>
 				</Grid>
 			</Grid>
 		</Container>
