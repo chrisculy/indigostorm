@@ -10,7 +10,7 @@ interface EpisodeSelectorProps {
 	dispatch: Dispatch;
 }
 
-const EpisodeSelector: React.StatelessComponent<EpisodeSelectorProps> = (props: EpisodeSelectorProps) => {
+const EpisodeSelector: React.FC<EpisodeSelectorProps> = (props: EpisodeSelectorProps) => {
 	const episodeMenuItems = Episodes.map((episode: Episode, index: number) => {
 		return (
 			<MenuItem key={episode.name} value={index}>

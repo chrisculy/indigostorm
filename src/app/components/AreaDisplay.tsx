@@ -24,7 +24,7 @@ const onActiveAreaChanged = (
 	}
 };
 
-const AreaDisplay: React.StatelessComponent<AreaDisplayProps> = (props: AreaDisplayProps) => {
+const AreaDisplay: React.FC<AreaDisplayProps> = (props: AreaDisplayProps) => {
 	const areaMenuItems = props.areas.map((area: Area, index: number) => {
 		return (
 			<MenuItem key={`area_${index}_${area.name}`} value={index}>
