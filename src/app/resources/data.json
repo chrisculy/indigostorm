@@ -125,6 +125,10 @@
 			"color": "orange",
 			"faces": [
 				{
+					"action": "none",
+					"value": 0
+				},
+				{
 					"action": "defuse",
 					"value": 2
 				},
@@ -143,10 +147,6 @@
 				{
 					"action": "talk",
 					"value": 3
-				},
-				{
-					"action": "none",
-					"value": 0
 				}
 			]
 		},
@@ -155,24 +155,24 @@
 			"color": "yellow",
 			"faces": [
 				{
-					"action": "defuse",
-					"value": 2
-				},
-				{
-					"action": "hack",
-					"value": 2
-				},
-				{
-					"action": "defuse",
-					"value": 2
-				},
-				{
-					"action": "hack",
-					"value": 2
-				},
-				{
 					"action": "none",
 					"value": 0
+				},
+				{
+					"action": "defuse",
+					"value": 2
+				},
+				{
+					"action": "hack",
+					"value": 2
+				},
+				{
+					"action": "defuse",
+					"value": 2
+				},
+				{
+					"action": "hack",
+					"value": 2
 				},
 				{
 					"action": "search",
@@ -185,6 +185,10 @@
 			"color": "teal",
 			"faces": [
 				{
+					"action": "none",
+					"value": 0
+				},
+				{
 					"action": "hack",
 					"value": 2
 				},
@@ -203,10 +207,6 @@
 				{
 					"action": "talk",
 					"value": 3
-				},
-				{
-					"action": "none",
-					"value": 0
 				}
 			]
 		},
