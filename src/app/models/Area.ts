@@ -1,7 +1,11 @@
+import { AreaPointOfInterest } from './AreaPointOfInterest';
+
 export interface Area {
 	name: string;
 	x: number;
 	y: number;
-	adjacentTo: string[];
-	leadIds: number[];
+	image: string;
+	width: number;
+	height: number;
+	pois: AreaPointOfInterest[];
 }

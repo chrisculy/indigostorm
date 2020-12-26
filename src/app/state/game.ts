@@ -37,6 +37,7 @@ export interface Player {
 
 export interface GameState {
 	episode: Episode;
+	revealedAreas: string[];
 	activeAreaIndex: number;
 	players: Player[];
 }
@@ -44,6 +45,7 @@ export interface GameState {
 const initialState: GameState = {
 	activeAreaIndex: 0,
 	episode: Episodes[0],
+	revealedAreas: ['A', 'B', 'C', 'D', 'E'],
 	players: [
 		{
 			name: 'medic',
@@ -77,7 +79,12 @@ export const gameReducer = (state: GameState = initialState, action: GameAction)
 					dice: getInitialDiceForCharacter(action.payload.characterTwo),
 				},
 			];
-			return { ...state, episode: Episodes[action.payload.episodeIndex], players };
+			return {
+				...state,
+				episode: Episodes[action.payload.episodeIndex],
+				players,
+				revealedAreas: Episodes[action.payload.episodeIndex].map.areas.map(x => x.name),
+			};
 		}
 		case getType(GameActions.setActiveArea):
 			return { ...state, activeAreaIndex: action.payload };
@@ -86,7 +93,9 @@ export const gameReducer = (state: GameState = initialState, action: GameAction)
 			const episode = { ...state.episode };
 			const lead = episode.leads.filter(x => x.id === action.payload.leadId)[0];
 			players[action.payload.playerIndex].hand.leads.push(lead);
-			episode.areas[state.activeAreaIndex].leadIds = episode.areas[state.activeAreaIndex].leadIds.filter(leadId => leadId !== action.payload.leadId);
+			episode.map.areas[state.activeAreaIndex].pois = episode.map.areas[state.activeAreaIndex].pois.filter(
+				poi => poi.leadId !== action.payload.leadId
+			);
 			return { ...state, players };
 		}
 		case getType(GameActions.acquireClue): {

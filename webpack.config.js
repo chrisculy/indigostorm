@@ -9,6 +9,9 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 var config = {
 	entry: './src/app/main.tsx',
+	devServer: {
+		contentBase: path.join(__dirname, 'src', 'app', 'resources'),
+	},
 	output: {
 		filename: 'bundle.js',
 		path: path.resolve(__dirname, './dist'),

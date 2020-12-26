@@ -1,5 +1,5 @@
-import { Area } from './Area';
 import { Event } from './Event';
+import { Map } from './Map';
 import { Mission } from './Mission';
 import { Lead } from './Lead';
 
@@ -8,5 +8,5 @@ export interface Episode {
 	events: Event[];
 	mission: Mission;
 	leads: Lead[];
-	areas: Area[];
+	map: Map;
 }

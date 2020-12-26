@@ -2,7 +2,7 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Container, Grid, Typography, Box } from '@material-ui/core';
-import AreaDisplay from './AreaDisplay';
+import MapDisplay from './MapDisplay';
 import { ReduxStore } from '../state/store';
 import LeadsDisplay from './LeadsDisplay';
 import { GameState, investigateLead } from '../state/game';
@@ -12,7 +12,7 @@ export type EpisodeDisplayProps = GameState & {
 };
 
 const EpisodeDisplay: React.FC<EpisodeDisplayProps> = (props: EpisodeDisplayProps) => {
-	const leads = props.episode.leads.filter(lead => props.episode.areas[props.activeAreaIndex].leadIds.some(leadId => lead.id === leadId));
+	const leads = props.episode.leads.filter(lead => props.episode.map.areas[props.activeAreaIndex].pois.some(poi => lead.id === poi.leadId));
 	return (
 		<Container>
 			<Box my={2}>
@@ -31,7 +31,13 @@ const EpisodeDisplay: React.FC<EpisodeDisplayProps> = (props: EpisodeDisplayProp
 			</Box>
 			<Grid container spacing={2}>
 				<Grid item xs={12}>
-					<AreaDisplay activeAreaIndex={props.activeAreaIndex} areas={props.episode.areas} dispatch={props.dispatch} />
+					<MapDisplay
+						activeAreaIndex={props.activeAreaIndex}
+						map={props.episode.map}
+						leads={props.episode.leads}
+						revealedAreas={props.revealedAreas}
+						dispatch={props.dispatch}
+					/>
 				</Grid>
 				<Grid item xs={12}>
 					<LeadsDisplay

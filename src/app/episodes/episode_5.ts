@@ -108,41 +108,156 @@ export const Episode5: Episode = {
 			description: 'You escape with Agent Dawson just as the house explodes behind you. Mission accomplished!',
 		},
 	],
-	areas: [
-		{
-			name: 'A',
-			x: 0,
-			y: 2,
-			adjacentTo: ['B'],
-			leadIds: [1],
-		},
-		{
-			name: 'B',
-			x: 0,
-			y: 1,
-			adjacentTo: ['A', 'C'],
-			leadIds: [2, 3, 4],
-		},
-		{
-			name: 'C',
-			x: 1,
-			y: 1,
-			adjacentTo: ['B', 'D'],
-			leadIds: [5, 6, 7],
-		},
-		{
-			name: 'D',
-			x: 1,
-			y: 0,
-			adjacentTo: ['C', 'E'],
-			leadIds: [8, 9],
-		},
-		{
-			name: 'E',
-			x: 0,
-			y: 0,
-			adjacentTo: ['D'],
-			leadIds: [10, 11],
-		},
-	],
+	map: {
+		width: 720,
+		height: 1080,
+		backgroundColor: '#dfdfec',
+		areas: [
+			{
+				name: 'A',
+				x: 0,
+				y: 2,
+				width: 360,
+				height: 360,
+				image: 'area_a.png',
+				pois: [
+					{
+						x: 188,
+						y: 0,
+						destinationArea: 'B',
+						leadId: 1,
+					},
+				],
+			},
+			{
+				name: 'B',
+				x: 0,
+				y: 1,
+				width: 360,
+				height: 360,
+				image: 'area_b.png',
+				pois: [
+					// moves
+					{
+						x: 188,
+						y: 300,
+						destinationArea: 'A',
+					},
+					{
+						x: 340,
+						y: 150,
+						destinationArea: 'C',
+					},
+					// leads
+					{
+						x: 100,
+						y: 224,
+						leadId: 2,
+					},
+					{
+						x: 314,
+						y: 266,
+						leadId: 3,
+					},
+					{
+						x: 180,
+						y: 110,
+						leadId: 4,
+					},
+				],
+			},
+			{
+				name: 'C',
+				x: 1,
+				y: 1,
+				width: 360,
+				height: 360,
+				image: 'area_c.png',
+				pois: [
+					// moves
+					{
+						x: 20,
+						y: 150,
+						destinationArea: 'B',
+					},
+					{
+						x: 220,
+						y: 0,
+						destinationArea: 'D',
+						leadId: 7,
+					},
+					// leads
+					{
+						x: 154,
+						y: 212,
+						leadId: 5,
+					},
+					{
+						x: 284,
+						y: 80,
+						leadId: 6,
+					},
+				],
+			},
+			{
+				name: 'D',
+				x: 1,
+				y: 0,
+				width: 360,
+				height: 360,
+				image: 'area_d.png',
+				pois: [
+					// moves
+					{
+						x: 220,
+						y: 300,
+						destinationArea: 'C',
+					},
+					{
+						x: 30,
+						y: 140,
+						destinationArea: 'E',
+					},
+					// leads
+					{
+						x: 88,
+						y: 270,
+						leadId: 8,
+					},
+					{
+						x: 90,
+						y: 110,
+						leadId: 9,
+					},
+				],
+			},
+			{
+				name: 'E',
+				x: 0,
+				y: 0,
+				width: 360,
+				height: 360,
+				image: 'area_e.png',
+				pois: [
+					// moves
+					{
+						x: 320,
+						y: 140,
+						destinationArea: 'D',
+					},
+					// leads
+					{
+						x: 160,
+						y: 100,
+						leadId: 10,
+					},
+					{
+						x: 140,
+						y: 0,
+						leadId: 11,
+					},
+				],
+			},
+		],
+	},
 };
