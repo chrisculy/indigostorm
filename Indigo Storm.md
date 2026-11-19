@@ -20,7 +20,7 @@
 - **Dry-Erase Campaign Sheet & Marker:** A single durable board used across all 30 days to track **Exposure** (Heat), **Lead** (Progress), **Clearance Upgrades**, and the **30-Day Star Grid**.
 - **2 Tracking Tokens (or Dry-Erase Pips):** One for the **Lead Track** and one for the **Exposure Track**.
 - **4 Timer Dice (six-sided):** Placed on timed Threats to count down their turns.
-- **Card backs:** Player cards share one back and Threat cards share another, so each can be shuffled. Story and replacement cards have distinct backs: Intro and Rule Cards (*Briefing*), Outro Cards (*Read after the episode*—packed face-down at the back of the pack), Awakened Cards (*Flashback—read only when awakened*), and Countermeasure Cards (*Countermeasure*). No card is double-sided except Rule Cards, which are never shuffled.
+- **Card backs:** Player cards share one back and Threat cards share another, so each can be shuffled. Encrypted Threats have their own *Encrypted* back (so you can see an Encrypted Threat coming, but not what it is). Story and replacement cards have distinct backs: Intro and Rule Cards (*Briefing*), Outro Cards (*Read after the episode*—packed face-down at the back of the pack), Awakened Cards (*Flashback—read only when awakened*), and Countermeasure Cards (*Countermeasure*). No card is double-sided except Rule Cards, which are never shuffled.
 
 ## 2. Core Gameplay Loop (The 10-Minute Session)
 
@@ -89,7 +89,7 @@ An episode ends immediately when any of the following occur:
 1. **Objective Secured:** Your **Lead Track** reaches today's **Lead target** (set on the Intro Card, e.g., `+8 Lead`).
 2. **Cover Blown:** Your **Exposure Track** hits the maximum redline (e.g., `6 Exposure`).
 3. **Out of Time:** Your 15-card Operative Deck is empty and you have no cards left in hand.
-4. **Scene Cleared:** The Scene Row and the Threat Deck are both empty. Gain a **+1 Lead bonus** (tunable), then score.
+4. **Scene Cleared:** The Scene Row (including any Pursuer) and the Threat Deck are both empty. Gain a **+1 Lead bonus** (tunable), then score.
 
 **Episode Rating (0–3 Stars):** Players **always** advance to the next day's story regardless of how the session ended. Score each Star independently and record the total on the campaign sheet:
 
@@ -166,7 +166,11 @@ The campaign is a three-act season with **10 episodes per act**. There is **no s
 
 **Act II — Inside the Program (Days 11–20)**
 
-3. **Day 11 — Encrypted Threats:** Introduces **Face-Down Threats** in the Scene Row that must be decrypted with 👁️ Recon before engaging.
+3. **Day 11 — Encrypted Threats:** Some Threat cards have an **Encrypted** back.
+   - *Face-down:* When an Encrypted Threat enters the Scene Row, it goes in **face-down**. While face-down it has no Pressure and no timer, and you can't tuck cards under it—it just occupies its slot.
+   - *Decrypt:* Play any 👁️ Recon card to it (one of your 2 plays) and flip it face-up, placing a Timer Die if it has a timer. If Recon is its preferred or alternate suit, the card stays under it and counts; otherwise discard the card.
+   - *Worth cracking:* Encrypted Threats carry richer Rewards than normal Threats (typically +1 Lead).
+   - Master Decryptor's "any suit" counts as Recon for decrypting.
 4. **Day 16 — Memory Flashbacks (midpoint twist):** Introduces **Conditioned Cards**. Three flashbacks arrive on **Days 16, 19, and 22**, and each one happens **the same day it arrives**, so every player sees every flashback, in story order:
    - The Conditioned Card is one of the day's 3 player cards. Its matching **Awakened Card**—the stronger version, carrying the flashback scene—waits in the same pack behind a *Flashback* back.
    - *Awaken during play (bonus):* The Conditioned Card prints a trigger checked when you play it (e.g., *"If you play this at 4+ Exposure..."*). If the trigger is met, swap in the Awakened Card and play it instead, gain its printed **Awakening bonus** (e.g., +1 Lead), and read the flashback.
@@ -176,7 +180,12 @@ The campaign is a three-act season with **10 episodes per act**. There is **no s
 
 **Act III — Burn Notice (Days 21–30)**
 
-5. **Day 21 — Hunter-Killer Operatives:** Introduces persistent **Pursuer Cards** that lock into a 4th slot of the Scene Row, countering specific suits or draining Lead every turn until neutralized.
+5. **Day 21 — Hunter-Killer Operatives:** Introduces **Pursuers**.
+   - *Setup:* The Intro Card places a Pursuer in a **4th Scene Row slot** at the start of the episode. It isn't part of the Threat Deck.
+   - *Neutralize:* It's cleared like any Threat (symbols + Power, cards stay under it) but needs far more—a multi-turn project. Clearing it claims its Reward, and its slot stays empty.
+   - *Hunt and Strike:* Instead of a timer, it shows a **Hunt** number. Place a Timer Die on it set to that number and turn it down by 1 each Pressure step. At 0 the Pursuer **Strikes** (apply its printed Strike effect, e.g., +2 Exposure) and the die resets to its Hunt number. Pursuers never escape.
+   - Ally Cover can cancel a Strike, and Stall and Adrenaline Surge work on its die like any timer. Pursuer cards say *"Cannot be Vanished."* Some Pursuers also print an ongoing effect that counters a suit (e.g., *"Your Stealth cards get −1 Power"*).
+   - *Scene Cleared* requires the Pursuer to be neutralized too.
 6. **Day 26 — Black-Site Lockdown:** Introduces **Two-Phase Threats** for the final 5-episode climax. When you clear one, claim its Reward as usual, then put its matching **Countermeasure Card** (set aside during setup) into the same Scene Row slot—an internal security response you must clear in turn.
 - **Day 30 — Epilogue.**
 
@@ -184,7 +193,7 @@ The campaign is a three-act season with **10 episodes per act**. There is **no s
 
 ## 6. Recommended Next Steps for Prototyping
 
-1. **Build a "Vertical Slice" Prototype (Days 1–3):** Create the 12-card Core Operative Deck and the full contents of Packs 1, 2, and 3 on index cards or card sleeves to stress-test the 10-minute clock and Lead/Exposure math.
+1. **Prototype the six rule days (Days 1, 6, 11, 16, 21, 26).** Each day after Day 1 comes with a **Jump-In Card**: a preset 12-card deck typical for that point in the campaign (including stand-in cards marked `PROTO`, which represent cards from days not yet written) and the Clearance Perks to treat as unlocked. Day cards and Threats are tuned with the simulator before printing, and the stand-ins are retired once the full 30 days are written.
 2. **Calibrate the Math:** Verify that an average 15-card deck generates roughly **28–35 total Power** across a single pass through the deck, and tune Threat requirements so each Star feels earned on its own and getting all 3 requires tight ability sequencing.
    - *Early numbers (15 Training cards at 5 per suit with Power 1/1/2/3/4):* every episode is exactly **8 turns**, so up to **8 Pressure steps**—tune Pressure and timers (3–5 turns) for that. Two cards average about **4.4 Power**. A 4-card hand holds 2+ cards of a given suit only about **40%** of the time, so Threats that need **1–2 symbols** can usually be cleared in one turn. Because cards stay on a Threat across turns, Threats with 3+ symbols or 7+ Power work as **multi-turn projects**, balanced by their timers and Pressure. Typical one-turn Power totals: **3–6**. (Needs a proper simulation with symbol requirements, Gear, and Allies.)
    - *Simulator:* `indigo_sim.py` in this folder plays thousands of episodes with a greedy player, reading the deck from the Cards workbook's **Sim Effect** column. First findings with the Day 1 deck and generated Threats (8 per day, ~55% one-symbol / ~40% two-symbol): at **2.2 Power per symbol** the Objective Star lands ~89% of the time in ~4.5 turns (far too easy); **3.4 Power per symbol** gives ~60% Objective / ~74% Cover in ~6 turns. Raising the share of hazard Threats (Exposure Pressure, no Lead reward) from 35% to 50% drops Objective to ~34%. Not yet simulated: Conditioned Cards, Face-Down Threats, Pursuers, Two-Phase Threats, perks, Episode Twists.
