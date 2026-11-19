@@ -1,0 +1,15 @@
+{
+  "_note": "Act III, Days 21-30: target ~50% Objective / ~70% Cover",
+  "episode": {
+    "lead_target": 8,
+    "start_exposure": 1,
+    "cover_threshold": 2
+  },
+  "threats": {
+    "count": 9,
+    "profile": {
+      "power_per_symbol": 3.0,
+      "hazard_chance": 0.3
+    }
+  }
+}

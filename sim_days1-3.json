@@ -1,0 +1,15 @@
+{
+  "_note": "Days 1-3 (tutorial): target ~85% Objective / ~90% Cover",
+  "episode": {
+    "lead_target": 7,
+    "start_exposure": 0,
+    "cover_threshold": 3
+  },
+  "threats": {
+    "count": 9,
+    "profile": {
+      "power_per_symbol": 2.4,
+      "hazard_chance": 0.25
+    }
+  }
+}
