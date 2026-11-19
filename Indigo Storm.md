@@ -198,7 +198,7 @@ The campaign is a three-act season with **10 episodes per act**. There is **no s
    | 21–30 (Act III) | 8 | 1 | ≤2 | 9 | 3.0 | 30% | ~50% / ~70% | 46% / 73% | 6.7 |
 
    Episodes run longer as the campaign goes on (about 5 turns while learning, nearly 7 by Act III), since the Objective is reached later or not at all. At ~35 seconds per turn plus ~45 seconds of setup, ~30 seconds of cleanup, and story reading, sessions should run about 6–8 minutes. Turn speed itself can only be measured in playtests. The settings for each band are saved as `sim_days1-3.json`, `sim_act1.json`, `sim_act2.json`, and `sim_act3.json` (run with `python3 indigo_sim.py --config sim_act2.json`). *Power per symbol* and *hazard share* are guides for writing each day's Threats.
-4. **Outline the 30-Day Story Beat Sheet:** *(Drafted: see `Indigo Storm - Beat Sheet.md`.)* Map the three 10-episode acts (Section 5) with key beats on Day 1 (inciting incident), Day 10 (Act I break), Days 15–16 (midpoint reveal, paired with Memory Flashbacks), Day 20 (Act II break), and Days 26–30 (climax: *Redact the Source*), so every day ends on a crisp narrative hook.
+4. **Outline the 30-Day Story Beat Sheet:** All story material lives in the `spoilers/` folder (see its README) so the first full playthrough stays a surprise. Map the three 10-episode acts (Section 5) with key beats on Day 1 (inciting incident), Day 10 (Act I break), Days 15–16 (midpoint reveal, paired with Memory Flashbacks), Day 20 (Act II break), and Days 26–30 (climax: *Redact the Source*), so every day ends on a crisp narrative hook.
 
 ## 7. Open Design Questions
 
