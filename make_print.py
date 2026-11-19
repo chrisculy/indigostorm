@@ -37,8 +37,9 @@ try:
     from reportlab.lib.units import mm
     from reportlab.pdfgen import canvas
     from reportlab.platypus import Paragraph
-except ImportError:
-    sys.exit("Requires: pip install openpyxl reportlab")
+except ImportError as e:
+    sys.exit(f"Couldn't import {e.name!r} ({e}).\nThis Python is {sys.executable}\n"
+             "Install the requirements into it with:  python3 -m pip install -r requirements.txt")
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CARDS = os.path.join(HERE, "Indigo Storm - Cards.xlsx")

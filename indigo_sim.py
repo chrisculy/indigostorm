@@ -200,8 +200,9 @@ def wb_rows(path, sheet):
     if key not in _WB_CACHE:
         try:
             from openpyxl import load_workbook
-        except ImportError:
-            sys.exit("openpyxl is required: pip install openpyxl")
+        except ImportError as e:
+            sys.exit(f"Couldn't import {e.name!r} ({e}).\nThis Python is {sys.executable}\n"
+                     "Install the requirements into it with:  python3 -m pip install -r requirements.txt")
         wb = load_workbook(path, data_only=True)
         if sheet not in wb.sheetnames:
             _WB_CACHE[key] = []
