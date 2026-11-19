@@ -2,3 +2,4 @@
 __pycache__/
 # Generated print-and-play PDFs (rebuild with make_print.py)
 print/
+.venv/
