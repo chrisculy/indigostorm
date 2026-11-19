@@ -193,7 +193,7 @@ The campaign is a three-act season with **10 episodes per act**. There is **no s
 
 ## 6. Recommended Next Steps for Prototyping
 
-1. **Prototype the six rule days (Days 1, 6, 11, 16, 21, 26).** Each day after Day 1 comes with a **Jump-In Card**: a preset 12-card deck typical for that point in the campaign (including stand-in cards marked `PROTO`, which represent cards from days not yet written) and the Clearance Perks to treat as unlocked. Day cards and Threats are tuned with the simulator before printing, and the stand-ins are retired once the full 30 days are written. Run any prototype day with `python3 indigo_sim.py --day 11` (add `--log` to watch one episode).
+1. **Prototype the six rule days (Days 1, 6, 11, 16, 21, 26).** Each day after Day 1 comes with a **Jump-In Card**: a preset 12-card deck typical for that point in the campaign (including stand-in cards marked `PROTO`, which represent cards from days not yet written) and the Clearance Perks to treat as unlocked. Day cards and Threats are tuned with the simulator before printing, and the stand-ins are retired once the full 30 days are written. Run any prototype day with `python3 indigo_sim.py --day 11` (add `--log` to watch one episode). Build printable cards with `python3 make_print.py`: one PDF per day's pack (fronts and mirrored backs for long-edge duplex), plus the Core deck, prototype extras and the campaign sheet, in `print/`. Record sessions in `Indigo Storm - Playtest Log.md`.
 
    *First tuning pass (simulated player, jump-in deck and perks):*
 
