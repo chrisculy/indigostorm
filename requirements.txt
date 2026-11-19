@@ -1,3 +1,4 @@
 # Python 3.9+ (works with the Python that ships with macOS)
 openpyxl>=3.1
 reportlab>=4.0,<5    # reportlab 5 needs Python 3.10+
+pypdfium2>=4.0       # only for make_print.py --images

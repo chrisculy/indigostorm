@@ -9,11 +9,15 @@ the full 30-day game) can be rebuilt with one command after any change.
   python3 make_print.py --days 1,6      # only these packs
   python3 make_print.py --fronts-only   # skip back pages (single-sided printing)
 
+  python3 make_print.py --images        # also export PNG card images for PlayingCards.io etc.
+
 Output goes to print/ (ignored by git):
   Day 01 Pack.pdf …     one pack per day, in the order a player opens it
   Core Deck.pdf         the 12-card Core Operative Deck
   Prototype Extras.pdf  PROTO stand-in cards and the prototype rules card
   Campaign Sheet.pdf    tracks, Clearance Perks and the 30-day Star grid
+  images/Day 06/…       with --images: one folder per deck, ready for bulk upload
+                        (see "PlayingCards.io Setup.md")
 
 Printing: US Letter, 9 poker-size cards (63 x 88 mm) per page with cut marks.
 For double-sided printing, print with "flip on long edge": every fronts page
@@ -21,7 +25,7 @@ is followed by its backs page, mirrored so each back lands behind its front.
 
 Story text comes from spoilers/Indigo Storm - Story.xlsx ("Story Cards" sheet)
 when that file exists, otherwise from the placeholder Story Cards sheet in the
-Cards workbook. Requires: pip install openpyxl reportlab
+Cards workbook. Requires: pip install -r requirements.txt
 """
 import argparse
 import os
@@ -370,8 +374,10 @@ def draw_back(c, x, y, kind):
 # ----------------------------------------------------------------------------- packs
 
 class Card:
-    def __init__(self, front, back):
+    def __init__(self, front, back, role="", name=""):
         self.front, self.back = front, back      # back: kind name or a callable for double-sided cards
+        self.role, self.name = role, name        # role: reading / operative / threat / aside
+        self.pursuer = False
 
 
 def build_pack(D, day):
@@ -391,7 +397,7 @@ def build_pack(D, day):
             if any(day_str(t["Day"]) == day and t.get("Type") == "Pursuer" for t in D.threats):
                 setup.append("<b>SETUP:</b> place today's Pursuer in a 4th Scene Row slot.")
             draw_text_card(c, x, y, s.get("Title") or f"Day {day}", "INTRO", txt + "<br/><br/>" + "<br/>".join(setup), BAND["Intro"], s["ID"], day, size=7.2)
-        cards.append(Card(f, "briefing"))
+        cards.append(Card(f, "briefing", "reading", f"{s['ID']} Intro"))
     j = D.jump.get(day)
     if j:
         ids = [i.strip() for i in str(j["Deck (12 cards)"]).split(",") if i.strip()]
@@ -401,17 +407,20 @@ def build_pack(D, day):
             draw_text_card(c, x, y, f"Jump-In: Day {day}", "PROTOTYPE",
                            f"Set up as if you'd played Days 1–{int(day) - 1}.<br/><b>YOUR 12-CARD DECK</b><br/>{lst}<br/><b>UNLOCKED PERKS</b><br/>{perks}",
                            BAND["Jump-In"], f"JUMP-{day}", day, size=6.6)
-        cards.append(Card(f, "jumpin"))
+        cards.append(Card(f, "jumpin", "reading", f"JUMP-{day} Jump-In"))
     for r in [r for r in D.rules if day_str(r["Day"]) == day]:
-        cards.append(rule_card(r))
+        cards.append(rule_card(r, "reading"))
     for r in [r for r in D.player if day_str(r["Day"]) == day and r.get("Class") != "Awakened"]:
-        cards.append(Card(lambda c, x, y, r=r: draw_player(c, x, y, r), "player"))
+        cards.append(player_card(r))
     for r in [r for r in D.threats if day_str(r["Day"]) == day and r.get("Type") != "Countermeasure"]:
-        cards.append(Card(lambda c, x, y, r=r: draw_threat(c, x, y, r), "encrypted" if r.get("Type") == "Encrypted Threat" else "threat"))
+        card = Card(lambda c, x, y, r=r: draw_threat(c, x, y, r), "encrypted" if r.get("Type") == "Encrypted Threat" else "threat",
+                    "threat", f"{r['ID']} {r['Name']}")
+        card.pursuer = r.get("Type") == "Pursuer"
+        cards.append(card)
     for r in [r for r in D.threats if day_str(r["Day"]) == day and r.get("Type") == "Countermeasure"]:
-        cards.append(Card(lambda c, x, y, r=r: draw_threat(c, x, y, r), "countermeasure"))
+        cards.append(Card(lambda c, x, y, r=r: draw_threat(c, x, y, r), "countermeasure", "aside", f"{r['ID']} {r['Name']}"))
     for r in [r for r in D.player if day_str(r["Day"]) == day and r.get("Class") == "Awakened"]:
-        cards.append(Card(lambda c, x, y, r=r: draw_player(c, x, y, r), "flashback"))
+        cards.append(Card(lambda c, x, y, r=r: draw_player(c, x, y, r), "flashback", "aside", f"{r['ID']} {r['Name']}"))
     for s in [s for s in D.story if day_str(s["Day"]) == day and s.get("Type") == "Outro"]:
         def f(c, x, y, s=s):
             extra = []
@@ -422,14 +431,18 @@ def build_pack(D, day):
             extra.append("Record today's Stars. Then discard down to 12 cards.")
             draw_text_card(c, x, y, s.get("Title") or f"Day {day}", "OUTRO", markup(s.get("Text")) + "<br/><br/>" + "<br/>".join(extra),
                            BAND["Outro"], s["ID"], day)
-        cards.append(Card(f, "outro"))
+        cards.append(Card(f, "outro", "reading", f"{s['ID']} Outro"))
     return cards
 
 
-def rule_card(r):
+def rule_card(r, role="reading"):
     front = lambda c, x, y: draw_text_card(c, x, y, r["Title"], "RULES", markup(r.get("Front")), BAND["Rule"], r["ID"], r["Day"], size=7.4)
     back = lambda c, x, y: draw_text_card(c, x, y, r["Title"] + " (cont.)", "RULES", markup(r.get("Back")), BAND["Rule"], r["ID"], r["Day"], size=7.4)
-    return Card(front, back)
+    return Card(front, back, role, f"{r['ID']} {r['Title']}")
+
+
+def player_card(r):
+    return Card(lambda c, x, y, r=r: draw_player(c, x, y, r), "player", "operative", f"{r['ID']} {r['Name']}")
 
 
 def write_pdf(path, cards, backs=True, title=""):
@@ -465,6 +478,80 @@ def cut_marks(c):
     for j in range(ROWS + 1):
         y = MY + j * CH
         c.line(MX - 2 * mm, y, MX - 6 * mm, y); c.line(PW - MX + 2 * mm, y, PW - MX + 6 * mm, y)
+
+
+# ----------------------------------------------------------------------------- image export
+
+def safe(name):
+    return re.sub(r'[\\/:*?"<>|]+', "-", clean(name)).strip()
+
+
+def render_cards(drawers, path_for, px_width):
+    """Draw each card on its own PDF page, then rasterize every page to PNG."""
+    try:
+        import pypdfium2 as pdfium
+    except ImportError:
+        sys.exit("Image export needs pypdfium2:  python3 -m pip install -r requirements.txt")
+    import io
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=(CW, CH))
+    for draw in drawers:
+        draw(c, 0, 0)
+        c.showPage()
+    c.save()
+    pdf = pdfium.PdfDocument(buf.getvalue())
+    scale = px_width / CW
+    for i in range(len(pdf)):
+        out = path_for(i)
+        os.makedirs(os.path.dirname(out), exist_ok=True)
+        pdf[i].render(scale=scale).to_pil().save(out, optimize=True)
+    pdf.close()
+
+
+def back_drawer(card):
+    return card.back if callable(card.back) else (lambda c, x, y, k=card.back: draw_back(c, x, y, k))
+
+
+def export_deck(folder, cards, px):
+    """Fronts/NN <ID> <Name>.png in deck order; Backs/Back.png if every card shares a back, else numbered backs."""
+    if not cards:
+        return 0
+    names = [f"{i + 1:02d} {safe(card.name)}.png" for i, card in enumerate(cards)]
+    render_cards([cd.front for cd in cards], lambda i: os.path.join(folder, "Fronts", names[i]), px)
+    kinds = {cd.back for cd in cards if not callable(cd.back)}
+    if len(kinds) == 1 and not any(callable(cd.back) for cd in cards):
+        render_cards([back_drawer(cards[0])], lambda i: os.path.join(folder, "Backs", "Back.png"), px)
+    else:
+        render_cards([back_drawer(cd) for cd in cards], lambda i: os.path.join(folder, "Backs", names[i]), px)
+    return len(cards)
+
+
+def export_day_images(D, day, px):
+    pack = build_pack(D, day)
+    base = os.path.join(OUT, "images", f"Day {int(day):02d}")
+    j = D.jump.get(day)
+    ids = [i.strip() for i in str(j["Deck (12 cards)"]).split(",") if i.strip()] if j else \
+        [r["ID"] for r in D.player if day_str(r["Day"]) == "CORE"]
+    operative = [player_card(D.by_id[i]) for i in ids if i in D.by_id] + [cd for cd in pack if cd.role == "operative"]
+    counts = {
+        "1 Operative Deck": export_deck(os.path.join(base, "1 Operative Deck"), operative, px),
+        "2 Threat Deck": export_deck(os.path.join(base, "2 Threat Deck"),
+                                     [cd for cd in pack if cd.role == "threat" and not cd.pursuer], px),
+        "3 Set Aside": export_deck(os.path.join(base, "3 Set Aside"),
+                                   [cd for cd in pack if cd.role == "aside" or cd.pursuer], px),
+    }
+    reading = [cd for cd in pack if cd.role == "reading"]
+    if j:
+        reading += [rule_card(r) for r in D.rules if day_str(r["Day"]) == "PROTO"]
+    drawers, names = [], []
+    for i, cd in enumerate(reading):
+        drawers.append(cd.front); names.append(f"{i + 1:02d} {safe(cd.name)}.png")
+        if callable(cd.back):
+            drawers.append(cd.back); names.append(f"{i + 1:02d} {safe(cd.name)} (back).png")
+    if drawers:
+        render_cards(drawers, lambda i: os.path.join(base, "4 Reading", names[i]), px)
+    counts["4 Reading"] = len(names)
+    return base, counts
 
 
 # ----------------------------------------------------------------------------- campaign sheet
@@ -551,6 +638,8 @@ def main():
     ap = argparse.ArgumentParser(description="Build print-and-play PDFs for Indigo Storm")
     ap.add_argument("--days", help="comma-separated days to build (default: every day that has cards)")
     ap.add_argument("--fronts-only", action="store_true", help="no back pages (single-sided printing)")
+    ap.add_argument("--images", action="store_true", help="also export PNG card images, one folder per deck (for PlayingCards.io etc.)")
+    ap.add_argument("--image-width", type=int, default=630, help="PNG width in pixels (default 630 = 10 px per mm)")
     a = ap.parse_args()
     D = Data()
     os.makedirs(OUT, exist_ok=True)
@@ -563,18 +652,25 @@ def main():
             p = os.path.join(OUT, f"Day {int(d):02d} Pack.pdf")
             write_pdf(p, cards, backs, f"Indigo Storm — Day {d} Pack ({len(cards)} cards)")
             made.append((p, len(cards)))
-    core = [Card(lambda c, x, y, r=r: draw_player(c, x, y, r), "player") for r in D.player if day_str(r["Day"]) == "CORE"]
+    core = [player_card(r) for r in D.player if day_str(r["Day"]) == "CORE"]
     if core and not a.days:
         p = os.path.join(OUT, "Core Deck.pdf"); write_pdf(p, core, backs, "Indigo Storm — Core Operative Deck"); made.append((p, len(core)))
-    extras = [Card(lambda c, x, y, r=r: draw_player(c, x, y, r), "player") for r in D.player if day_str(r["Day"]) == "PROTO"]
+    extras = [player_card(r) for r in D.player if day_str(r["Day"]) == "PROTO"]
     extras += [rule_card(r) for r in D.rules if day_str(r["Day"]) == "PROTO"]
     if extras and not a.days:
         p = os.path.join(OUT, "Prototype Extras.pdf"); write_pdf(p, extras, backs, "Indigo Storm — Prototype Extras"); made.append((p, len(extras)))
     if not a.days:
         p = os.path.join(OUT, "Campaign Sheet.pdf"); campaign_sheet(p); made.append((p, 0))
+    if a.images:
+        for d in days:
+            if build_pack(D, d):
+                base, counts = export_day_images(D, d, a.image_width)
+                made.append((base, 0))
+                made.extend((f"    {k}", v) for k, v in counts.items())
     print(f"Story text: {D.story_source}")
     for p, n in made:
-        print(f"  {os.path.relpath(p, HERE)}" + (f"  ({n} cards)" if n else ""))
+        label = p if p.startswith("    ") else os.path.relpath(p, HERE)
+        print(f"  {label}" + (f"  ({n} {'images' if p.endswith('Reading') else 'cards'})" if n else ""))
 
 
 if __name__ == "__main__":
