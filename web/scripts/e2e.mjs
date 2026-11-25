@@ -14,7 +14,13 @@ import { chromium } from 'playwright-core';
 const here = dirname(fileURLToPath(import.meta.url));
 const url = pathToFileURL(join(here, '..', 'dist', 'index.html')).href;
 const SHOTS = process.env.SHOTS ?? '/tmp/app-shots';
-const CHROME = process.env.CHROME ?? '/usr/bin/google-chrome';
+const CHROME =
+  process.env.CHROME ??
+  (process.platform === 'darwin'
+    ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+    : process.platform === 'win32'
+      ? 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+      : '/usr/bin/google-chrome');
 mkdirSync(SHOTS, { recursive: true });
 
 const problems = [];
