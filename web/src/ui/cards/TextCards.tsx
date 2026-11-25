@@ -212,7 +212,11 @@ export function JumpInView({ jumpIn, size = 'lg', ...state }: JumpInViewProps) {
     >
       <CardBand name={`Jump-in: Day ${jumpIn.day}`} label="Prototype" />
       <span className="card-body text-body jump-body">
-        <span className="rt-p">Set up as if you’d played Days 1–{jumpIn.day - 1}.</span>
+        <span className="rt-p">
+          {jumpIn.day > 1
+            ? `Set up as if you’d played Days 1–${jumpIn.day - 1}.`
+            : 'Your starting deck for the campaign.'}
+        </span>
         <span className="rt-h">Your 12-card deck</span>
         <span className="jump-deck">
           {cards.map(({ id, card }) => (

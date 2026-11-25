@@ -53,7 +53,7 @@ export function Logo({ variant = 'full', title = 'Indigo Storm', size, ...rest }
   }
   if (variant === 'stacked') {
     return (
-      <Svg {...rest} title={title} width={size ?? '10em'} height="auto" viewBox="0 0 220 176">
+      <Svg {...rest} title={title} width={size ?? '10em'} viewBox="0 0 220 176">
         <g transform="translate(70 0) scale(1.25)">
           <Mark gid={gid} />
         </g>
@@ -85,7 +85,7 @@ export function Logo({ variant = 'full', title = 'Indigo Storm', size, ...rest }
     );
   }
   return (
-    <Svg {...rest} title={title} width={size ?? '16em'} height="auto" viewBox="0 0 330 64">
+    <Svg {...rest} title={title} width={size ?? '16em'} viewBox="0 0 330 64">
       <Mark gid={gid} />
       <text
         x="78"

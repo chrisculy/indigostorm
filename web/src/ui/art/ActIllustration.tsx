@@ -284,7 +284,6 @@ export function ActIllustration({ act, title, className, style }: ActIllustratio
       style={style}
       viewBox={`0 0 ${W} ${H}`}
       width="100%"
-      height="auto"
       preserveAspectRatio="xMidYMid slice"
     >
       {act === 1 && <Act1 id={id} />}
