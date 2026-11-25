@@ -1,5 +1,5 @@
 {
-  "version": "eaf2bd560275",
+  "version": "4511efd94c64",
   "storySource": "placeholder",
   "playerCards": [
     {
@@ -3313,7 +3313,7 @@
       "day": 1,
       "title": "Your Turn: Play 2 Cards",
       "front": "Every turn has 3 steps: Play 2 Cards, Pressure, Draw 2.\n\nSTEP 1: PLAY EXACTLY 2 CARDS\nUse each card one of two ways:\n- TUCK it under a Threat whose preferred or alternate suit matches. It adds 1 symbol of its suit and its Power.\n- USE ITS ABILITY (the text box) instead, then discard it.\n\nCards stay under a Threat across turns until it is cleared, so you can wear down a big Threat over several turns.",
-      "back": "CLEARING A THREAT\nWhen the symbols and Power under a Threat meet its requirement, it is cleared:\n- Claim its Reward.\n- Discard it and the cards under it.\n- Deal a new Threat into the empty slot.\n\nCLEAN CLEAR\nIf everything that counted was its preferred suit, also gain its Clean bonus."
+      "back": "CLEARING A THREAT\nWhen the symbols and Power under a Threat meet its requirement, it is cleared:\n- Claim its Reward.\n- Discard it and the cards under it.\n- Deal a new Threat into the empty slot.\n\nCLEAN CLEAR\nIf every card under it is its preferred suit, and its preferred-suit symbols (cards and Allies) meet the requirement on their own, also gain its Clean bonus."
     },
     {
       "id": "D01-R3",

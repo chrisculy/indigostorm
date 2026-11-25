@@ -4,7 +4,7 @@ export interface ArtProps {
   /** Accessible name. Without it the graphic is decorative (aria-hidden). */
   title?: string | undefined;
   className?: string | undefined;
-  /** Width/height (number = px). Defaults to 1em so icons follow the font size. */
+  /** Width/height (number = px). Defaults to 1em so icons follow the font size. With only `width`, the height follows the viewBox aspect ratio. */
   size?: number | string | undefined;
   style?: CSSProperties | undefined;
 }
@@ -36,7 +36,7 @@ export function Svg({
       <svg
         viewBox={viewBox}
         width={width ?? size}
-        height={height ?? size}
+        height={height ?? (width === undefined ? size : undefined)}
         className={cls}
         style={style}
         role="img"
@@ -53,7 +53,7 @@ export function Svg({
     <svg
       viewBox={viewBox}
       width={width ?? size}
-      height={height ?? size}
+      height={height ?? (width === undefined ? size : undefined)}
       className={cls}
       style={style}
       aria-hidden="true"
