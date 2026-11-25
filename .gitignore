@@ -3,3 +3,6 @@ __pycache__/
 # Generated print-and-play PDFs (rebuild with make_print.py)
 print/
 .venv/
+.transfer/
+web/node_modules/
+web/dist/

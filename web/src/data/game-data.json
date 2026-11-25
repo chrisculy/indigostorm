@@ -1,0 +1,4181 @@
+{
+  "version": "eaf2bd560275",
+  "storySource": "placeholder",
+  "playerCards": [
+    {
+      "id": "CORE-01",
+      "name": "Overwatch",
+      "day": "CORE",
+      "cls": "Training",
+      "suit": "Recon",
+      "power": 1,
+      "allySymbols": [],
+      "text": "Look at the top 2 cards of the Threat Deck and put them back in any order.",
+      "effects": [
+        {
+          "op": "peek",
+          "n": 2
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "CORE-02",
+      "name": "Signal Intercept",
+      "day": "CORE",
+      "cls": "Training",
+      "suit": "Recon",
+      "power": 2,
+      "allySymbols": [],
+      "text": "Stall 1 Timer (turn a Timer Die up by 1).",
+      "effects": [
+        {
+          "op": "stall",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "CORE-03",
+      "name": "Pattern Read",
+      "day": "CORE",
+      "cls": "Training",
+      "suit": "Recon",
+      "power": 2,
+      "allySymbols": [],
+      "text": "Draw 1 card.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "CORE-04",
+      "name": "Cold Read",
+      "day": "CORE",
+      "cls": "Training",
+      "suit": "Recon",
+      "power": 3,
+      "allySymbols": [],
+      "text": "Swap a Scene card: swap a Scene Row Threat with the top of the Threat Deck (the old one goes to the bottom).",
+      "effects": [
+        {
+          "op": "swap"
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "CORE-05",
+      "name": "Shadow Step",
+      "day": "CORE",
+      "cls": "Training",
+      "suit": "Stealth",
+      "power": 1,
+      "allySymbols": [],
+      "text": "Reduce Exposure by 1.",
+      "effects": [
+        {
+          "op": "exposure",
+          "n": -1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "CORE-06",
+      "name": "Blend In",
+      "day": "CORE",
+      "cls": "Training",
+      "suit": "Stealth",
+      "power": 2,
+      "allySymbols": [],
+      "text": "Cancel one Threat's Pressure this turn.",
+      "effects": [
+        {
+          "op": "cancel_pressure"
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "CORE-07",
+      "name": "Misdirection",
+      "day": "CORE",
+      "cls": "Training",
+      "suit": "Stealth",
+      "power": 2,
+      "allySymbols": [],
+      "text": "Move 1 card from under one Threat to another Threat.",
+      "effects": [
+        {
+          "op": "move_card"
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "CORE-08",
+      "name": "Lockpick",
+      "day": "CORE",
+      "cls": "Training",
+      "suit": "Stealth",
+      "power": 3,
+      "allySymbols": [],
+      "text": "The next Threat you clear this turn counts as a Clean Clear.",
+      "effects": [
+        {
+          "op": "clean_next"
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "CORE-09",
+      "name": "Strike First",
+      "day": "CORE",
+      "cls": "Training",
+      "suit": "Force",
+      "power": 1,
+      "allySymbols": [],
+      "text": "Add 2 Power (no symbol) to a Threat whose preferred or alternate suit is Force.",
+      "effects": [
+        {
+          "op": "add_power",
+          "n": 2,
+          "suit": "Force"
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "CORE-10",
+      "name": "Takedown",
+      "day": "CORE",
+      "cls": "Training",
+      "suit": "Force",
+      "power": 2,
+      "allySymbols": [],
+      "text": "Gain +1 Lead and +1 Exposure.",
+      "effects": [
+        {
+          "op": "lead",
+          "n": 1
+        },
+        {
+          "op": "exposure",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "CORE-11",
+      "name": "Breach",
+      "day": "CORE",
+      "cls": "Training",
+      "suit": "Force",
+      "power": 2,
+      "allySymbols": [],
+      "text": "Clear a Threat that needs 1 symbol and 3 or less Power outright (claim its Reward, no Clean bonus).",
+      "effects": [
+        {
+          "op": "breach",
+          "max": 3
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "CORE-12",
+      "name": "Second Wind",
+      "day": "CORE",
+      "cls": "Training",
+      "suit": "Force",
+      "power": 3,
+      "allySymbols": [],
+      "text": "Draw 1 card.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D01-P1",
+      "name": "Fragmented Instinct",
+      "day": 1,
+      "cls": "Training",
+      "suit": "Stealth",
+      "power": 3,
+      "allySymbols": [],
+      "text": "Reduce Exposure by 1.",
+      "effects": [
+        {
+          "op": "exposure",
+          "n": -1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D01-P2",
+      "name": "Muscle Memory",
+      "day": 1,
+      "cls": "Training",
+      "suit": "Force",
+      "power": 4,
+      "allySymbols": [],
+      "text": "Draw 1 card.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D01-P3",
+      "name": "Half-Remembered Code",
+      "day": 1,
+      "cls": "Training",
+      "suit": "Recon",
+      "power": 2,
+      "allySymbols": [],
+      "text": "Stall 1 Timer.",
+      "effects": [
+        {
+          "op": "stall",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D06-P1",
+      "name": "Field Kit",
+      "day": 6,
+      "cls": "Gear",
+      "suit": null,
+      "power": 0,
+      "allySymbols": [],
+      "text": "Ongoing: each Force card you tuck under a Threat gets +1 Power.",
+      "effects": [
+        {
+          "op": "power_bonus",
+          "suit": "Force",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D06-P2",
+      "name": "The Fixer",
+      "day": 6,
+      "cls": "Ally",
+      "suit": null,
+      "power": 0,
+      "allySymbols": [
+        "Force"
+      ],
+      "text": "Ally: adds 1 Force symbol to every Threat you engage.",
+      "effects": [],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D06-P3",
+      "name": "Hand-to-Hand",
+      "day": 6,
+      "cls": "Training",
+      "suit": "Force",
+      "power": 3,
+      "allySymbols": [],
+      "text": "Draw 1 card.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D11-P1",
+      "name": "Decryption Key",
+      "day": 11,
+      "cls": "Training",
+      "suit": "Recon",
+      "power": 3,
+      "allySymbols": [],
+      "text": "Draw 1 card.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D11-P2",
+      "name": "The Codebreaker",
+      "day": 11,
+      "cls": "Ally",
+      "suit": null,
+      "power": 0,
+      "allySymbols": [
+        "Recon"
+      ],
+      "text": "Ally: adds 1 Recon symbol to every Threat you engage.",
+      "effects": [],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D11-P3",
+      "name": "Packet Sniffer",
+      "day": 11,
+      "cls": "Training",
+      "suit": "Recon",
+      "power": 2,
+      "allySymbols": [],
+      "text": "Stall 1 Timer.",
+      "effects": [
+        {
+          "op": "stall",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D16-P1",
+      "name": "Recurring Dream",
+      "day": 16,
+      "cls": "Conditioned",
+      "suit": "Stealth",
+      "power": 2,
+      "allySymbols": [],
+      "text": "Reduce Exposure by 1.",
+      "effects": [
+        {
+          "op": "exposure",
+          "n": -1
+        }
+      ],
+      "trigger": {
+        "kind": "allies",
+        "n": 1
+      },
+      "triggerText": "If you play this while you have an Ally in play, it awakens.",
+      "awakeningBonus": null,
+      "pairsWith": "D16-W1",
+      "flavor": ""
+    },
+    {
+      "id": "D16-W1",
+      "name": "Remembered Training",
+      "day": 16,
+      "cls": "Awakened",
+      "suit": "Stealth",
+      "power": 4,
+      "allySymbols": [],
+      "text": "Reduce Exposure by 2.",
+      "effects": [
+        {
+          "op": "exposure",
+          "n": -2
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": {
+        "lead": 1,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pairsWith": "D16-P1",
+      "flavor": "[Placeholder flashback text — real flashback goes in spoilers/.]"
+    },
+    {
+      "id": "D16-P2",
+      "name": "Silent Approach",
+      "day": 16,
+      "cls": "Training",
+      "suit": "Stealth",
+      "power": 3,
+      "allySymbols": [],
+      "text": "The next Threat you clear this turn counts as a Clean Clear.",
+      "effects": [
+        {
+          "op": "clean_next"
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D16-P3",
+      "name": "Thermal Cloak",
+      "day": 16,
+      "cls": "Gear",
+      "suit": null,
+      "power": 0,
+      "allySymbols": [],
+      "text": "Ongoing: each Stealth card you tuck under a Threat gets +1 Power.",
+      "effects": [
+        {
+          "op": "power_bonus",
+          "suit": "Stealth",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D21-P1",
+      "name": "Counterstrike",
+      "day": 21,
+      "cls": "Training",
+      "suit": "Force",
+      "power": 4,
+      "allySymbols": [],
+      "text": "Stall 1 Timer.",
+      "effects": [
+        {
+          "op": "stall",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D21-P2",
+      "name": "Overwatch Team",
+      "day": 21,
+      "cls": "Ally",
+      "suit": null,
+      "power": 0,
+      "allySymbols": [
+        "Force",
+        "Stealth"
+      ],
+      "text": "Ally: adds 1 Force and 1 Stealth symbol to every Threat you engage.",
+      "effects": [],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D21-P3",
+      "name": "Evasion Route",
+      "day": 21,
+      "cls": "Training",
+      "suit": "Recon",
+      "power": 3,
+      "allySymbols": [],
+      "text": "Cancel one Threat's Pressure this turn.",
+      "effects": [
+        {
+          "op": "cancel_pressure"
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D26-P1",
+      "name": "Blueprint Analysis",
+      "day": 26,
+      "cls": "Training",
+      "suit": "Recon",
+      "power": 4,
+      "allySymbols": [],
+      "text": "Stall 1 Timer.",
+      "effects": [
+        {
+          "op": "stall",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D26-P2",
+      "name": "Maintenance Uniform",
+      "day": 26,
+      "cls": "Training",
+      "suit": "Stealth",
+      "power": 4,
+      "allySymbols": [],
+      "text": "Reduce Exposure by 1.",
+      "effects": [
+        {
+          "op": "exposure",
+          "n": -1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "D26-P3",
+      "name": "Access Spoofer",
+      "day": 26,
+      "cls": "Gear",
+      "suit": null,
+      "power": 0,
+      "allySymbols": [],
+      "text": "Ongoing: each Recon card you tuck under a Threat gets +1 Power.",
+      "effects": [
+        {
+          "op": "power_bonus",
+          "suit": "Recon",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "PROTO-01",
+      "name": "Tradecraft Drill",
+      "day": "PROTO",
+      "cls": "Training",
+      "suit": "Recon",
+      "power": 3,
+      "allySymbols": [],
+      "text": "Draw 1 card.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "PROTO-02",
+      "name": "Quiet Entry",
+      "day": "PROTO",
+      "cls": "Training",
+      "suit": "Stealth",
+      "power": 3,
+      "allySymbols": [],
+      "text": "Reduce Exposure by 1.",
+      "effects": [
+        {
+          "op": "exposure",
+          "n": -1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "PROTO-03",
+      "name": "Hard Breach",
+      "day": "PROTO",
+      "cls": "Training",
+      "suit": "Force",
+      "power": 4,
+      "allySymbols": [],
+      "text": "Gain +1 Lead and +1 Exposure.",
+      "effects": [
+        {
+          "op": "lead",
+          "n": 1
+        },
+        {
+          "op": "exposure",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "PROTO-04",
+      "name": "Counter-Surveillance",
+      "day": "PROTO",
+      "cls": "Training",
+      "suit": "Recon",
+      "power": 4,
+      "allySymbols": [],
+      "text": "Cancel one Threat's Pressure this turn.",
+      "effects": [
+        {
+          "op": "cancel_pressure"
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "PROTO-05",
+      "name": "Ghost Protocol",
+      "day": "PROTO",
+      "cls": "Training",
+      "suit": "Stealth",
+      "power": 4,
+      "allySymbols": [],
+      "text": "The next Threat you clear this turn counts as a Clean Clear.",
+      "effects": [
+        {
+          "op": "clean_next"
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "PROTO-07",
+      "name": "Signal Ghost",
+      "day": "PROTO",
+      "cls": "Training",
+      "suit": "Recon",
+      "power": 4,
+      "allySymbols": [],
+      "text": "Draw 1 card.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": null,
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "PROTO-W2",
+      "name": "Old Reflexes",
+      "day": "PROTO",
+      "cls": "Awakened",
+      "suit": "Force",
+      "power": 5,
+      "allySymbols": [],
+      "text": "Draw 1 card.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 1
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pairsWith": null,
+      "flavor": ""
+    },
+    {
+      "id": "PROTO-W3",
+      "name": "Locked Memory",
+      "day": "PROTO",
+      "cls": "Awakened",
+      "suit": "Recon",
+      "power": 5,
+      "allySymbols": [],
+      "text": "Swap a Scene card.",
+      "effects": [
+        {
+          "op": "swap"
+        }
+      ],
+      "trigger": null,
+      "triggerText": "",
+      "awakeningBonus": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pairsWith": null,
+      "flavor": ""
+    }
+  ],
+  "threats": [
+    {
+      "id": "D01-T01",
+      "name": "Locked Door",
+      "day": 1,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": "Force",
+      "symbols": 1,
+      "power": 4,
+      "timer": null,
+      "reward": {
+        "lead": 1,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+1 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D01-T02",
+      "name": "Security Camera",
+      "day": 1,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": "Recon",
+      "symbols": 1,
+      "power": 2,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D01-T03",
+      "name": "Night Nurse",
+      "day": 1,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": null,
+      "symbols": 1,
+      "power": 4,
+      "timer": null,
+      "reward": {
+        "lead": 1,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+1 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D01-T04",
+      "name": "Patient Records",
+      "day": 1,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": null,
+      "symbols": 2,
+      "power": 6,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D01-T05",
+      "name": "Orderly",
+      "day": 1,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": "Stealth",
+      "symbols": 1,
+      "power": 3,
+      "timer": null,
+      "reward": {
+        "lead": 1,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+1 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D01-T06",
+      "name": "Fire Alarm",
+      "day": 1,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": "Stealth",
+      "symbols": 1,
+      "power": 4,
+      "timer": 3,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 2,
+        "draw": 0
+      },
+      "expiryText": "+2 Exposure",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D01-T07",
+      "name": "Patrol Guard",
+      "day": 1,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": "Stealth",
+      "symbols": 2,
+      "power": 5,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D01-T08",
+      "name": "Service Elevator",
+      "day": 1,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": "Force",
+      "symbols": 2,
+      "power": 5,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D01-T09",
+      "name": "Loading Dock Gate",
+      "day": 1,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": null,
+      "symbols": 2,
+      "power": 7,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D06-T01",
+      "name": "Warehouse Guard",
+      "day": 6,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": "Stealth",
+      "symbols": 1,
+      "power": 4,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D06-T02",
+      "name": "Bolted Shutter",
+      "day": 6,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": null,
+      "symbols": 2,
+      "power": 5,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D06-T03",
+      "name": "Ledger Safe",
+      "day": 6,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": "Stealth",
+      "symbols": 2,
+      "power": 7,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D06-T04",
+      "name": "Lookout",
+      "day": 6,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": "Recon",
+      "symbols": 1,
+      "power": 3,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D06-T05",
+      "name": "Getaway Car",
+      "day": 6,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": "Recon",
+      "symbols": 1,
+      "power": 4,
+      "timer": 3,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 2,
+        "draw": 0
+      },
+      "expiryText": "+2 Exposure",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D06-T06",
+      "name": "Price Haggle",
+      "day": 6,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": null,
+      "symbols": 1,
+      "power": 5,
+      "timer": null,
+      "reward": {
+        "lead": 1,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+1 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D06-T07",
+      "name": "Back Alley",
+      "day": 6,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": "Force",
+      "symbols": 1,
+      "power": 4,
+      "timer": null,
+      "reward": {
+        "lead": 1,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+1 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D06-T08",
+      "name": "Loading Crane",
+      "day": 6,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": null,
+      "symbols": 2,
+      "power": 6,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D06-T09",
+      "name": "Rival Buyer",
+      "day": 6,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": "Stealth",
+      "symbols": 2,
+      "power": 6,
+      "timer": 4,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "expiryText": "+1 Exposure",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D11-T01",
+      "name": "Firewall Node",
+      "day": 11,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": null,
+      "symbols": 1,
+      "power": 5,
+      "timer": null,
+      "reward": {
+        "lead": 1,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+1 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D11-T02",
+      "name": "Encrypted Server",
+      "day": 11,
+      "type": "Encrypted Threat",
+      "pref": "Recon",
+      "alt": "Force",
+      "symbols": 2,
+      "power": 7,
+      "timer": null,
+      "reward": {
+        "lead": 3,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+3 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D11-T03",
+      "name": "Encrypted Archive",
+      "day": 11,
+      "type": "Encrypted Threat",
+      "pref": "Recon",
+      "alt": "Stealth",
+      "symbols": 2,
+      "power": 7,
+      "timer": null,
+      "reward": {
+        "lead": 3,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+3 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D11-T04",
+      "name": "Encrypted Relay",
+      "day": 11,
+      "type": "Encrypted Threat",
+      "pref": "Stealth",
+      "alt": "Recon",
+      "symbols": 1,
+      "power": 5,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D11-T05",
+      "name": "Admin Login",
+      "day": 11,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": "Stealth",
+      "symbols": 1,
+      "power": 5,
+      "timer": 3,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 2,
+        "draw": 0
+      },
+      "expiryText": "+2 Exposure",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D11-T06",
+      "name": "Security Drone",
+      "day": 11,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": "Force",
+      "symbols": 1,
+      "power": 4,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 2,
+        "draw": 0
+      },
+      "pressureText": "+2 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D11-T07",
+      "name": "Network Tracer",
+      "day": 11,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": null,
+      "symbols": 1,
+      "power": 4,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D11-T08",
+      "name": "Server Room Guard",
+      "day": 11,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": "Stealth",
+      "symbols": 2,
+      "power": 5,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D11-T09",
+      "name": "Backup Drive",
+      "day": 11,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": "Recon",
+      "symbols": 2,
+      "power": 7,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D16-T01",
+      "name": "Sentry",
+      "day": 16,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": "Force",
+      "symbols": 1,
+      "power": 3,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D16-T02",
+      "name": "Motion Sensor",
+      "day": 16,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": "Recon",
+      "symbols": 1,
+      "power": 3,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D16-T03",
+      "name": "Records Vault",
+      "day": 16,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": "Stealth",
+      "symbols": 2,
+      "power": 8,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D16-T04",
+      "name": "Ventilation Shaft",
+      "day": 16,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": null,
+      "symbols": 2,
+      "power": 7,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D16-T05",
+      "name": "Shift Change",
+      "day": 16,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": "Force",
+      "symbols": 1,
+      "power": 5,
+      "timer": 3,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 2,
+        "draw": 0
+      },
+      "expiryText": "+2 Exposure",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D16-T06",
+      "name": "Keycard Reader",
+      "day": 16,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": "Stealth",
+      "symbols": 1,
+      "power": 5,
+      "timer": null,
+      "reward": {
+        "lead": 1,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+1 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D16-T07",
+      "name": "Laser Grid",
+      "day": 16,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": null,
+      "symbols": 2,
+      "power": 8,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D16-T08",
+      "name": "Patrol Dog",
+      "day": 16,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": "Stealth",
+      "symbols": 1,
+      "power": 3,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D16-T09",
+      "name": "Lab Terminal",
+      "day": 16,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": null,
+      "symbols": 2,
+      "power": 7,
+      "timer": 4,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "expiryText": "+1 Exposure",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D21-T01",
+      "name": "Roadblock",
+      "day": 21,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": "Stealth",
+      "symbols": 2,
+      "power": 8,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D21-T02",
+      "name": "Checkpoint Guard",
+      "day": 21,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": "Force",
+      "symbols": 1,
+      "power": 3,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D21-T03",
+      "name": "Drone Sweep",
+      "day": 21,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": "Stealth",
+      "symbols": 1,
+      "power": 3,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D21-T04",
+      "name": "Stolen Car",
+      "day": 21,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": null,
+      "symbols": 1,
+      "power": 5,
+      "timer": 3,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 2,
+        "draw": 0
+      },
+      "expiryText": "+2 Exposure",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D21-T05",
+      "name": "Rooftop Gap",
+      "day": 21,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": "Recon",
+      "symbols": 2,
+      "power": 8,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D21-T06",
+      "name": "Safe Route",
+      "day": 21,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": null,
+      "symbols": 2,
+      "power": 8,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D21-T07",
+      "name": "Informant",
+      "day": 21,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": "Stealth",
+      "symbols": 1,
+      "power": 5,
+      "timer": null,
+      "reward": {
+        "lead": 1,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+1 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D21-T08",
+      "name": "Tracking Beacon",
+      "day": 21,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": "Force",
+      "symbols": 1,
+      "power": 3,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D21-T09",
+      "name": "Rail Yard",
+      "day": 21,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": "Force",
+      "symbols": 2,
+      "power": 8,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D21-T10",
+      "name": "Hunter-Killer Team",
+      "day": 21,
+      "type": "Pursuer",
+      "pref": "Force",
+      "alt": "Stealth",
+      "symbols": 3,
+      "power": 12,
+      "timer": 3,
+      "reward": {
+        "lead": 3,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "+3 Lead, -1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "cleanText": "",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 2,
+        "draw": 0
+      },
+      "expiryText": "+2 Exposure",
+      "pairsWith": null,
+      "rulesText": "Cannot be Vanished. While this is in play, your Stealth cards get -1 Power.",
+      "noVanish": true,
+      "effects": [
+        {
+          "op": "suit_penalty",
+          "suit": "Stealth",
+          "n": 1
+        }
+      ],
+      "flavor": ""
+    },
+    {
+      "id": "D26-T01",
+      "name": "Perimeter Fence",
+      "day": 26,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": "Force",
+      "symbols": 1,
+      "power": 6,
+      "timer": null,
+      "reward": {
+        "lead": 1,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+1 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D26-T02",
+      "name": "Guard Tower",
+      "day": 26,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": "Recon",
+      "symbols": 1,
+      "power": 3,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D26-T03",
+      "name": "Server Core",
+      "day": 26,
+      "type": "Two-Phase Threat",
+      "pref": "Recon",
+      "alt": null,
+      "symbols": 2,
+      "power": 9,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": "D26-C1",
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D26-T04",
+      "name": "Blast Door",
+      "day": 26,
+      "type": "Two-Phase Threat",
+      "pref": "Force",
+      "alt": "Recon",
+      "symbols": 2,
+      "power": 10,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": "D26-C2",
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D26-T05",
+      "name": "Camera Network",
+      "day": 26,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": "Stealth",
+      "symbols": 1,
+      "power": 4,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D26-T06",
+      "name": "Maintenance Tunnel",
+      "day": 26,
+      "type": "Threat",
+      "pref": "Stealth",
+      "alt": null,
+      "symbols": 2,
+      "power": 9,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D26-T07",
+      "name": "Data Uplink",
+      "day": 26,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": "Force",
+      "symbols": 1,
+      "power": 5,
+      "timer": 3,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "pressureText": "",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 2,
+        "draw": 0
+      },
+      "expiryText": "+2 Exposure",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D26-T08",
+      "name": "Security Chief",
+      "day": 26,
+      "type": "Threat",
+      "pref": "Force",
+      "alt": "Stealth",
+      "symbols": 2,
+      "power": 6,
+      "timer": null,
+      "reward": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "rewardText": "-1 Exposure",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D26-T09",
+      "name": "Cell Block Panel",
+      "day": 26,
+      "type": "Threat",
+      "pref": "Recon",
+      "alt": "Stealth",
+      "symbols": 2,
+      "power": 9,
+      "timer": null,
+      "reward": {
+        "lead": 2,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+2 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": null,
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D26-C1",
+      "name": "Core Lockdown",
+      "day": 26,
+      "type": "Countermeasure",
+      "pref": "Recon",
+      "alt": "Stealth",
+      "symbols": 1,
+      "power": 5,
+      "timer": null,
+      "reward": {
+        "lead": 1,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+1 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": "D26-T03",
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    },
+    {
+      "id": "D26-C2",
+      "name": "Sealed Bulkhead",
+      "day": 26,
+      "type": "Countermeasure",
+      "pref": "Force",
+      "alt": null,
+      "symbols": 2,
+      "power": 6,
+      "timer": null,
+      "reward": {
+        "lead": 1,
+        "exposure": 0,
+        "draw": 0
+      },
+      "rewardText": "+1 Lead",
+      "clean": {
+        "lead": 0,
+        "exposure": -1,
+        "draw": 0
+      },
+      "cleanText": "-1 Exposure",
+      "pressure": {
+        "lead": 0,
+        "exposure": 1,
+        "draw": 0
+      },
+      "pressureText": "+1 Exposure",
+      "blocker": false,
+      "expiry": {
+        "lead": 0,
+        "exposure": 0,
+        "draw": 0
+      },
+      "expiryText": "",
+      "pairsWith": "D26-T04",
+      "rulesText": "",
+      "noVanish": false,
+      "effects": [],
+      "flavor": ""
+    }
+  ],
+  "jumpIns": [
+    {
+      "day": 6,
+      "deck": [
+        "CORE-02",
+        "CORE-03",
+        "CORE-04",
+        "CORE-06",
+        "CORE-08",
+        "CORE-10",
+        "CORE-11",
+        "CORE-12",
+        "D01-P1",
+        "D01-P2",
+        "PROTO-01",
+        "PROTO-02"
+      ],
+      "perks": [
+        "falseTrail"
+      ],
+      "notes": "After Day 5: one perk (unlocked Day 3)."
+    },
+    {
+      "day": 11,
+      "deck": [
+        "CORE-04",
+        "CORE-08",
+        "CORE-12",
+        "D01-P1",
+        "D01-P2",
+        "D06-P1",
+        "D06-P2",
+        "PROTO-01",
+        "PROTO-02",
+        "PROTO-03",
+        "PROTO-04",
+        "PROTO-05"
+      ],
+      "perks": [
+        "falseTrail",
+        "patternRecognition",
+        "adrenalineSurge"
+      ],
+      "notes": "After Day 10: three perks (Days 3, 7, 10)."
+    },
+    {
+      "day": 16,
+      "deck": [
+        "CORE-04",
+        "CORE-08",
+        "D01-P2",
+        "D06-P1",
+        "D06-P2",
+        "D11-P1",
+        "D11-P2",
+        "PROTO-02",
+        "PROTO-03",
+        "PROTO-04",
+        "PROTO-05",
+        "PROTO-07"
+      ],
+      "perks": [
+        "falseTrail",
+        "patternRecognition",
+        "adrenalineSurge",
+        "satelliteOverwrite"
+      ],
+      "notes": "After Day 15: four perks (Days 3, 7, 10, 13)."
+    },
+    {
+      "day": 21,
+      "deck": [
+        "D01-P2",
+        "D06-P1",
+        "D06-P2",
+        "D11-P1",
+        "D11-P2",
+        "D16-W1",
+        "D16-P3",
+        "PROTO-03",
+        "PROTO-04",
+        "PROTO-05",
+        "PROTO-07",
+        "PROTO-W2"
+      ],
+      "perks": [
+        "falseTrail",
+        "patternRecognition",
+        "adrenalineSurge",
+        "satelliteOverwrite",
+        "vanish",
+        "masterDecryptor"
+      ],
+      "notes": "After Day 20: six perks; Flashbacks 1–2 awakened."
+    },
+    {
+      "day": 26,
+      "deck": [
+        "D06-P1",
+        "D11-P2",
+        "D16-W1",
+        "D16-P3",
+        "D21-P1",
+        "D21-P2",
+        "PROTO-03",
+        "PROTO-04",
+        "PROTO-05",
+        "PROTO-07",
+        "PROTO-W2",
+        "PROTO-W3"
+      ],
+      "perks": [
+        "falseTrail",
+        "patternRecognition",
+        "adrenalineSurge",
+        "satelliteOverwrite",
+        "vanish",
+        "masterDecryptor",
+        "kineticMomentum"
+      ],
+      "notes": "After Day 25: all seven perks; all three Flashbacks awakened."
+    }
+  ],
+  "rules": [
+    {
+      "id": "D01-R1",
+      "day": 1,
+      "title": "Welcome, Operative",
+      "front": "SETUP\n1. Read today's Intro Card.\n2. Shuffle today's 3 player cards into your 12-card Operative Deck (15 cards). Draw 4.\n3. Shuffle today's Threat Cards into the Threat Deck. Deal 3 face-up in a row: the Scene Row.\n4. Set the Lead and Exposure markers to the Intro Card's starting values.\n\nGOAL: Reach today's Lead target before your cover is blown.",
+      "back": "YOUR CARDS\nEach card shows a suit and a Power value:\nRECON  ·  STEALTH  ·  FORCE\n\nTHREATS\nEach Threat shows a requirement, like  STEALTH x2 + 5:\n- 2 symbols of its preferred suit (some Threats list an alternate suit that also counts)\n- at least 5 total Power\nIt also shows its Reward, Clean bonus, and any Pressure or timer."
+    },
+    {
+      "id": "D01-R2",
+      "day": 1,
+      "title": "Your Turn: Play 2 Cards",
+      "front": "Every turn has 3 steps: Play 2 Cards, Pressure, Draw 2.\n\nSTEP 1: PLAY EXACTLY 2 CARDS\nUse each card one of two ways:\n- TUCK it under a Threat whose preferred or alternate suit matches. It adds 1 symbol of its suit and its Power.\n- USE ITS ABILITY (the text box) instead, then discard it.\n\nCards stay under a Threat across turns until it is cleared, so you can wear down a big Threat over several turns.",
+      "back": "CLEARING A THREAT\nWhen the symbols and Power under a Threat meet its requirement, it is cleared:\n- Claim its Reward.\n- Discard it and the cards under it.\n- Deal a new Threat into the empty slot.\n\nCLEAN CLEAR\nIf everything that counted was its preferred suit, also gain its Clean bonus."
+    },
+    {
+      "id": "D01-R3",
+      "day": 1,
+      "title": "Pressure & Drawing",
+      "front": "STEP 2: PRESSURE\nEvery Threat still in the Scene Row applies its Pressure (for example, +1 Exposure).\n\nTIMERS: When a Threat with a timer enters the Scene Row, place a die on it showing that number. Turn it down by 1 each Pressure step. At 0 the Threat escapes: apply its Expiry effect, discard it, and deal a new Threat.\n\nSTEP 3: DRAW 2\nDraw 2 cards. Your hand stays at 4 until your deck runs out.",
+      "back": "THE EPISODE ENDS when:\n- your Lead reaches today's target, or\n- your Exposure hits the redline (6), or\n- your deck and hand are both empty, or\n- the Scene Row and Threat Deck are both empty (gain +1 Lead first).\n\nSTARS (0 to 3)\n• Reached the Lead target\n• Exposure at or below today's threshold\n• Completed today's Bonus Objective"
+    },
+    {
+      "id": "D01-R4",
+      "day": 1,
+      "title": "After the Episode",
+      "front": "1. Gather all 15 of your player cards.\n2. DISCARD DOWN TO 12: choose 3 cards to retire—any cards, even today's new ones. Retired cards go back into the pack (or box slot) named on them. This is how you shape your deck.\n3. Put today's Intro, Rule, Threat, and Outro Cards back in today's pack.\n4. Record your Stars on the campaign sheet.",
+      "back": "QUICK REFERENCE\nTurn: Play 2 · Pressure · Draw 2\nTuck: +1 symbol of the card's suit, + its Power\nClean Clear: only the preferred suit counted\nTimer at 0: Threat escapes, apply Expiry\nEnd: Lead target · redline · out of cards · Scene Cleared\nAfter: discard down to 12"
+    },
+    {
+      "id": "D06-R1",
+      "day": 6,
+      "title": "Gear",
+      "front": "GEAR\nGear cards are equipment. Playing one counts as one of your 2 plays. Place it on the table: it stays in play for the rest of the episode, and its ongoing ability works every turn.\n\nGear has no Power and can't be tucked under Threats.",
+      "back": "ALLIES\nAllies are contacts and assets. Playing one counts as one of your 2 plays. Place it on the table: it stays in play.\n\nAn Ally's suit symbols count toward EVERY Threat you engage while it's in play—as if a card of that suit were tucked under each one.\n\nAllies have no Power."
+    },
+    {
+      "id": "D06-R2",
+      "day": 6,
+      "title": "Ally Cover",
+      "front": "ALLY COVER\nDuring Pressure, before any one Pressure or Expiry effect resolves, you may defeat one of your Allies in play to cancel that effect. Move the Ally to your discard pile.\n\nDefeat lasts only for this episode: the Ally is back in your deck next time.",
+      "back": "TIP\nAllies make big Threats easier and protect you when things go wrong. Deciding when to spend one is often the key choice of an episode.\n\nGear and Allies return to your deck after every episode like any other card, and you can retire them in the end-of-day cut."
+    },
+    {
+      "id": "D11-R1",
+      "day": 11,
+      "title": "Encrypted Threats",
+      "front": "Some Threat cards have an ENCRYPTED back.\n\nWhen an Encrypted Threat enters the Scene Row, it goes in FACE-DOWN. While face-down it has no Pressure and no timer, and you can't tuck cards under it. It just takes up its slot.\n\nEncrypted Threats carry richer Rewards, so they're worth cracking.",
+      "back": "DECRYPTING\nPlay any RECON card to a face-down Threat (one of your 2 plays) and flip it face-up. If it has a timer, place its die now.\n\nIf Recon is its preferred or alternate suit, your card stays under it and counts. Otherwise, discard the card.\n\nThe Master Decryptor perk lets any card decrypt."
+    },
+    {
+      "id": "D16-R1",
+      "day": 16,
+      "title": "Memory Flashbacks",
+      "front": "Today's pack holds a CONDITIONED CARD—one of your 3 new cards—and its AWAKENED CARD, set aside under a Flashback back. Don't read the Awakened Card yet.\n\nEvery flashback happens today: the Conditioned Card always awakens by the end of the episode.",
+      "back": "AWAKENING DURING PLAY\nThe Conditioned Card prints a trigger. If its trigger is met when you play it, it awakens:\n- Swap in the Awakened Card and play it instead.\n- Gain its Awakening bonus.\n- Read its flashback."
+    },
+    {
+      "id": "D16-R2",
+      "day": 16,
+      "title": "Awakening at the End",
+      "front": "If the Conditioned Card hasn't awakened by the end of the episode—for any reason—it awakens during cleanup, before you discard down to 12. Read the flashback and swap in the Awakened Card (no bonus).",
+      "back": "AFTER AWAKENING\nThe dormant card goes back in the pack. From now on, the Awakened Card is an ordinary player card—keep it, or retire it in the cut like any other."
+    },
+    {
+      "id": "D21-R1",
+      "day": 21,
+      "title": "Pursuers",
+      "front": "Today's Intro Card places a PURSUER in a 4th Scene Row slot. It is not part of the Threat Deck.\n\nNeutralize it like any Threat—symbols and Power, cards stay under it—but it needs far more. Clearing it claims its Reward, and its slot stays empty.\n\nPursuers can't be Vanished. Some also print an ongoing effect.",
+      "back": "HUNT & STRIKE\nA Pursuer shows a HUNT number instead of a timer. Place a die on it set to that number and turn it down by 1 each Pressure step.\n\nAt 0 it STRIKES: apply its Strike effect, then reset the die to its Hunt number. Pursuers never escape.\n\nAlly Cover can cancel a Strike. Stall works on its die. Scene Cleared requires the Pursuer to be neutralized."
+    },
+    {
+      "id": "D26-R1",
+      "day": 26,
+      "title": "Black-Site Lockdown",
+      "front": "TWO-PHASE THREATS are marked with a lock. Clearing one doesn't free its slot: claim its Reward as usual, then put its matching COUNTERMEASURE CARD (set aside during setup) into the same slot.\n\nThe Countermeasure is a Threat in every way. Clear it to finish the job.",
+      "back": "SETUP REMINDER\nDuring setup, set aside today's Countermeasure Cards (Countermeasure back) without reading them. Each names the Two-Phase Threat it follows.\n\nIf a Two-Phase Threat escapes or is swapped away, its Countermeasure never appears."
+    },
+    {
+      "id": "PROTO-R1",
+      "day": "PROTO",
+      "title": "Clearance Perks (prototype)",
+      "front": "PROTOTYPE NOTE\nIn the full game, Outro Cards unlock Clearance Perks on Days 3, 7, 10, 13, 17, 20, and 24. For jump-in days, check the perks listed on the Jump-In Card on your campaign sheet.\n\nEach unlocked perk can be used ONCE PER EPISODE. Mark its \"used\" box when you use it; erase the marks during cleanup.",
+      "back": "PROTOTYPE NOTE\nJUMP-IN CARDS set you up as if you'd played the earlier days:\n1. Build your 12-card deck from the cards listed (PROTO cards stand in for cards from days not yet written).\n2. Check the listed perks on your sheet.\n3. Then set up the day normally."
+    }
+  ],
+  "story": [
+    {
+      "id": "D01-I1",
+      "day": 1,
+      "type": "Intro",
+      "title": "Day 1 — Placeholder",
+      "text": "PROTOTYPE STORY PLACEHOLDER\nYou wake in a locked room with no memory. Get out quietly."
+    },
+    {
+      "id": "D01-O1",
+      "day": 1,
+      "type": "Outro",
+      "title": "Day 1 — Placeholder",
+      "text": "PROTOTYPE STORY PLACEHOLDER\nYou're out. Someone is already looking for you."
+    },
+    {
+      "id": "D06-I1",
+      "day": 6,
+      "type": "Intro",
+      "title": "Day 6 — Placeholder",
+      "text": "PROTOTYPE STORY PLACEHOLDER\nA contact at the docks can sell you equipment. Make the deal."
+    },
+    {
+      "id": "D06-O1",
+      "day": 6,
+      "type": "Outro",
+      "title": "Day 6 — Placeholder",
+      "text": "PROTOTYPE STORY PLACEHOLDER\nThe deal is done, and you have a new friend."
+    },
+    {
+      "id": "D11-I1",
+      "day": 11,
+      "type": "Intro",
+      "title": "Day 11 — Placeholder",
+      "text": "PROTOTYPE STORY PLACEHOLDER\nThe files you need are locked behind layers of encryption."
+    },
+    {
+      "id": "D11-O1",
+      "day": 11,
+      "type": "Outro",
+      "title": "Day 11 — Placeholder",
+      "text": "PROTOTYPE STORY PLACEHOLDER\nThe files are cracked. What's inside changes everything."
+    },
+    {
+      "id": "D16-I1",
+      "day": 16,
+      "type": "Intro",
+      "title": "Day 16 — Placeholder",
+      "text": "PROTOTYPE STORY PLACEHOLDER\nSomething about this building feels familiar."
+    },
+    {
+      "id": "D16-O1",
+      "day": 16,
+      "type": "Outro",
+      "title": "Day 16 — Placeholder",
+      "text": "PROTOTYPE STORY PLACEHOLDER\nYou remember. Not everything—but enough."
+    },
+    {
+      "id": "D21-I1",
+      "day": 21,
+      "type": "Intro",
+      "title": "Day 21 — Placeholder",
+      "text": "PROTOTYPE STORY PLACEHOLDER\nA hunter team is on your trail. Keep moving."
+    },
+    {
+      "id": "D21-O1",
+      "day": 21,
+      "type": "Outro",
+      "title": "Day 21 — Placeholder",
+      "text": "PROTOTYPE STORY PLACEHOLDER\nYou've slipped them—for now."
+    },
+    {
+      "id": "D26-I1",
+      "day": 26,
+      "type": "Intro",
+      "title": "Day 26 — Placeholder",
+      "text": "PROTOTYPE STORY PLACEHOLDER\nThe black site. Every door you open, another one locks."
+    },
+    {
+      "id": "D26-O1",
+      "day": 26,
+      "type": "Outro",
+      "title": "Day 26 — Placeholder",
+      "text": "PROTOTYPE STORY PLACEHOLDER\nYou're inside. The real test is still ahead."
+    }
+  ],
+  "days": [
+    {
+      "day": 1,
+      "act": 1,
+      "actTitle": "Amnesia & Extraction",
+      "focusSuit": "Stealth",
+      "newRules": "Base rules",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 7,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 3,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Make a Clean Clear.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": true
+    },
+    {
+      "day": 2,
+      "act": 1,
+      "actTitle": "Amnesia & Extraction",
+      "focusSuit": "Recon",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 7,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 3,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Clear a timed Threat while its timer is 2 or higher.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 3,
+      "act": 1,
+      "actTitle": "Amnesia & Extraction",
+      "focusSuit": "Force",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 7,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 3,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Clear a Threat that needs 2+ symbols in a single turn.",
+      "episodeTwist": "",
+      "perkUnlock": true,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 4,
+      "act": 1,
+      "actTitle": "Amnesia & Extraction",
+      "focusSuit": "Stealth",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Never let Exposure go above 2.",
+      "episodeTwist": "Crowded station: Stealth Clean Clears also give +1 Lead.",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 5,
+      "act": 1,
+      "actTitle": "Amnesia & Extraction",
+      "focusSuit": "Recon",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Use 3 Tactical Abilities this episode.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 6,
+      "act": 1,
+      "actTitle": "Amnesia & Extraction",
+      "focusSuit": "Force",
+      "newRules": "Gear & Allies",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Have a Gear and an Ally in play at the same time.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": true
+    },
+    {
+      "day": 7,
+      "act": 1,
+      "actTitle": "Amnesia & Extraction",
+      "focusSuit": "Stealth",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Use Ally Cover to cancel an Expiry effect.",
+      "episodeTwist": "",
+      "perkUnlock": true,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 8,
+      "act": 1,
+      "actTitle": "Amnesia & Extraction",
+      "focusSuit": "Recon",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Clear every Threat in the opening Scene Row.",
+      "episodeTwist": "Night op: the Scene Row has 4 slots today.",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 9,
+      "act": 1,
+      "actTitle": "Amnesia & Extraction",
+      "focusSuit": "Force",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Make 3 Clean Clears.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 10,
+      "act": 1,
+      "actTitle": "Amnesia & Extraction",
+      "focusSuit": "Stealth",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Reach the Lead target with at least 2 turns to spare.",
+      "episodeTwist": "",
+      "perkUnlock": true,
+      "debrief": "Act I Debrief",
+      "hasContent": false
+    },
+    {
+      "day": 11,
+      "act": 2,
+      "actTitle": "Inside the Program",
+      "focusSuit": "Recon",
+      "newRules": "Encrypted Threats",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Decrypt every Encrypted Threat that enters the Scene Row.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": true
+    },
+    {
+      "day": 12,
+      "act": 2,
+      "actTitle": "Inside the Program",
+      "focusSuit": "Force",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Clear 2 Threats in one turn.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 13,
+      "act": 2,
+      "actTitle": "Inside the Program",
+      "focusSuit": "Stealth",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Finish without any Threat escaping.",
+      "episodeTwist": "Comms blackout: no Tactical Abilities today.",
+      "perkUnlock": true,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 14,
+      "act": 2,
+      "actTitle": "Inside the Program",
+      "focusSuit": "Recon",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Clear a Threat with a single card.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 15,
+      "act": 2,
+      "actTitle": "Inside the Program",
+      "focusSuit": "Force",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "End the episode with 2 Allies in play.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 16,
+      "act": 2,
+      "actTitle": "Inside the Program",
+      "focusSuit": "Stealth",
+      "newRules": "Memory Flashbacks",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Awaken the Conditioned Card during play.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": true
+    },
+    {
+      "day": 17,
+      "act": 2,
+      "actTitle": "Inside the Program",
+      "focusSuit": "Recon",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Make a Clean Clear in each suit.",
+      "episodeTwist": "",
+      "perkUnlock": true,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 18,
+      "act": 2,
+      "actTitle": "Inside the Program",
+      "focusSuit": "Force",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Clear a Threat that needs 7+ Power.",
+      "episodeTwist": "Handler on the line: draw 1 extra card at the start.",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 19,
+      "act": 2,
+      "actTitle": "Inside the Program",
+      "focusSuit": "Stealth",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Awaken the Conditioned Card during play.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 20,
+      "act": 2,
+      "actTitle": "Inside the Program",
+      "focusSuit": "Recon",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 0,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 0,
+      "countermeasures": 0,
+      "bonusObjective": "Reach the Lead target without using any perks.",
+      "episodeTwist": "",
+      "perkUnlock": true,
+      "debrief": "Act II Debrief",
+      "hasContent": false
+    },
+    {
+      "day": 21,
+      "act": 3,
+      "actTitle": "Burn Notice",
+      "focusSuit": "Force",
+      "newRules": "Hunter-Killer Operatives (Pursuers)",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 1,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 1,
+      "countermeasures": 0,
+      "bonusObjective": "Neutralize the Pursuer.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": true
+    },
+    {
+      "day": 22,
+      "act": 3,
+      "actTitle": "Burn Notice",
+      "focusSuit": "Stealth",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 1,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 1,
+      "countermeasures": 0,
+      "bonusObjective": "Awaken the Conditioned Card during play.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 23,
+      "act": 3,
+      "actTitle": "Burn Notice",
+      "focusSuit": "Recon",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 1,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 1,
+      "countermeasures": 0,
+      "bonusObjective": "Neutralize the Pursuer before turn 5.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 24,
+      "act": 3,
+      "actTitle": "Burn Notice",
+      "focusSuit": "Force",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 1,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 1,
+      "countermeasures": 0,
+      "bonusObjective": "Use Ally Cover twice.",
+      "episodeTwist": "Lockdown: timers start 1 lower.",
+      "perkUnlock": true,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 25,
+      "act": 3,
+      "actTitle": "Burn Notice",
+      "focusSuit": "Stealth",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 1,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 1,
+      "countermeasures": 0,
+      "bonusObjective": "Finish with lower Exposure than you started with.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 26,
+      "act": 3,
+      "actTitle": "Burn Notice",
+      "focusSuit": "Recon",
+      "newRules": "Black-Site Lockdown (Two-Phase Threats)",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 1,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 1,
+      "countermeasures": 2,
+      "bonusObjective": "Clear a Countermeasure.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": true
+    },
+    {
+      "day": 27,
+      "act": 3,
+      "actTitle": "Burn Notice",
+      "focusSuit": "Force",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 1,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 1,
+      "countermeasures": 2,
+      "bonusObjective": "Clear both Countermeasures.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 28,
+      "act": 3,
+      "actTitle": "Burn Notice",
+      "focusSuit": "Stealth",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 1,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 1,
+      "countermeasures": 2,
+      "bonusObjective": "Make 2 Clean Clears in one turn.",
+      "episodeTwist": "Alarm raised: start at +1 Exposure, but Clean Clears give -2 Exposure.",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 29,
+      "act": 3,
+      "actTitle": "Burn Notice",
+      "focusSuit": "Recon",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 1,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 1,
+      "countermeasures": 2,
+      "bonusObjective": "Finish without any Threat escaping.",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "",
+      "hasContent": false
+    },
+    {
+      "day": 30,
+      "act": 3,
+      "actTitle": "Burn Notice",
+      "focusSuit": "Force",
+      "newRules": "",
+      "episodeTitle": "",
+      "startLead": 0,
+      "leadTarget": 8,
+      "startExposure": 1,
+      "redline": 6,
+      "coverThreshold": 2,
+      "threatCount": 9,
+      "pursuers": 1,
+      "countermeasures": 2,
+      "bonusObjective": "Clear every Threat (Scene Cleared).",
+      "episodeTwist": "",
+      "perkUnlock": false,
+      "debrief": "Epilogue",
+      "hasContent": false
+    }
+  ],
+  "perks": [
+    {
+      "id": "vanish",
+      "name": "Vanish",
+      "branch": "GHOST",
+      "text": "Discard any Threat from the Scene Row (unless its card says otherwise) without clearing it."
+    },
+    {
+      "id": "clonedCredentials",
+      "name": "Cloned Credentials",
+      "branch": "GHOST",
+      "text": "During setup, put 1 card of your choice from your deck into your opening hand."
+    },
+    {
+      "id": "falseTrail",
+      "name": "False Trail",
+      "branch": "GHOST",
+      "text": "This turn, ignore up to 2 Exposure you would gain, and gain +1 Lead."
+    },
+    {
+      "id": "sleeperInstinct",
+      "name": "Sleeper Instinct",
+      "branch": "GHOST",
+      "text": "When you play a Stealth card for its ability, also tuck it under a Threat."
+    },
+    {
+      "id": "satelliteOverwrite",
+      "name": "Satellite Overwrite",
+      "branch": "ANALYST",
+      "text": "Look at the top 4 Threats, discard up to 2, put the rest back in any order."
+    },
+    {
+      "id": "contingencyPlan",
+      "name": "Contingency Plan",
+      "branch": "ANALYST",
+      "text": "Draw 2 extra cards."
+    },
+    {
+      "id": "patternRecognition",
+      "name": "Pattern Recognition",
+      "branch": "ANALYST",
+      "text": "When you clear a Threat with 3+ excess Power, draw 1 card."
+    },
+    {
+      "id": "masterDecryptor",
+      "name": "Master Decryptor",
+      "branch": "ANALYST",
+      "text": "For one turn, all cards in your hand count as any suit."
+    },
+    {
+      "id": "adrenalineSurge",
+      "name": "Adrenaline Surge",
+      "branch": "OPERATIVE",
+      "text": "Skip one Pressure step (timers don't tick, no Pressure resolves)."
+    },
+    {
+      "id": "improvisedWeapon",
+      "name": "Improvised Weapon",
+      "branch": "OPERATIVE",
+      "text": "When you tuck a card, it counts as any suit and its Power is doubled."
+    },
+    {
+      "id": "hardenedResolve",
+      "name": "Hardened Resolve",
+      "branch": "OPERATIVE",
+      "text": "When you would reach the Exposure redline, stop 1 below it instead."
+    },
+    {
+      "id": "kineticMomentum",
+      "name": "Kinetic Momentum",
+      "branch": "OPERATIVE",
+      "text": "When you clear a Threat using Force, carry excess Power onto another Threat."
+    }
+  ]
+}
