@@ -15,12 +15,12 @@ Simulated player with the Jump-In deck and perks (see the design doc for details
 
 | Day | Mechanic | Objective Star | Cover Star | Avg. turns |
 | --- | --- | --- | --- | --- |
-| 1 | Base rules | 81% | 100% | 6.4 |
-| 6 | Gear & Allies | 71% | 94% | 6.8 |
-| 11 | Encrypted Threats | 73% | 84% | 6.1 |
-| 16 | Memory Flashbacks | 63% | 70% | 6.7 |
-| 21 | Pursuers | 59% | 72% | 6.7 |
-| 26 | Two-Phase Threats | 50% | 89% | 7.0 |
+| 1 | Base rules | 81% | 100% | 6.5 |
+| 6 | Gear & Allies | 69% | 92% | 6.8 |
+| 11 | Encrypted Threats | 71% | 82% | 6.2 |
+| 16 | Memory Flashbacks | 80% | 72% | 5.9 |
+| 21 | Pursuers | 61% | 40% | 6.4 |
+| 26 | Two-Phase Threats | 49% | 86% | 7.0 |
 
 ## Summary
 
@@ -42,7 +42,7 @@ Copy this block for each session.
 - **Final Lead / Exposure:** __ / __   **Stars:** Objective [ ] Cover [ ] Bonus [ ]
 - **Perks used:** __
 - **Today's mechanic** (Gear & Allies / Encrypted / Flashback / Pursuer / Two-Phase): how often did it come up, and did it matter?
-- **Timers:** did any Threat escape? (The simulator says timers almost never fire.)
+- **Timers:** did any Threat escape? (The simulator says timers rarely fire.)
 - **Turns with no real choice:** which turns, and why?
 - **Best decision of the session:**
 - **Rules questions or confusion** (and how you ruled):

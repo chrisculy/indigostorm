@@ -221,6 +221,10 @@ def day_str(v):
     return str(v).strip()
 
 
+TIMER_COL = "Timer (Hunt for Pursuers)"
+EXPIRY_COL = "Expiry Effect (Strike for Pursuers)"
+
+
 def card_from_row(r):
     sym = [s.strip() for s in re.split(r"[+/,]", str(r.get("Ally Symbols") or "")) if s.strip()]
     return PCard(r["ID"], r.get("Name") or r["ID"], r.get("Class") or "Training", r.get("Suit") or "",
@@ -247,6 +251,7 @@ def load_deck(cfg):
             pair = by_id.get(r.get("Pairs With"))
             if pair:
                 c.awakened = card_from_row(pair)
+                c.bonus = c.awakened.bonus or c.bonus      # the Awakening Bonus is printed on the Awakened card
         deck.append(c)
     if len(deck) != 15:
         print(f"Warning: deck has {len(deck)} cards (expected 15).", file=sys.stderr)
@@ -259,9 +264,9 @@ def threat_from_row(r):
     return Threat(id=r["ID"], name=r.get("Name") or r["ID"], kind=r.get("Type") or "Threat",
                   pref=r.get("Preferred Suit"), alt=r.get("Alternate Suit") or None,
                   sym=int(r.get("Symbols Required") or 1), pw=int(r.get("Power Required") or 0),
-                  timer=int(r["Timer"]) if r.get("Timer") not in (None, "") else None,
+                  timer=int(r[TIMER_COL]) if r.get(TIMER_COL) not in (None, "") else None,
                   reward=parse_delta(r.get("Reward")), clean=parse_delta(r.get("Clean Bonus")),
-                  pressure=parse_delta(press), expiry=parse_delta(r.get("Expiry Effect")),
+                  pressure=parse_delta(press), expiry=parse_delta(r.get(EXPIRY_COL)),
                   blocker="blocker" in press.lower(), pairs=r.get("Pairs With"),
                   effects=parse_effects(r.get("Sim Effect")), no_vanish="cannot be vanished" in rules.lower())
 

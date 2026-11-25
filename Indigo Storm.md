@@ -195,18 +195,18 @@ The campaign is a three-act season with **10 episodes per act**. There is **no s
 
 1. **Prototype the six rule days (Days 1, 6, 11, 16, 21, 26).** Each day after Day 1 comes with a **Jump-In Card**: a preset 12-card deck typical for that point in the campaign (including stand-in cards marked `PROTO`, which represent cards from days not yet written) and the Clearance Perks to treat as unlocked. Day cards and Threats are tuned with the simulator before printing, and the stand-ins are retired once the full 30 days are written. Run any prototype day with `python3 indigo_sim.py --day 11` (add `--log` to watch one episode). Build printable cards with `python3 make_print.py`: one PDF per day's pack (fronts and mirrored backs for long-edge duplex), plus the Core deck, prototype extras and the campaign sheet, in `print/`. Record sessions in `Indigo Storm - Playtest Log.md`.
 
-   *First tuning pass (simulated player, jump-in deck and perks):*
+   *First tuning pass (simulated player, jump-in deck and perks). Re-run after fixing a simulator bug that ignored timers, Expiry effects, Pursuer Strikes and the Awakening bonus; the web app's rules engine bot gives matching numbers:*
 
    | Day | Mechanic | Target Objective / Cover | Simulated | Avg. turns | Notes |
    | --- | --- | --- | --- | --- | --- |
-   | 1 | Base rules | ~85% / ~90% | 81% / 100% | 6.4 | |
-   | 6 | Gear & Allies | ~75% / ~85% | 71% / 94% | 6.8 | |
-   | 11 | Encrypted Threats | ~65% / ~75% | 73% / 84% | 6.1 | ~1.5 decrypts per episode |
-   | 16 | Memory Flashbacks | ~65% / ~75% | 63% / 70% | 6.7 | Awakens during play ~60% of the time |
-   | 21 | Pursuers | ~50% / ~70% | 59% / 72% | 6.7 | Pursuer neutralized ~20% of the time |
-   | 26 | Two-Phase Threats | ~50% / ~70% | 50% / 89% | 7.0 | |
+   | 1 | Base rules | ~85% / ~90% | 81% / 100% | 6.5 | |
+   | 6 | Gear & Allies | ~75% / ~85% | 69% / 92% | 6.8 | |
+   | 11 | Encrypted Threats | ~65% / ~75% | 71% / 82% | 6.2 | ~1.5 decrypts per episode |
+   | 16 | Memory Flashbacks | ~65% / ~75% | **80%** / 72% | 5.9 | Awakening bonus makes it easier than targeted |
+   | 21 | Pursuers | ~50% / ~70% | 61% / **40%** | 6.4 | ~1 Pursuer Strike per episode; neutralized ~20% |
+   | 26 | Two-Phase Threats | ~50% / ~70% | 49% / 86% | 7.0 | |
 
-   *Tuning lessons:* (1) Every Threat needed about +1 Power over the generator's guide, and later days more, because jump-in decks and perks are strong. (2) Exposure only builds when some Lead-reward Threats also apply Pressure ("guarded" targets); hazards alone get cleared too fast. (3) False Trail originally converted *all* incoming Exposure into Lead, which took Day 6 from 33% to 90% Objective; it is now capped. (4) Cover runs high on Days 1, 6 and 26, partly because the simulated player avoids Exposure more carefully than people do. (5) No timed Threat escaped on any day: timers may be too gentle. Watch for this in playtests.
+   *Tuning lessons:* (1) Every Threat needed about +1 Power over the generator's guide, and later days more, because jump-in decks and perks are strong. (2) Exposure only builds when some Lead-reward Threats also apply Pressure ("guarded" targets); hazards alone get cleared too fast. (3) False Trail originally converted *all* incoming Exposure into Lead, which took Day 6 from 33% to 90% Objective; it is now capped. (4) Cover runs high on Days 1, 6 and 26, partly because the simulated player avoids Exposure more carefully than people do. (5) Timers rarely fire (0–0.16 escapes per episode), so they are mostly a soft threat; watch whether that feels right. (6) Off target after the fix: Day 16 Objective is ~15 points too easy and Day 21 Cover is ~30 points too hard (Pursuer Strikes); both are candidates for the next tuning pass.
 2. **Calibrate the Math:** Verify that an average 15-card deck generates roughly **28–35 total Power** across a single pass through the deck, and tune Threat requirements so each Star feels earned on its own and getting all 3 requires tight ability sequencing.
    - *Early numbers (15 Training cards at 5 per suit with Power 1/1/2/3/4):* every episode is exactly **8 turns**, so up to **8 Pressure steps**—tune Pressure and timers (3–5 turns) for that. Two cards average about **4.4 Power**. A 4-card hand holds 2+ cards of a given suit only about **40%** of the time, so Threats that need **1–2 symbols** can usually be cleared in one turn. Because cards stay on a Threat across turns, Threats with 3+ symbols or 7+ Power work as **multi-turn projects**, balanced by their timers and Pressure. Typical one-turn Power totals: **3–6**. (Needs a proper simulation with symbol requirements, Gear, and Allies.)
    - *Simulator:* `indigo_sim.py` in this folder plays thousands of episodes with a greedy player, reading the deck from the Cards workbook's **Sim Effect** column. First findings with the Day 1 deck and generated Threats (8 per day, ~55% one-symbol / ~40% two-symbol): at **2.2 Power per symbol** the Objective Star lands ~89% of the time in ~4.5 turns (far too easy); **3.4 Power per symbol** gives ~60% Objective / ~74% Cover in ~6 turns. Raising the share of hazard Threats (Exposure Pressure, no Lead reward) from 35% to 50% drops Objective to ~34%. Not yet simulated: Conditioned Cards, Face-Down Threats, Pursuers, Two-Phase Threats, perks, Episode Twists.
