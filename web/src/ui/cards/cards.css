@@ -187,7 +187,8 @@
       animation: none;
     }
   }
-  :root[data-motion="reduced"] .card[data-highlighted]::before {
+  :root[data-motion="reduced"] .card[data-highlighted]::before,
+  :root[data-speed="instant"] .card[data-highlighted]::before {
     animation: none;
   }
 

@@ -2,6 +2,7 @@
 // No network: export is a Blob download, import reads a user-chosen file.
 
 import { contentDays, perksById, playerCardsById } from '../data/index.ts';
+import { TWIST_CODES } from '../data/twists.ts';
 import type { Action, CampaignState, EpisodeSetup, Stars } from '../engine/index.ts';
 import { DEFAULT_SETTINGS, type Settings, sanitizeSettings } from './settings.ts';
 
@@ -89,13 +90,25 @@ export function sanitizeCampaign(v: unknown): CampaignState | null {
   };
 }
 
-function sanitizeEpisode(v: unknown): SavedEpisode | null {
-  if (!isObj(v) || !isObj(v.setup) || !Array.isArray(v.actions)) return null;
+const EPISODE_DROPPED = 'The saved episode in progress was damaged and has been discarded';
+
+/** A saved episode, or null. `warn` receives a reason when a stored episode had to be dropped. */
+function sanitizeEpisode(v: unknown, warn: (msg: string) => void = () => {}): SavedEpisode | null {
+  if (v === null || v === undefined) return null;
+  const drop = (why: string) => {
+    warn(`${EPISODE_DROPPED} (${why}).`);
+    return null;
+  };
+  if (!isObj(v) || !isObj(v.setup) || !Array.isArray(v.actions)) return drop('unreadable');
   const s = v.setup;
   const day = Number(s.day);
-  if (!contentDays.includes(day) || typeof s.seed !== 'number') return null;
+  if (!contentDays.includes(day)) return drop(`unknown day ${String(s.day)}`);
+  if (typeof s.seed !== 'number' || !Number.isSafeInteger(s.seed)) return drop('invalid shuffle seed');
   const deck = strings(s.deck);
-  if (deck.length === 0 || deck.some((id) => !playerCardsById.has(id))) return null;
+  if (deck.length === 0 || deck.some((id) => !playerCardsById.has(id))) return drop('unknown cards in the deck');
+  if (s.twist !== undefined && s.twist !== null && !(TWIST_CODES as readonly unknown[]).includes(s.twist)) {
+    return drop(`unknown twist “${String(s.twist)}”`);
+  }
   const setup: EpisodeSetup = {
     day,
     deck,
@@ -139,8 +152,9 @@ export class SaveFormatError extends Error {
 }
 
 /** Bring any parsed save up to the current version and sanitize it. Throws SaveFormatError when
- * the document is not a save at all or comes from a newer version of the app. */
-export function migrate(raw: unknown): SaveData {
+ * the document is not a save at all or comes from a newer version of the app. Parts that had to be
+ * dropped (e.g. a damaged episode) are reported through `warnings`. */
+export function migrate(raw: unknown, warnings: string[] = []): SaveData {
   if (!isObj(raw)) throw new SaveFormatError('Not an Indigo Storm save');
   let doc: Record<string, unknown> = { ...raw };
   let v = typeof doc.version === 'number' ? doc.version : 0;
@@ -157,7 +171,7 @@ export function migrate(raw: unknown): SaveData {
     settings: sanitizeSettings(doc.settings),
     campaign: sanitizeCampaign(doc.campaign),
     prototypeBest: sanitizeBest(doc.prototypeBest),
-    episode: sanitizeEpisode(doc.episode),
+    episode: sanitizeEpisode(doc.episode, (m) => warnings.push(m)),
     rulesSeen: [...new Set(strings(doc.rulesSeen))],
     flashbacksSeen: [...new Set(strings(doc.flashbacksSeen))],
   };
@@ -186,7 +200,9 @@ export function loadSave(): LoadResult {
   const raw = ls?.getItem(STORAGE_KEY) ?? null;
   if (raw === null) return { data: emptySave(), corrupt: false };
   try {
-    return { data: migrate(JSON.parse(raw)), corrupt: false };
+    const warnings: string[] = [];
+    const data = migrate(JSON.parse(raw), warnings);
+    return warnings.length ? { data, corrupt: false, message: warnings.join(' ') } : { data, corrupt: false };
   } catch (e) {
     try {
       ls?.setItem(CORRUPT_KEY, raw);
@@ -235,8 +251,9 @@ export function serializeExport(data: SaveData): string {
   return JSON.stringify({ kind: EXPORT_KIND, ...data, savedAt: new Date().toISOString() }, null, 2);
 }
 
-/** Parse an exported file's text into a save. Throws SaveFormatError with a readable message. */
-export function parseImport(text: string): SaveData {
+/** Parse an exported file's text into a save. Throws SaveFormatError with a readable message.
+ * Parts that had to be dropped are reported through `warnings`. */
+export function parseImport(text: string, warnings: string[] = []): SaveData {
   let raw: unknown;
   try {
     raw = JSON.parse(text);
@@ -247,7 +264,7 @@ export function parseImport(text: string): SaveData {
     throw new SaveFormatError('The file is not an Indigo Storm save');
   }
   const { kind: _kind, ...rest } = raw;
-  return migrate(rest);
+  return migrate(rest, warnings);
 }
 
 /** Offer the save as a .json download (Blob + <a download>; no network). */

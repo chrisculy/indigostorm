@@ -100,7 +100,8 @@ export function PerksPanel() {
       <h2 id="perks-h" className="side-head">
         Perks
       </h2>
-      <ul className="perks">
+      {/* biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region must be reachable by keyboard */}
+      <ul className="perks" aria-label="Unlocked perks" tabIndex={0}>
         {v.perks.unlocked.map((p) => {
           const info = perksById.get(p);
           const used = v.perks.used.includes(p);

@@ -4,7 +4,7 @@
 import { type CSSProperties, type DragEvent, useState } from 'react';
 import { playerCard, threat } from '../../data/index.ts';
 import { actionKey, type Decision, type DecisionChoice, deltaText } from '../../engine/index.ts';
-import { useGame } from '../../state/store.ts';
+import { useGame, useHideFlashback } from '../../state/store.ts';
 import { UiIcon } from '../art/index.ts';
 import { PlayerCardView, pretty } from '../cards/index.ts';
 import { Badge, Button, SideSheet } from '../components/index.ts';
@@ -167,6 +167,7 @@ function SatelliteBody({ d }: { d: Extract<Decision, { kind: 'satellite' }> }) {
 
 function ChooseCardBody({ d }: { d: Extract<Decision, { kind: 'chooseCard' }> }) {
   const decide = useGame((s) => s.decide);
+  const hide = useHideFlashback();
   const [pick, setPick] = useState<string | null>(null);
   return (
     <>
@@ -177,6 +178,7 @@ function ChooseCardBody({ d }: { d: Extract<Decision, { kind: 'chooseCard' }> })
             <PlayerCardView
               card={playerCard(id)}
               size="sm"
+              hideFlashback={hide(id)}
               selected={pick === id}
               onClick={() => setPick(pick === id ? null : id)}
               ariaHint="Choose this card."
@@ -299,7 +301,7 @@ export function DecisionSheet() {
       break;
   }
   return (
-    <SideSheet open title={title} context={context} className="decision-sheet">
+    <SideSheet open title={title} context={context} className="decision-sheet" focusKey={id}>
       {body}
     </SideSheet>
   );

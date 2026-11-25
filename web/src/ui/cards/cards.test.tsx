@@ -108,14 +108,14 @@ describe('other cards', () => {
     const rule = gameData.rules[0];
     if (!rule) throw new Error('no rules');
     render(<RuleCardView rule={rule} />);
-    const flip = screen.getByRole('button', { name: `Flip ${rule.title} to side 2` });
+    const flip = screen.getByRole('button', { name: `Side 1 of 2: flip ${rule.title} to side 2` });
     const faces = document.querySelectorAll('.flip__face');
     expect(faces[0]?.hasAttribute('inert')).toBe(false);
     expect(faces[1]?.hasAttribute('inert')).toBe(true);
     fireEvent.click(flip);
     expect(faces[0]?.hasAttribute('inert')).toBe(true);
     expect(faces[1]?.hasAttribute('inert')).toBe(false);
-    expect(screen.getByRole('button', { name: `Flip ${rule.title} to side 1` })).toBeTruthy();
+    expect(screen.getByRole('button', { name: `Side 2 of 2: flip ${rule.title} to side 1` })).toBeTruthy();
   });
 
   it('adds the day setup to Intro cards', () => {

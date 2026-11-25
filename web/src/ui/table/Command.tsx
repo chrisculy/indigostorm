@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { perksById, playerCard } from '../../data/index.ts';
-import { effectiveCard } from '../../engine/index.ts';
+import { willAwaken } from '../../engine/index.ts';
 import { canEndPlays, type Option, onlyEndPlaysLeft, pressureForecast } from '../../state/derive.ts';
 import { useGame } from '../../state/store.ts';
 import { UiIcon } from '../art/index.ts';
@@ -99,10 +99,8 @@ export function CommandPanel() {
   const onlyEnd = onlyEndPlaysLeft(state) && !t.locked;
   const hintEnd = t.hint?.type === 'endPlays';
 
-  // Move focus to End plays once it is the only thing left to do (keyboard flow).
-  useEffect(() => {
-    if (onlyEnd && !sel && document.activeElement === document.body) endRef.current?.focus();
-  }, [onlyEnd, sel]);
+  // (Focus after a play — the next hand card, or End plays when that is all that is left — is
+  // handled by the Table.)
   // Focus the first option when a slot narrows the list.
   useEffect(() => {
     if (targetSlot !== null) listRef.current?.querySelector<HTMLButtonElement>('button.option')?.focus();
@@ -111,12 +109,10 @@ export function CommandPanel() {
   let heading = 'Orders';
   let sub = '';
   if (sel?.kind === 'card') {
-    const eff = effectiveCard(state, sel.uid);
-    heading = eff.name;
-    sub =
-      eff.id !== sel.uid
-        ? `${playerCard(sel.uid).name} awakens when played`
-        : `${eff.cls}${eff.suit ? ` · ${eff.suit} ${eff.power}` : ''}`;
+    // The selected card itself — never its Awakened Card, which stays secret until played.
+    const card = playerCard(sel.uid);
+    heading = card.name;
+    sub = `${card.cls}${card.suit ? ` · ${card.suit} ${card.power}` : ''}${willAwaken(state, sel.uid) ? ' · awakens if played now' : ''}`;
   } else if (sel?.kind === 'perk') {
     heading = perksById.get(sel.perk)?.name ?? sel.perk;
     sub = 'Perk · choose a target';
@@ -145,7 +141,8 @@ export function CommandPanel() {
           {v.leadBlocked && <Badge tone="danger">Blocker: Lead can't increase</Badge>}
         </div>
       )}
-      <div className="command__body">
+      {/* biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region must be reachable by keyboard */}
+      <section className="command__body" aria-label="Orders details" tabIndex={0}>
         {sel ? (
           <>
             {targetSlot !== null && (
@@ -183,7 +180,7 @@ export function CommandPanel() {
             <Forecast />
           </>
         )}
-      </div>
+      </section>
       <footer className="command__foot">
         <Button
           size="sm"

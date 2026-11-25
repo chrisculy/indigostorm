@@ -87,7 +87,7 @@ export function RuleCardView({
           type="button"
           className="flip-btn"
           onClick={flip}
-          aria-label={`Flip ${rule.title} to side ${current === 'front' ? 2 : 1}`}
+          aria-label={`${current === 'front' ? 'Side 1 of 2' : 'Side 2 of 2'}: flip ${rule.title} to side ${current === 'front' ? 2 : 1}`}
         >
           <UiIcon name="flip" />
           <span>{current === 'front' ? 'Side 1 of 2' : 'Side 2 of 2'}</span>

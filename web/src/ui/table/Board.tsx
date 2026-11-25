@@ -37,7 +37,7 @@ function SlotPreview({ slot }: { slot: number }) {
   const { hoverOption } = useTable();
   const p = hoverOption?.preview;
   if (!hoverOption || !p || !hoverOption.slots.includes(slot)) return null;
-  if (p.hidden) return <span className="slot-preview">Reveal</span>;
+  if (p.hidden) return <span className="slot-preview">{p.awakens ? 'Awakens' : 'Reveal'}</span>;
   const clear = p.clears.find((c) => c.slot === slot);
   if (clear)
     return (

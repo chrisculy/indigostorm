@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { MotionSetting, TextSize, ThemeSetting } from '../../state/settings.ts';
+import type { MotionSetting, SpeedSetting, TextSize, ThemeSetting } from '../../state/settings.ts';
 import { useGame } from '../../state/store.ts';
 import { UiIcon } from '../art/index.ts';
 import { Button, Dialog, Segmented, Switch } from '../components/index.ts';
@@ -17,17 +17,25 @@ export function SettingsScreen() {
           <h2 id="set-look" className="sec-title">
             Look
           </h2>
+          {/* Visible caption; the group's accessible name is its (visually hidden) legend. */}
+          <p className="field-label settings__caption" aria-hidden="true">
+            Theme
+          </p>
           <Segmented<ThemeSetting>
             label="Theme"
             value={s.theme}
             onChange={(theme) => update({ theme })}
             options={[
+              { value: 'system', label: 'System' },
               { value: 'dark', label: 'Dark', icon: <UiIcon name="moon" /> },
               { value: 'light', label: 'Light', icon: <UiIcon name="sun" /> },
               { value: 'contrast', label: 'High contrast', icon: <UiIcon name="contrast" /> },
-              { value: 'system', label: 'System' },
             ]}
           />
+          {/* Visible caption; the group's accessible name is its (visually hidden) legend. */}
+          <p className="field-label settings__caption" aria-hidden="true">
+            Text size
+          </p>
           <Segmented<TextSize>
             label="Text size"
             value={s.textSize}
@@ -45,6 +53,10 @@ export function SettingsScreen() {
             label="High-contrast suits"
             description="Stronger Recon / Stealth / Force colors. Suits always carry their shape too."
           />
+          {/* Visible caption; the group's accessible name is its (visually hidden) legend. */}
+          <p className="field-label settings__caption" aria-hidden="true">
+            Motion
+          </p>
           <Segmented<MotionSetting>
             label="Motion"
             value={s.motion}
@@ -53,6 +65,20 @@ export function SettingsScreen() {
               { value: 'system', label: 'System' },
               { value: 'full', label: 'Full' },
               { value: 'reduced', label: 'Reduced' },
+            ]}
+          />
+          {/* Visible caption; the group's accessible name is its (visually hidden) legend. */}
+          <p className="field-label settings__caption" aria-hidden="true">
+            Animation speed
+          </p>
+          <Segmented<SpeedSetting>
+            label="Animation speed"
+            value={s.speed}
+            onChange={(speed) => update({ speed })}
+            options={[
+              { value: 'normal', label: 'Normal' },
+              { value: 'fast', label: 'Fast' },
+              { value: 'instant', label: 'Instant' },
             ]}
           />
           <Switch

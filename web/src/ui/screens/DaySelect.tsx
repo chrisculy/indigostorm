@@ -65,7 +65,7 @@ export function DaySelectScreen() {
                     onClick={() => (inProgress ? go('table') : openBriefing('prototype', day))}
                     aria-label={`${inProgress ? 'Resume' : 'Brief'} Day ${day}: ${p.newRules}`}
                   >
-                    {inProgress ? 'Resume' : 'Briefing'}
+                    {inProgress ? 'Resume' : 'Brief'}
                   </Button>
                 </div>
               </div>

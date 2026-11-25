@@ -45,6 +45,13 @@
   align-items: baseline;
   gap: var(--space-3);
   min-width: 0;
+  margin: 0;
+  font: inherit;
+  letter-spacing: normal;
+}
+.topbar__mode {
+  display: flex;
+  align-items: center;
 }
 .topbar__dayno {
   font-family: var(--font-display);
@@ -352,7 +359,8 @@
     transform: scale(1.25);
   }
 }
-:root[data-motion="reduced"] .burst {
+:root[data-motion="reduced"] .burst,
+:root[data-speed="instant"] .burst {
   display: none;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -542,7 +550,10 @@
   letter-spacing: var(--tracking-caps);
   text-transform: uppercase;
   z-index: var(--z-card-selected);
-  white-space: nowrap;
+  width: max-content;
+  max-width: calc(100% + 8px);
+  text-align: center;
+  line-height: 1.25;
   box-shadow: var(--shadow-2);
 }
 .hand__empty {
@@ -630,7 +641,8 @@
     box-shadow: var(--glow-accent);
   }
 }
-:root[data-motion="reduced"] .end-plays[data-ready] {
+:root[data-motion="reduced"] .end-plays[data-ready],
+:root[data-speed="instant"] .end-plays[data-ready] {
   animation: none;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1217,7 +1229,9 @@
   }
   .side .command {
     flex: none;
-    max-height: 340px;
+    /* Tall enough for the "When you end plays" forecast at large text sizes; the side column scrolls,
+       and the orders body scrolls (keyboard-focusable) beyond this. */
+    max-height: max(340px, 66vh);
     min-height: 220px;
   }
   .side-sec--log {
@@ -1284,15 +1298,6 @@
   border-radius: inherit;
 }
 
-/* On the table, toasts sit at the top centre so they never cover the hand or the orders panel. */
-body:has(.table) .toasts {
-  top: 60px;
-  bottom: auto;
-  left: 50%;
-  right: auto;
-  transform: translateX(-50%);
-  width: min(420px, calc(100vw - 32px));
-}
 .setaside .badge {
   max-width: 100%;
   white-space: normal;

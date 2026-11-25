@@ -1,5 +1,5 @@
 import './ui/screens/screens.css';
-import { useEffect, useSyncExternalStore } from 'react';
+import { useEffect, useRef, useSyncExternalStore } from 'react';
 import { dayPlan } from './data/index.ts';
 import { isGalleryHash } from './state/router.ts';
 import { applySettingsToRoot } from './state/settings.ts';
@@ -37,10 +37,41 @@ function NoticeBridge() {
         title: n.title,
         tone: n.tone,
         duration: n.tone === 'danger' ? 8000 : n.title === 'Pressure step' ? 3500 : 5000,
+        scope: n.scope,
       });
       dismiss(n.id);
     }
   }, [notices, toast, dismiss]);
+  return null;
+}
+
+/** The heading to focus when a screen opens: [data-screen-heading], else the first <h1> in <main>. */
+export function focusScreenHeading(): boolean {
+  const h =
+    document.querySelector<HTMLElement>('[data-screen-heading]') ?? document.querySelector<HTMLElement>('main h1');
+  if (!h) return false;
+  if (!h.hasAttribute('tabindex')) h.tabIndex = -1;
+  h.focus({ preventScroll: true });
+  return document.activeElement === h;
+}
+
+/** On every screen change: dismiss the episode's toasts and move focus to the new screen's heading
+ * (keyboard and screen-reader users start at the top of the new screen; focus never drops to <body>). */
+function ScreenChange() {
+  const screen = useGame((s) => s.screen);
+  const toast = useToast();
+  const first = useRef(true);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: runs on every screen change
+  useEffect(() => {
+    if (first.current) {
+      first.current = false; // the initial screen keeps its own autofocus (e.g. Continue on the title)
+      return;
+    }
+    toast.clear('episode');
+    // After the new screen has rendered (and any of its own autofocus ran).
+    const id = requestAnimationFrame(() => focusScreenHeading());
+    return () => cancelAnimationFrame(id);
+  }, [screen, toast]);
   return null;
 }
 
@@ -126,6 +157,7 @@ export function App() {
       <RootAttributes />
       <DocumentTitle />
       <NoticeBridge />
+      <ScreenChange />
       <ErrorBoundary
         onResetEpisode={() => {
           const st = gameStore().getState();

@@ -1,9 +1,10 @@
 // The app store (Zustand). Every game state change goes through engine `apply`; the episode is
 // kept as { setup, actions } and its state is rebuilt with `replay` when loaded.
 
+import { useCallback } from 'react';
 import { useStore } from 'zustand';
 import { createStore, type StoreApi } from 'zustand/vanilla';
-import { contentDays, dayPlan, threat } from '../data/index.ts';
+import { contentDays, dayPlan, playerCardsById, threat } from '../data/index.ts';
 
 import type { PerkId } from '../data/types.ts';
 import {
@@ -78,6 +79,9 @@ export interface Notice {
   message: string;
   title?: string;
   tone: 'info' | 'success' | 'warning' | 'danger';
+  /** 'episode' notices are about the table (Pressure summaries, auto-answers, rejected actions): they
+   * are dismissed when the screen changes or the episode ends. */
+  scope?: 'episode' | undefined;
 }
 
 export interface FlashbackNotice {
@@ -137,6 +141,8 @@ export interface GameStore {
   clearUi: () => void;
   requestHint: () => Action | null;
   dismissFlashback: () => void;
+  /** Record that this profile has read an Awakened card's flashback (e.g. revealed in the Debrief). */
+  markFlashbackSeen: (awakenedId: string) => void;
   abandonEpisode: () => void;
   /** Finish the post-episode flow. Campaign: completeDay (validates the cut). */
   finishDebrief: (choices: { retire: string[]; perk?: PerkId | null }) => boolean;
@@ -238,6 +244,9 @@ export function createGameStore(initial: LoadResult = { data: emptySave(), corru
   const store = createStore<GameStore>()((set, get) => {
     const notify = (n: Omit<Notice, 'id'>) =>
       set((st) => ({ notices: [...st.notices.slice(-4), { ...n, id: noticeId++ }] }));
+    /** Events of a Pressure step that a decision (Ally Cover, Hardened Resolve) interrupted: the
+     * summary toast waits until the step completes, so it covers everything that happened. */
+    let pressureEvents: GameEvent[] | null = null;
 
     return {
       screen: 'title',
@@ -272,7 +281,10 @@ export function createGameStore(initial: LoadResult = { data: emptySave(), corru
       },
       back: () => get().go(get().returnTo),
 
-      updateSettings: (patch) => set((st) => ({ settings: { ...st.settings, ...patch } })),
+      updateSettings: (patch) =>
+        set((st) => ({
+          settings: { ...st.settings, ...patch, ...(patch.theme !== undefined ? { themeChosen: true } : {}) },
+        })),
       notify,
       dismissNotice: (id) => set((st) => ({ notices: st.notices.filter((n) => n.id !== id) })),
 
@@ -294,16 +306,29 @@ export function createGameStore(initial: LoadResult = { data: emptySave(), corru
         const b = st.briefing;
         if (!b) return;
         let setup: EpisodeSetup;
+        let state: GameState;
         try {
           if (b.mode === 'campaign') {
             if (!st.campaign) throw new Error('No campaign in progress');
             setup = campaignSetup(st.campaign, seed);
           } else setup = prototypeSetup(b.day, seed);
+          state = createEpisode(setup);
         } catch (e) {
-          notify({ tone: 'danger', message: e instanceof Error ? e.message : 'Could not start the episode.' });
+          // E.g. a damaged campaign deck (duplicate cards, a Conditioned card next to its Awakened card).
+          const why = e instanceof Error ? e.message : 'unknown error';
+          notify({
+            tone: 'danger',
+            title: 'Could not start the episode',
+            message:
+              b.mode === 'campaign'
+                ? `Your campaign deck is invalid (${why}). Import a backup save or start a new campaign.`
+                : `${why}.`,
+          });
+          set({ briefing: null });
+          get().go(b.mode === 'campaign' && st.campaign ? 'campaign' : b.mode === 'prototype' ? 'days' : 'title');
           return;
         }
-        const state = createEpisode(setup);
+        pressureEvents = null;
         const rules = briefingRules(b.day, setup.perks).map((r) => r.id);
         set({
           episode: { mode: b.mode, setup, actions: [], state },
@@ -337,15 +362,30 @@ export function createGameStore(initial: LoadResult = { data: emptySave(), corru
             state = r2.state;
             actions.push(a);
             events.push(...r2.events);
-            notify({ tone: 'info', message: auto.note });
+            notify({ tone: 'info', message: auto.note, scope: 'episode' });
           }
         } catch (e) {
-          notify({ tone: 'danger', message: e instanceof Error ? e.message : 'That action is not allowed.' });
+          notify({
+            tone: 'danger',
+            message: e instanceof Error ? e.message : 'That action is not allowed.',
+            scope: 'episode',
+          });
           return false;
         }
-        if (action.type === 'endPlays') {
-          const summary = pressureSummary(events);
-          if (summary) notify(summary);
+        // Pressure summary: once the step is complete (a decision may interrupt it; then the events of
+        // the decide actions that finish it are added before summarizing).
+        const startsPressure = events.some((e) => e.type === 'pressureStep' || e.type === 'pressureSkipped');
+        const buffered = pressureEvents ? [...pressureEvents, ...events] : startsPressure ? events : null;
+        pressureEvents = null;
+        if (buffered) {
+          const finished =
+            !state.pending || buffered.some((e) => e.type === 'turnStarted' || e.type === 'episodeEnded');
+          if (!finished) pressureEvents = buffered;
+          else if (state.phase !== 'over') {
+            // When the episode ends the End banner tells the story; no toast on top of it.
+            const summary = pressureSummary(buffered);
+            if (summary) notify({ ...summary, scope: 'episode' });
+          }
         }
         const flashbacks: FlashbackNotice[] = events.flatMap((e) =>
           e.type === 'awakened' && e.duringPlay
@@ -399,7 +439,11 @@ export function createGameStore(initial: LoadResult = { data: emptySave(), corru
           };
         }),
 
+      markFlashbackSeen: (id) =>
+        set((st) => (st.flashbacksSeen.includes(id) ? st : { flashbacksSeen: [...st.flashbacksSeen, id] })),
+
       abandonEpisode: () => {
+        pressureEvents = null;
         set({ episode: null, ui: EMPTY_UI, lastEvents: [], flashbackQueue: [] });
       },
 
@@ -410,7 +454,18 @@ export function createGameStore(initial: LoadResult = { data: emptySave(), corru
         const debrief = debriefOf(ep.mode, ep.state, st.campaign);
         const seen = [...new Set([...st.flashbacksSeen, ...debrief.flashbacks.map((f) => f.awakened)])];
         if (ep.mode === 'campaign') {
-          if (!st.campaign) return false;
+          if (!st.campaign) {
+            // A campaign episode whose campaign is gone (damaged or replaced save): nothing to record it in.
+            notify({
+              tone: 'warning',
+              title: 'Campaign not found',
+              message:
+                'This episode belongs to a campaign that is no longer saved on this device, so its result cannot be recorded. The episode was closed.',
+            });
+            set({ episode: null, flashbacksSeen: seen, ui: EMPTY_UI, briefing: null, flashbackQueue: [] });
+            get().go('title');
+            return false;
+          }
           let next: CampaignState;
           try {
             next = completeDay(st.campaign, debrief, choices);
@@ -455,6 +510,7 @@ export function createGameStore(initial: LoadResult = { data: emptySave(), corru
         ),
 
       replaceData: (data) => {
+        pressureEvents = null;
         const ep = restoreEpisode(data.episode);
         set({
           settings: data.settings,
@@ -470,6 +526,7 @@ export function createGameStore(initial: LoadResult = { data: emptySave(), corru
       },
 
       resetAll: () => {
+        pressureEvents = null;
         const e = emptySave();
         set({
           settings: e.settings,
@@ -548,4 +605,17 @@ export function resetGameStore(initial?: LoadResult, autosave = false): StoreApi
 
 export function useGame<T>(selector: (s: GameStore) => T): T {
   return useStore(gameStore(), selector);
+}
+
+/** True when a card must be drawn without its flashback text: an Awakened card whose flashback this
+ * profile has not seen yet (spoiler safety, everywhere a player card is shown). */
+export function flashbackHidden(id: string, seen: readonly string[]): boolean {
+  const c = playerCardsById.get(id);
+  return c?.cls === 'Awakened' && !seen.includes(id);
+}
+
+/** `(id) => hideFlashback` for the current profile. */
+export function useHideFlashback(): (id: string) => boolean {
+  const seen = useGame((s) => s.flashbacksSeen);
+  return useCallback((id: string) => flashbackHidden(id, seen), [seen]);
 }

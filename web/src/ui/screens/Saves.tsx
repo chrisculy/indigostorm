@@ -25,13 +25,16 @@ export function SavesScreen() {
   const fileRef = useRef<HTMLInputElement>(null);
   const [pending, setPending] = useState<SaveData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [importWarnings, setImportWarnings] = useState<string[]>([]);
   const current = snapshot();
 
   const onFile = async (f: File | undefined) => {
     setError(null);
     if (!f) return;
     try {
-      setPending(parseImport(await readFileText(f)));
+      const warnings: string[] = [];
+      setPending(parseImport(await readFileText(f), warnings));
+      setImportWarnings(warnings);
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Could not read the file.');
     }
@@ -77,6 +80,9 @@ export function SavesScreen() {
               accept="application/json,.json"
               className="sr-only"
               id="import-file"
+              // Visually hidden and out of the tab order: the labelled button below opens it.
+              tabIndex={-1}
+              aria-label="Save file to import"
               onChange={(e) => onFile(e.target.files?.[0])}
             />
             <Button onClick={() => fileRef.current?.click()}>Choose a save file…</Button>
@@ -104,6 +110,7 @@ export function SavesScreen() {
                 if (pending) replaceData(pending);
                 setPending(null);
                 notify({ tone: 'success', message: 'Save imported.' });
+                for (const w of importWarnings) notify({ tone: 'warning', message: w });
               }}
             >
               Import
@@ -112,6 +119,11 @@ export function SavesScreen() {
         }
       >
         <p>The file contains:</p>
+        {importWarnings.map((w) => (
+          <p key={w} className="form-error">
+            {w}
+          </p>
+        ))}
         {pending && (
           <ul className="plain-list">
             {summary(pending).map((l) => (

@@ -3,9 +3,15 @@
 export type ThemeSetting = 'system' | 'dark' | 'light' | 'contrast';
 export type MotionSetting = 'system' | 'full' | 'reduced';
 export type TextSize = 'sm' | 'md' | 'lg' | 'xl';
+/** Animation speed: scales the motion duration tokens (instant = no animation, like reduced motion). */
+export type SpeedSetting = 'normal' | 'fast' | 'instant';
 
 export interface Settings {
+  /** Default 'system' (follows prefers-color-scheme). */
   theme: ThemeSetting;
+  /** The player picked the theme in Settings (older saves stored the old 'dark' default without asking). */
+  themeChosen: boolean;
+  speed: SpeedSetting;
   motion: MotionSetting;
   textSize: TextSize;
   /** High-contrast suit colors. */
@@ -23,7 +29,9 @@ export interface Settings {
 }
 
 export const DEFAULT_SETTINGS: Settings = {
-  theme: 'dark',
+  theme: 'system',
+  themeChosen: false,
+  speed: 'normal',
   motion: 'system',
   textSize: 'md',
   hcSuits: false,
@@ -37,6 +45,7 @@ export const DEFAULT_SETTINGS: Settings = {
 const THEMES: readonly ThemeSetting[] = ['system', 'dark', 'light', 'contrast'];
 const MOTIONS: readonly MotionSetting[] = ['system', 'full', 'reduced'];
 const SIZES: readonly TextSize[] = ['sm', 'md', 'lg', 'xl'];
+const SPEEDS: readonly SpeedSetting[] = ['normal', 'fast', 'instant'];
 
 /** Coerce anything (old saves, imported files) into valid settings; unknown keys are dropped. */
 export function sanitizeSettings(raw: unknown): Settings {
@@ -44,8 +53,14 @@ export function sanitizeSettings(raw: unknown): Settings {
   const pick = <T>(v: unknown, ok: readonly T[], d: T): T => (ok.includes(v as T) ? (v as T) : d);
   const bool = (v: unknown, d: boolean) => (typeof v === 'boolean' ? v : d);
   const d = DEFAULT_SETTINGS;
+  const themeChosen = bool(r.themeChosen, false);
+  // Saves from before the 'system' default stored 'dark' whether or not the player chose it: only an
+  // explicit choice (themeChosen) keeps 'dark'. Light / high contrast were always explicit choices.
+  const storedTheme = pick(r.theme, THEMES, d.theme);
   return {
-    theme: pick(r.theme, THEMES, d.theme),
+    theme: storedTheme === 'dark' && !themeChosen ? 'system' : storedTheme,
+    themeChosen,
+    speed: pick(r.speed, SPEEDS, d.speed),
     motion: pick(r.motion, MOTIONS, d.motion),
     textSize: pick(r.textSize, SIZES, d.textSize),
     hcSuits: bool(r.hcSuits, d.hcSuits),
@@ -63,6 +78,8 @@ export function applySettingsToRoot(s: Settings, root: HTMLElement = document.do
   else root.dataset.theme = s.theme;
   if (s.motion === 'system') delete root.dataset.motion;
   else root.dataset.motion = s.motion;
+  if (s.speed === 'normal') delete root.dataset.speed;
+  else root.dataset.speed = s.speed;
   if (s.hcSuits) root.dataset.suits = 'hc';
   else delete root.dataset.suits;
   root.dataset.textSize = s.textSize;
@@ -70,7 +87,7 @@ export function applySettingsToRoot(s: Settings, root: HTMLElement = document.do
 
 /** True when animations should run (setting, else the OS preference). */
 export function motionEnabled(s: Settings): boolean {
-  if (s.motion === 'reduced') return false;
+  if (s.motion === 'reduced' || s.speed === 'instant') return false;
   if (s.motion === 'full') return true;
   return !(typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches);
 }

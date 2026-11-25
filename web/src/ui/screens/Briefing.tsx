@@ -5,7 +5,7 @@ import { twistForDay, twistSummaries } from '../../data/twists.ts';
 import type { JumpIn, PerkId } from '../../data/types.ts';
 import { dayCards } from '../../engine/index.ts';
 import { briefingRules } from '../../state/derive.ts';
-import { useGame } from '../../state/store.ts';
+import { useGame, useHideFlashback } from '../../state/store.ts';
 import { PerkEmblem, SuitIcon, UiIcon } from '../art/index.ts';
 import { JumpInView, PlayerCardView, RuleCardView, StoryCardView } from '../cards/index.ts';
 import { Badge, Button, Dialog, StarRow } from '../components/index.ts';
@@ -53,6 +53,7 @@ function DeckList({ ids, perks }: { ids: string[]; perks: PerkId[] }) {
 
 export function BriefingScreen() {
   const b = useGame((s) => s.briefing);
+  const hideFlashback = useHideFlashback();
   const campaign = useGame((s) => s.campaign);
   const episode = useGame((s) => s.episode);
   const begin = useGame((s) => s.beginEpisode);
@@ -198,7 +199,7 @@ export function BriefingScreen() {
           <ul className="new-cards">
             {newCards.map((id) => (
               <li key={id}>
-                <PlayerCardView card={playerCard(id)} size="fluid" />
+                <PlayerCardView card={playerCard(id)} size="fluid" hideFlashback={hideFlashback(id)} />
               </li>
             ))}
           </ul>

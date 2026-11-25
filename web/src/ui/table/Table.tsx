@@ -2,14 +2,22 @@
 // submits actions through the store, which applies them with the engine.
 
 import './table.css';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { dayPlan } from '../../data/index.ts';
 import { type Action, actionKey, isLegal, NOMINAL_TURNS } from '../../engine/index.ts';
-import { canEndPlays, legalOf, type Option, optionsFor, playableCards, viewOf } from '../../state/derive.ts';
+import {
+  canEndPlays,
+  legalOf,
+  type Option,
+  onlyEndPlaysLeft,
+  optionsFor,
+  playableCards,
+  viewOf,
+} from '../../state/derive.ts';
 import { motionEnabled } from '../../state/settings.ts';
 import { gameStore, useGame } from '../../state/store.ts';
 import { UiIcon } from '../art/index.ts';
-import { Badge, Button, Dialog, IconButton, Track } from '../components/index.ts';
+import { Badge, Button, Dialog, IconButton, Track, useToast } from '../components/index.ts';
 import { RulebookContent } from '../screens/Rulebook.tsx';
 import { InPlay, SceneRow, ThreatDeckPile } from './Board.tsx';
 import { CommandPanel } from './Command.tsx';
@@ -36,6 +44,31 @@ function focusAmong(selector: string, dir: number) {
   const i = els.indexOf(document.activeElement as HTMLElement);
   const next = els[(i + dir + els.length) % els.length] ?? els[0];
   next?.focus();
+}
+
+function isUsable(el: Element | null): el is HTMLElement {
+  if (!(el instanceof HTMLElement) || el === document.body || !el.isConnected) return false;
+  return !(el as HTMLButtonElement).disabled && el.getAttribute('aria-disabled') !== 'true';
+}
+
+/**
+ * Where keyboard focus goes after the table changed under it (a play, End plays, a decision, a
+ * flashback): End plays when that is all that is left, else the hand card that took the played card's
+ * place (or the first playable one), else End plays, else the table heading. Never <body>.
+ */
+function focusTableTarget(handIndex: number): void {
+  const st = gameStore().getState().episode?.state;
+  const end = document.querySelector<HTMLElement>('.end-plays');
+  if (st && onlyEndPlaysLeft(st) && isUsable(end)) {
+    end.focus();
+    return;
+  }
+  const hand = [...document.querySelectorAll<HTMLElement>('.hand .card')];
+  const playable = hand.filter((el) => el.getAttribute('aria-disabled') !== 'true');
+  const at = handIndex >= 0 ? hand[Math.min(handIndex, hand.length - 1)] : undefined;
+  const pick = (at && playable.includes(at) ? at : playable[0]) ?? (isUsable(end) ? end : null) ?? hand[0];
+  if (pick) pick.focus();
+  else document.querySelector<HTMLElement>('[data-screen-heading]')?.focus();
 }
 
 export function Table() {
@@ -94,12 +127,17 @@ function TableInner() {
   const motion = motionEnabled(settings);
   const midLayout = useMediaQuery(MID_LAYOUT);
 
+  /** The last action sent from the table, for focus management afterwards. */
+  const lastAction = useRef<{ type: Action['type']; handIndex: number } | null>(null);
   const perform = useCallback(
     (a: Action) => {
       withTransition(motion, () => {
         // A queued click (e.g. a double click) may no longer be legal: drop it quietly.
         const now = gameStore().getState().episode?.state;
-        if (now && isLegal(now, a)) act(a);
+        if (now && isLegal(now, a)) {
+          lastAction.current = { type: a.type, handIndex: a.type === 'play' ? now.hand.indexOf(a.cardUid) : -1 };
+          act(a);
+        }
       });
     },
     [act, motion],
@@ -253,6 +291,37 @@ function TableInner() {
     if (!over) setHideBanner(false);
   }, [over]);
 
+  // The End banner replaces the episode's toasts (Pressure summaries etc.): they would cover it.
+  const toast = useToast();
+  useEffect(() => {
+    if (over) toast.clear('episode');
+  }, [over, toast]);
+
+  // Focus after the table changes: a play removes the focused option/card, End plays disables its
+  // button, a decision closes its sheet. Put focus somewhere useful instead of letting it fall to
+  // <body>. Sheets, dialogs and the End banner manage their own focus.
+  const pendingNow = !!v.pending;
+  const prevPending = useRef(pendingNow);
+  const mounted = useRef(false);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: runs when the game moved on (eventSeq / flashbacks / pending)
+  useEffect(() => {
+    const decided = prevPending.current && !pendingNow;
+    prevPending.current = pendingNow;
+    if (!mounted.current) {
+      mounted.current = true; // entering the table: the screen heading gets focus (App)
+      return;
+    }
+    const id = requestAnimationFrame(() => {
+      if (document.querySelector('dialog[open]') || gameStore().getState().episode?.state.phase !== 'play') return;
+      const last = lastAction.current;
+      const forced = decided || last?.type === 'endPlays';
+      if (!forced && isUsable(document.activeElement)) return;
+      lastAction.current = null;
+      focusTableTarget(last?.type === 'play' ? last.handIndex : -1);
+    });
+    return () => cancelAnimationFrame(id);
+  }, [eventSeq, flashbacks, pendingNow]);
+
   const ctl: TableCtl = {
     state,
     v,
@@ -286,12 +355,12 @@ function TableInner() {
         data-dragging={drag.drag ? '' : undefined}
       >
         <header className="topbar">
-          <div className="topbar__day">
-            <span className="topbar__dayno display">Day {v.day}</span>
+          <h1 className="topbar__day" tabIndex={-1} data-screen-heading="">
+            <span className="topbar__dayno display">Day {v.day}</span>{' '}
             <span className="topbar__act">
               Act {ROMAN[plan.act]} · {plan.actTitle}
             </span>
-          </div>
+          </h1>
           <dl className="topbar__stats">
             <div>
               <dt>Turn</dt>
@@ -310,12 +379,14 @@ function TableInner() {
                 </span>
               </dd>
             </div>
+          </dl>
+          <div className="topbar__mode">
             {episode?.mode === 'prototype' ? (
               <Badge tone="neutral">Prototype</Badge>
             ) : (
               <Badge tone="accent">Campaign</Badge>
             )}
-          </dl>
+          </div>
           <div className="topbar__tools">
             {over && hideBanner && (
               <Button

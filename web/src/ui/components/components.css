@@ -511,12 +511,16 @@
   }
 
   /* ------------------------------------------------------------------ Toast */
+  /* Top-center, just below the screen bars: clear of the footers and primary buttons that every
+     screen keeps at the bottom (End plays, Debrief Next/Finish) and of the top-bar tools. Screens can
+     move it with --toast-top. */
   .toasts {
     position: fixed;
-    right: var(--space-4);
-    bottom: var(--space-4);
+    top: var(--toast-top, 60px);
+    left: 50%;
+    transform: translateX(-50%);
     z-index: var(--z-toast);
-    width: min(380px, calc(100vw - 32px));
+    width: min(400px, calc(100vw - 32px));
     pointer-events: none;
   }
   .toasts__list {
@@ -531,8 +535,8 @@
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: start;
-    gap: var(--space-3);
-    padding: var(--space-3) var(--space-2) var(--space-3) var(--space-3);
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-1) var(--space-2) var(--space-3);
     border: 1px solid var(--border-strong);
     border-inline-start: 3px solid var(--tone);
     border-radius: var(--radius-md);
@@ -553,8 +557,8 @@
   .toast__icon {
     display: grid;
     place-items: center;
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: color-mix(in srgb, var(--tone) 18%, transparent);
     color: var(--tone);
@@ -573,7 +577,7 @@
   @keyframes toast-in {
     from {
       opacity: 0;
-      transform: translateY(16px) scale(0.98);
+      transform: translateY(-12px) scale(0.98);
     }
   }
 
@@ -624,7 +628,7 @@
     font-size: var(--fs-md);
   }
   .track[data-pulse] .track__now {
-    animation: track-pulse 700ms var(--ease-out);
+    animation: track-pulse var(--dur-slower) var(--ease-out);
   }
   .track[data-pulse="up"][data-kind="exposure"] .track__now,
   .track[data-pulse="down"][data-kind="lead"] .track__now {
@@ -635,6 +639,17 @@
       transform: scale(1.35);
       color: var(--pulse, var(--tone));
       text-shadow: 0 0 14px var(--pulse, var(--tone));
+    }
+  }
+  /* Motion tokens collapse to ~0 under reduced motion; also drop the pulse outright so no frame of the
+     1.35× scale / glow can flash. */
+  :root[data-motion="reduced"] .track[data-pulse] .track__now,
+  :root[data-speed="instant"] .track[data-pulse] .track__now {
+    animation: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :root:not([data-motion="full"]) .track[data-pulse] .track__now {
+      animation: none;
     }
   }
   .track__cells {

@@ -84,6 +84,11 @@ async function answerSheet(seen) {
   if (!(await sheet.count())) return false;
   const title = (await sheet.locator('.sheet__title').textContent())?.trim() ?? '';
   seen.add(title);
+  // The safe answer is the default focus (Enter must never spend an Ally by accident).
+  if (/Ally Cover/.test(title)) {
+    const focused = await page.evaluate(() => document.activeElement?.textContent?.trim() ?? '');
+    check(/^Take it/.test(focused), `Ally Cover prompt: default focus should be "Take it", got "${focused}"`);
+  }
   if (!seen.has(`shot:${title}`)) {
     seen.add(`shot:${title}`);
     await shot(`decision-${title.replace(/\W+/g, '-').toLowerCase()}`);
@@ -172,6 +177,12 @@ async function playEpisode(label, strategy, seen = new Set()) {
 async function debriefPrototype(label, { expectFlashback = false } = {}) {
   await page.getByRole('button', { name: 'Debrief', exact: true }).first().click();
   await expectHash('#/debrief');
+  await page.waitForTimeout(100);
+  check((await page.locator('.toast').count()) === 0, `${label}: episode toasts should not follow onto the Debrief`);
+  check(
+    await page.evaluate(() => document.activeElement?.matches('h1') ?? false),
+    `${label}: focus should move to the Debrief heading`,
+  );
   await shot(`${label}-debrief-outro`);
   let sawFlash = false;
   let sawStars = false;
@@ -213,6 +224,16 @@ try {
   await page.goto(url);
   await page.waitForSelector('.title-screen');
   await shot('title');
+
+  // Fresh profile: the Rulebook must not describe mechanics whose Rule Card was not read yet.
+  await page.getByRole('button', { name: 'Rulebook' }).click();
+  await expectHash('#/rulebook');
+  const rb = (await page.locator('.rulebook').textContent()) ?? '';
+  check(
+    !/\b(Pursuer|Encrypted|Countermeasure|Flashback|Gear)\b/i.test(rb),
+    'fresh Rulebook shows no later-day mechanics',
+  );
+  await page.getByRole('button', { name: 'Back' }).click();
 
   // Settings, Rulebook, How to play, Saves (smoke + screenshots).
   await page.getByRole('button', { name: 'Settings' }).click();

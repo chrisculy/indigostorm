@@ -167,7 +167,8 @@ These pin down wording the paper rules leave loose. Anything not listed follows 
     - _Improvised Weapon_ — a play mode: tuck a card as the Threat's preferred suit with double Power.
     - _Hardened Resolve_ — automatic (asks first): when Exposure would reach the redline, it stops 1 below.
     - _Kinetic Momentum_ — when you clear a Threat with Force cards under it and excess Power, choose another face-up Threat to receive the excess as bonus Power.
-16. **Episode Twists** (by code): `stealth_clean_lead` (Stealth Clean Clears +1 Lead), `four_slots`, `no_abilities`, `extra_opening_card`, `timers_minus_one`, `alarm_raised` (start +1 Exposure, Clean bonus becomes −2 Exposure).
+16. **Decided during QA:** a Two-Phase Threat that escapes, is swapped away or is Vanished voids its Countermeasure; Pursuer suit penalties apply to a card's printed suit even when it counts as another suit; before a Conditioned Card is played the UI never reveals its Awakened Card (labels say "it will awaken"); "decrypt every Encrypted Threat" is met when none entered; hints never use hidden information.
+17. **Episode Twists** (by code): `stealth_clean_lead` (Stealth Clean Clears +1 Lead), `four_slots`, `no_abilities`, `extra_opening_card`, `timers_minus_one`, `alarm_raised` (start +1 Exposure, Clean bonus becomes −2 Exposure).
 
 ### 5.5 Campaign and prototype modes
 
@@ -225,7 +226,7 @@ Basic art (all SVG, generated in code): logo wordmark, suit icons, die faces, tr
 
 ### 6.4 Accessibility
 
-Semantic buttons and landmarks, visible focus, `aria-live="polite"` log, all info available as text, suit icons + color, WCAG AA contrast, respects `prefers-reduced-motion` and `prefers-color-scheme` (dark theme is the default; light theme supported).
+Semantic buttons and landmarks, visible focus (moved to each screen's heading on navigation), `aria-live="polite"` log, all info available as text, suit icons + color, WCAG AA contrast, respects `prefers-reduced-motion` and `prefers-color-scheme` (the default theme follows the system; dark, light and high-contrast can be chosen).
 
 ## 7. Persistence
 

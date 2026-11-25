@@ -61,7 +61,8 @@ const sgn = (n: number) => (n > 0 ? `+${n}` : `−${Math.abs(n)}`);
 
 export function outcomeText(a: Action, p: ActionPreview | null): string {
   if (!p) return '';
-  if (p.hidden) return 'Reveals the Threat (outcome hidden)';
+  // An awakening play hides its numbers: the Awakened Card stays secret until it is played.
+  if (p.hidden) return p.awakens ? 'Awakens — outcome revealed when played' : 'Reveals the Threat (outcome hidden)';
   const parts: string[] = [];
   for (const c of p.clears) parts.push(`CLEARS ${threat(c.threatId).name}${c.clean ? ' (Clean)' : ''}`);
   if (p.lead) parts.push(`${sgn(p.lead)} Lead`);

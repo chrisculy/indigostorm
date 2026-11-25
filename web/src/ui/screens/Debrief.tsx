@@ -4,7 +4,7 @@ import { objectiveForDay } from '../../data/objectives.ts';
 import type { PerkId, Suit } from '../../data/types.ts';
 import { endReasonText, type Flashback } from '../../engine/index.ts';
 import { cutError, debriefOf, debriefTier } from '../../state/derive.ts';
-import { useGame } from '../../state/store.ts';
+import { useGame, useHideFlashback } from '../../state/store.ts';
 import { PerkEmblem, SuitIcon, UiIcon } from '../art/index.ts';
 import { PlayerCardView, StoryCardView } from '../cards/index.ts';
 import { Badge, Button, StarRow } from '../components/index.ts';
@@ -21,7 +21,10 @@ const STEP_LABEL: Record<Step, string> = {
 };
 
 function FlashbackReveal({ f, index }: { f: Flashback; index: number }) {
-  const [shown, setShown] = useState(false);
+  const seen = useGame((s) => s.flashbacksSeen.includes(f.awakened));
+  const markSeen = useGame((s) => s.markFlashbackSeen);
+  const [revealed, setRevealed] = useState(false);
+  const shown = revealed || seen;
   return (
     <article className="fb-reveal" data-shown={shown || undefined}>
       <div className="fb-reveal__cards">
@@ -39,7 +42,13 @@ function FlashbackReveal({ f, index }: { f: Flashback; index: number }) {
         {shown ? (
           <blockquote className="flashback__quote">{f.text || 'A memory surfaces…'}</blockquote>
         ) : (
-          <Button variant="primary" onClick={() => setShown(true)}>
+          <Button
+            variant="primary"
+            onClick={() => {
+              setRevealed(true);
+              markSeen(f.awakened);
+            }}
+          >
             Read the flashback
           </Button>
         )}
@@ -64,6 +73,7 @@ function Cut({
   setRetire: (r: string[]) => void;
   required: boolean;
 }) {
+  const hide = useHideFlashback();
   const toggle = (id: string) =>
     setRetire(retire.includes(id) ? retire.filter((x) => x !== id) : retire.length < count ? [...retire, id] : retire);
   const kept = cards.filter((c) => !retire.includes(c));
@@ -88,6 +98,7 @@ function Cut({
                 <PlayerCardView
                   card={playerCard(id)}
                   size="fluid"
+                  hideFlashback={hide(id)}
                   selected={on}
                   disabled={!on && retire.length >= count}
                   onClick={() => toggle(id)}

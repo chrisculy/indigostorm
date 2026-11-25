@@ -3,7 +3,7 @@ import { gameData } from '../../data/index.ts';
 import { useGame } from '../../state/store.ts';
 import { RuleCardView } from '../cards/index.ts';
 import { Button } from '../components/index.ts';
-import { GLOSSARY, QUICK_REFERENCE } from './rulesText.ts';
+import { unlockedRuleDays, visibleGlossary, visibleQuickReference } from './rulesText.ts';
 import { ScreenFrame } from './ScreenFrame.tsx';
 
 const norm = (s: string) => s.toLowerCase();
@@ -15,13 +15,19 @@ export function RulebookContent({ autoFocus }: { autoFocus?: boolean }) {
   const id = useId();
   const query = norm(q.trim());
   const rules = useMemo(() => gameData.rules.filter((r) => seen.includes(r.id)), [seen]);
+  // Only mechanics whose Rule Card the player has read (no spoilers for later days).
+  const days = useMemo(() => unlockedRuleDays(seen, gameData.rules), [seen]);
+  const reference = useMemo(() => visibleQuickReference(days), [days]);
+  const glossary = useMemo(() => visibleGlossary(days), [days]);
   const match = (...texts: string[]) => !query || texts.some((t) => norm(t).includes(query));
   const shownRules = rules.filter((r) => match(r.title, r.front, r.back));
-  const shownRef = QUICK_REFERENCE.map((s) => ({
-    ...s,
-    items: match(s.title) ? s.items : s.items.filter((i) => match(i)),
-  })).filter((s) => s.items.length > 0);
-  const shownGloss = GLOSSARY.filter(([term, def]) => match(term, def));
+  const shownRef = reference
+    .map((s) => ({
+      ...s,
+      items: match(s.title) ? s.items : s.items.filter((i) => match(i)),
+    }))
+    .filter((s) => s.items.length > 0);
+  const shownGloss = glossary.filter((g) => match(g.term, g.def));
   const nothing = shownRules.length === 0 && shownRef.length === 0 && shownGloss.length === 0;
   return (
     <div className="rulebook">
@@ -33,7 +39,7 @@ export function RulebookContent({ autoFocus }: { autoFocus?: boolean }) {
           id={id}
           type="search"
           className="text-input"
-          placeholder="e.g. Clean, Pursuer, Ally Cover"
+          placeholder="e.g. Clean, Tuck, Timer"
           value={q}
           onChange={(e) => setQ(e.target.value)}
           // biome-ignore lint/a11y/noAutofocus: the Rulebook dialog is opened to search
@@ -92,10 +98,10 @@ export function RulebookContent({ autoFocus }: { autoFocus?: boolean }) {
             Glossary
           </h2>
           <dl className="glossary">
-            {shownGloss.map(([term, def]) => (
-              <div key={term} className="glossary__row">
-                <dt>{term}</dt>
-                <dd>{def}</dd>
+            {shownGloss.map((g) => (
+              <div key={g.term} className="glossary__row">
+                <dt>{g.term}</dt>
+                <dd>{g.def}</dd>
               </div>
             ))}
           </dl>

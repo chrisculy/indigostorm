@@ -9,6 +9,8 @@ export interface ToastOptions {
   tone?: ToastTone | undefined;
   /** ms before auto-dismiss; 0 keeps it until dismissed. Default 5000. */
   duration?: number | undefined;
+  /** Group tag for `clear(scope)` (e.g. 'episode' toasts are cleared when the screen changes). */
+  scope?: string | undefined;
 }
 
 interface ToastItem extends ToastOptions {
@@ -18,6 +20,8 @@ interface ToastItem extends ToastOptions {
 interface ToastApi {
   push: (t: ToastOptions) => number;
   dismiss: (id: number) => void;
+  /** Dismiss every toast of a scope, or all toasts when no scope is given. */
+  clear: (scope?: string) => void;
 }
 
 const Ctx = createContext<ToastApi | null>(null);
@@ -36,14 +40,29 @@ const ICON: Record<ToastTone, 'info' | 'check' | 'close'> = {
   danger: 'close',
 };
 
+/** Hovering pauses a toast so it can be read, but never for longer than this in total. */
+export const TOAST_MAX_PAUSE = 8000;
+
 function Toast({ item, onDismiss }: { item: ToastItem; onDismiss: () => void }) {
   const [paused, setPaused] = useState(false);
   const duration = item.duration ?? 5000;
+  // Time left before auto-dismiss, kept across pauses (resuming does not restart the full duration).
+  const left = useRef(duration);
   useEffect(() => {
     if (!duration || paused) return;
-    const t = setTimeout(onDismiss, duration);
-    return () => clearTimeout(t);
+    const started = Date.now();
+    const t = setTimeout(onDismiss, left.current);
+    return () => {
+      clearTimeout(t);
+      left.current = Math.max(0, left.current - (Date.now() - started));
+    };
   }, [duration, paused, onDismiss]);
+  // Hard cap: a pointer resting on the toast cannot keep it alive indefinitely.
+  useEffect(() => {
+    if (!duration) return;
+    const t = setTimeout(onDismiss, duration + TOAST_MAX_PAUSE);
+    return () => clearTimeout(t);
+  }, [duration, onDismiss]);
   const tone = item.tone ?? 'info';
   return (
     <li
@@ -75,6 +94,12 @@ function Toast({ item, onDismiss }: { item: ToastItem; onDismiss: () => void }) 
   );
 }
 
+/** Stable onDismiss per toast (an inline arrow would restart its timers on every render). */
+function ToastRow({ item, dismiss }: { item: ToastItem; dismiss: (id: number) => void }) {
+  const onDismiss = useCallback(() => dismiss(item.id), [dismiss, item.id]);
+  return <Toast item={item} onDismiss={onDismiss} />;
+}
+
 /** Provides useToast() and renders the toast stack in a polite live region. */
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<ToastItem[]>([]);
@@ -82,17 +107,21 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const dismiss = useCallback((id: number) => setItems((xs) => xs.filter((x) => x.id !== id)), []);
   const push = useCallback((t: ToastOptions) => {
     const id = next.current++;
-    setItems((xs) => [...xs.slice(-3), { ...t, id }]);
+    setItems((xs) => [...xs.slice(-2), { ...t, id }]);
     return id;
   }, []);
-  const api = useMemo(() => ({ push, dismiss }), [push, dismiss]);
+  const clear = useCallback(
+    (scope?: string) => setItems((xs) => (scope === undefined ? [] : xs.filter((x) => x.scope !== scope))),
+    [],
+  );
+  const api = useMemo(() => ({ push, dismiss, clear }), [push, dismiss, clear]);
   return (
     <Ctx.Provider value={api}>
       {children}
       <section className="toasts" aria-label="Notifications">
         <ol aria-live="polite" aria-relevant="additions" className="toasts__list">
           {items.map((it) => (
-            <Toast key={it.id} item={it} onDismiss={() => dismiss(it.id)} />
+            <ToastRow key={it.id} item={it} dismiss={dismiss} />
           ))}
         </ol>
       </section>

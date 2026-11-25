@@ -171,7 +171,7 @@ describe('store: settings and data', () => {
     store.getState().updateSettings({ theme: 'contrast', textSize: 'xl' });
     expect(store.getState().settings.theme).toBe('contrast');
     store.getState().resetAll();
-    expect(store.getState().settings.theme).toBe('dark');
+    expect(store.getState().settings.theme).toBe('system');
     expect(store.getState().episode).toBeNull();
     expect(store.getState().screen).toBe('title');
   });

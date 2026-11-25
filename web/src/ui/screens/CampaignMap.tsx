@@ -3,7 +3,7 @@ import { dayPlan, gameData, perksById, playerCard } from '../../data/index.ts';
 import type { PerkId } from '../../data/types.ts';
 import { ALL_PERKS, campaignFinished, LAST_DAY, nextContentDay, starCount } from '../../engine/index.ts';
 import { FLASHBACK_DAYS, isRuleDay } from '../../state/derive.ts';
-import { useGame } from '../../state/store.ts';
+import { useGame, useHideFlashback } from '../../state/store.ts';
 import { PerkEmblem, SpiralGlyph, UiIcon } from '../art/index.ts';
 import { PlayerCardView } from '../cards/index.ts';
 import { Badge, Button, Dialog, StarRow } from '../components/index.ts';
@@ -89,6 +89,7 @@ function SkipDialog({ open, onClose, from, to }: { open: boolean; onClose: () =>
 export function CampaignMapScreen() {
   const campaign = useGame((s) => s.campaign);
   const episode = useGame((s) => s.episode);
+  const hideFlashback = useHideFlashback();
   const openBriefing = useGame((s) => s.openBriefing);
   const go = useGame((s) => s.go);
   const [skipOpen, setSkipOpen] = useState(false);
@@ -264,7 +265,7 @@ export function CampaignMapScreen() {
         <ul className="card-grid" style={{ '--card-w': '130px' } as CSSProperties}>
           {campaign.deck.map((id) => (
             <li key={id}>
-              <PlayerCardView card={playerCard(id)} size="sm" />
+              <PlayerCardView card={playerCard(id)} size="sm" hideFlashback={hideFlashback(id)} />
             </li>
           ))}
         </ul>

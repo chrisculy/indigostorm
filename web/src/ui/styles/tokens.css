@@ -317,6 +317,23 @@
     }
   }
 
+  /* ---- animation speed (Settings → Animation speed) -------------------------
+     Declared before the reduced-motion rules so reduced motion always wins. */
+  :root[data-speed="fast"] {
+    --dur-instant: 40ms;
+    --dur-fast: 70ms;
+    --dur-base: 110ms;
+    --dur-slow: 190ms;
+    --dur-slower: 300ms;
+  }
+  :root[data-speed="instant"] {
+    --dur-instant: 0.01ms;
+    --dur-fast: 0.01ms;
+    --dur-base: 0.01ms;
+    --dur-slow: 0.01ms;
+    --dur-slower: 0.01ms;
+  }
+
   /* ---- motion preferences --------------------------------------------------- */
   @media (prefers-reduced-motion: reduce) {
     :root:not([data-motion="full"]) {

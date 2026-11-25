@@ -15,7 +15,7 @@ import {
   useState,
 } from 'react';
 import { playerCard, threat } from '../../data/index.ts';
-import { useGame } from '../../state/store.ts';
+import { useGame, useHideFlashback } from '../../state/store.ts';
 import {
   CardInspect,
   PlayerCardView,
@@ -37,12 +37,9 @@ interface InspectApi {
 const Ctx = createContext<InspectApi | null>(null);
 
 function CardFace({ c, size }: { c: CardRef; size: 'lg' | 'xl' }) {
-  const seen = useGame((s) => s.flashbacksSeen);
+  const hide = useHideFlashback();
   if (c.type === 'player') {
-    const card = playerCard(c.id);
-    return (
-      <PlayerCardView card={card} size={size} hideFlashback={card.cls === 'Awakened' && !seen.includes(card.id)} />
-    );
+    return <PlayerCardView card={playerCard(c.id)} size={size} hideFlashback={hide(c.id)} />;
   }
   return (
     <ThreatCardView

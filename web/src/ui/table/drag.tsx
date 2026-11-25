@@ -3,6 +3,7 @@
 
 import { type PointerEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { playerCard } from '../../data/index.ts';
+import { useHideFlashback } from '../../state/store.ts';
 import { PlayerCardView } from '../cards/index.ts';
 
 export type DropTarget = { kind: 'slot'; slot: number } | { kind: 'deploy' };
@@ -88,6 +89,7 @@ export function useCardDrag(opts: {
 }
 
 export function DragGhost({ drag }: { drag: DragInfo | null }) {
+  const hide = useHideFlashback();
   if (!drag) return null;
   return (
     <div
@@ -96,7 +98,7 @@ export function DragGhost({ drag }: { drag: DragInfo | null }) {
       data-over={drag.over ? '' : undefined}
       aria-hidden="true"
     >
-      <PlayerCardView card={playerCard(drag.uid)} size="sm" />
+      <PlayerCardView card={playerCard(drag.uid)} size="sm" hideFlashback={hide(drag.uid)} />
     </div>
   );
 }
