@@ -2,7 +2,7 @@
 // turn's plays plus the Pressure step, scored by the simulator's evaluation. Lookahead runs on
 // "hypothetical" copies, so it never sees hidden cards drawn or Threats refilled.
 
-import { threat } from '../data/index.ts';
+import { threat, threatsForDay } from '../data/index.ts';
 import { legalActions } from './actions.ts';
 import { step } from './core.ts';
 import { allySymbols, card, cloneState, faceUpSlots, perkAvailable, slotCounts } from './state.ts';
@@ -19,7 +19,8 @@ export const BOT_WEIGHTS = {
   allySymbol: 4,
   gear: 4,
   phantomDraw: 3,
-  faceDown: 4,
+  // A face-down Threat clogs a slot; the simulator's +4 relied on seeing hidden identities.
+  faceDown: -8,
   wildMargin: 15,
 } as const;
 const W = BOT_WEIGHTS;
@@ -163,22 +164,54 @@ function candidatePlays(s: GameState): Action[] {
   );
 }
 
+/** Encrypted Threats whose identity the player has not seen (candidates for any face-down card), sorted. */
+export function unseenEncrypted(s: GameState): string[] {
+  const seen = new Set<string>([...s.threatDiscard, ...s.knownTop]);
+  for (const sl of s.slots) if (sl && !sl.faceDown) seen.add(sl.threatId);
+  return threatsForDay(s.day)
+    .filter((t) => t.type === 'Encrypted Threat' && !seen.has(t.id))
+    .map((t) => t.id)
+    .sort();
+}
+
+/** The states an action can lead to, as far as the player knows. A decrypt is resolved once per
+ * unseen Encrypted Threat, never with the real (hidden) one. */
+function outcomes(s: GameState, a: Action): GameState[] {
+  if (a.type === 'play' && a.mode === 'decrypt' && a.slot !== undefined) {
+    const slot = a.slot;
+    const sl = s.slots[slot];
+    const pool = unseenEncrypted(s);
+    if (sl && pool.length > 0) {
+      return pool.map((id) => {
+        const c = cloneState(s, { keepLog: false });
+        c.slots[slot] = { ...sl, threatId: id };
+        return settle(step(c, a).state);
+      });
+    }
+  }
+  return [settle(step(s, a).state)];
+}
+
+const mean = (xs: number[]): number => xs.reduce((x, y) => x + y, 0) / Math.max(1, xs.length);
+
 function plan(s: GameState, playsLeft: number): { action: Action | null; score: number } {
   let best: Action | null = null;
   let bestScore = Number.NEGATIVE_INFINITY;
   for (const a of candidatePlays(s)) {
-    const g = settle(step(s, a).state);
-    let sc: number;
-    if (g.phase === 'over') sc = scoreState(g);
-    else if (playsLeft > 1 && g.phase === 'play' && g.hand.length > 0 && g.playsUsed < g.playsPerTurn) {
-      sc = Number.NEGATIVE_INFINITY;
-      for (const b of candidatePlays(g)) {
-        let h = settle(step(g, b).state);
-        if (h.phase !== 'over') h = finishTurn(h);
-        sc = Math.max(sc, scoreState(h));
-      }
-      if (sc === Number.NEGATIVE_INFINITY) sc = scoreState(finishTurn(g));
-    } else sc = scoreState(finishTurn(g));
+    const sc = mean(
+      outcomes(s, a).map((g) => {
+        if (g.phase === 'over') return scoreState(g);
+        if (playsLeft > 1 && g.phase === 'play' && g.hand.length > 0 && g.playsUsed < g.playsPerTurn) {
+          let inner = Number.NEGATIVE_INFINITY;
+          for (const b of candidatePlays(g)) {
+            const v = mean(outcomes(g, b).map((h) => scoreState(h.phase === 'over' ? h : finishTurn(h))));
+            inner = Math.max(inner, v);
+          }
+          return inner === Number.NEGATIVE_INFINITY ? scoreState(finishTurn(g)) : inner;
+        }
+        return scoreState(finishTurn(g));
+      }),
+    );
     if (sc > bestScore) {
       best = a;
       bestScore = sc;

@@ -24,6 +24,7 @@ export function cloneState(s: GameState, opts: { keepLog?: boolean } = {}): Game
     threatDeck: [...s.threatDeck],
     threatDiscard: [...s.threatDiscard],
     setAsideThreats: [...s.setAsideThreats],
+    voidThreats: [...(s.voidThreats ?? [])],
     knownTop: [...s.knownTop],
     openingRow: [...s.openingRow],
     perks: { unlocked: [...s.perks.unlocked], used: [...s.perks.used] },
@@ -86,8 +87,11 @@ export function allySymbols(s: GameState): Suit[] {
   return s.allies.flatMap((a) => playerCard(a).allySymbols);
 }
 
+/** A tucked card's Power. Suit penalties ("your Stealth cards get -1 Power") use the card's PRINTED
+ * suit, even when it counts as another suit (Master Decryptor / Improvised Weapon). */
 export function tuckedPower(s: GameState, c: TuckedCard): number {
-  return Math.max(0, c.power - suitPenalty(s, c.suit)) + c.gearBonus;
+  const printed = playerCard(c.uid).suit ?? c.suit;
+  return Math.max(0, c.power - suitPenalty(s, printed)) + c.gearBonus;
 }
 
 export interface Counts {
@@ -117,7 +121,7 @@ export function gearBonusFor(s: GameState, suit: Suit): number {
   return n;
 }
 
-/** The card that will actually be played for `uid`: its Awakened Card if it is a Conditioned
+/** SPOILER: never show its name or text before the play. The card that will actually be played for `uid`: its Awakened Card if it is a Conditioned
  * Card whose trigger is met right now (and the Awakened Card is set aside), else itself. */
 export function effectiveCard(s: GameState, uid: string): PlayerCard {
   const c = playerCard(uid);
@@ -125,6 +129,12 @@ export function effectiveCard(s: GameState, uid: string): PlayerCard {
     return playerCard(c.pairsWith);
   }
   return c;
+}
+
+/** Playing `uid` now would awaken it (a Conditioned Card whose trigger is met). Spoiler-safe:
+ * says nothing about the Awakened Card. */
+export function willAwaken(s: GameState, uid: string): boolean {
+  return effectiveCard(s, uid).id !== uid;
 }
 
 export function triggerMet(s: GameState, c: PlayerCard): boolean {
@@ -176,6 +186,7 @@ export function threatZones(s: GameState): [string, string][] {
   add('threatDeck', s.threatDeck);
   add('threatDiscard', s.threatDiscard);
   add('setAsideThreats', s.setAsideThreats);
+  add('voidThreats', s.voidThreats ?? []);
   s.slots.forEach((sl, i) => {
     if (sl) out.push([sl.threatId, `slot${i}`]);
   });

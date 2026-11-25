@@ -3,16 +3,7 @@
 import { threat } from '../data/index.ts';
 import type { Effect, PlayerCard } from '../data/types.ts';
 import { isTargeted, step } from './core.ts';
-import {
-  card,
-  effectiveCard,
-  faceUp,
-  faceUpSlots,
-  IllegalActionError,
-  isSuitCard,
-  perkAvailable,
-  suitMatches,
-} from './state.ts';
+import { card, faceUp, faceUpSlots, IllegalActionError, isSuitCard, perkAvailable, suitMatches } from './state.ts';
 import { abilitiesDisabled } from './twists.ts';
 import type { Action, Decision, DecisionChoice, GameEvent, GameState } from './types.ts';
 
@@ -90,7 +81,9 @@ function withTarget(base: Extract<Action, { type: 'play' }>, tg: AbilityTarget):
 /** Every legal play of one hand card. */
 export function playActionsFor(s: GameState, uid: string): Action[] {
   const out: Action[] = [];
-  const pc = effectiveCard(s, uid);
+  // Legality comes from the card the player can see (a Conditioned Card's Awakened Card is
+  // secret until it is played).
+  const pc = card(uid);
   if (card(uid).cls === 'Gear' || card(uid).cls === 'Ally') return [{ type: 'play', cardUid: uid, mode: 'deploy' }];
   if (!isSuitCard(pc) || !pc.suit) return out;
   const md = s.mods.masterDecryptor;
@@ -136,7 +129,7 @@ export function perkActions(s: GameState): Action[] {
   if (perkAvailable(s, 'falseTrail') && !s.mods.falseTrail) out.push({ type: 'perk', perk: 'falseTrail' });
   if (perkAvailable(s, 'satelliteOverwrite') && s.threatDeck.length > 0)
     out.push({ type: 'perk', perk: 'satelliteOverwrite' });
-  if (perkAvailable(s, 'contingencyPlan')) out.push({ type: 'perk', perk: 'contingencyPlan' });
+  if (perkAvailable(s, 'contingencyPlan') && s.drawPile.length > 0) out.push({ type: 'perk', perk: 'contingencyPlan' });
   if (perkAvailable(s, 'masterDecryptor') && s.playsUsed === 0 && !s.mods.masterDecryptor)
     out.push({ type: 'perk', perk: 'masterDecryptor' });
   if (perkAvailable(s, 'adrenalineSurge') && !s.mods.adrenaline) out.push({ type: 'perk', perk: 'adrenalineSurge' });

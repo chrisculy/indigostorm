@@ -126,7 +126,7 @@ describe('Two-Phase Threats', () => {
     expect(r2.state.threatDeck).toEqual([T.gate]);
   });
 
-  it('a swapped-away Two-Phase Threat leaves its Countermeasure set aside', () => {
+  it('a swapped-away Two-Phase Threat voids its Countermeasure (it never appears)', () => {
     const s = mk({
       day: 26,
       hand: [C.coldRead],
@@ -136,7 +136,8 @@ describe('Two-Phase Threats', () => {
     });
     const r = run(s, ability(C.coldRead, 0));
     expect(r.state.slots[0]?.threatId).toBe(T.gate);
-    expect(r.state.setAsideThreats).toEqual([T.coreLockdown]);
+    expect(r.state.setAsideThreats).toEqual([]);
+    expect(r.state.voidThreats).toEqual([T.coreLockdown]);
   });
 });
 

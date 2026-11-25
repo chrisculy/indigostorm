@@ -113,7 +113,7 @@ describe('Bonus Objective evaluators', () => {
     expect(ev(o, st([], { lead: 3, turn: 4 }))).toBe('pending');
   });
 
-  it('decryptAll needs at least one Encrypted Threat and all of them decrypted', () => {
+  it('decryptAll: every Encrypted Threat that entered was decrypted (met when none entered)', () => {
     const o: BonusObjective = { code: 'decryptAll' };
     const enter: GameEvent = {
       type: 'threatEntered',
@@ -124,7 +124,7 @@ describe('Bonus Objective evaluators', () => {
       countermeasure: false,
     };
     const dec: GameEvent = { type: 'decrypted', card: C.signal, slot: 0, threatId: T.encServer, tucked: true };
-    expect(ev(o, st([], over))).toBe('failed');
+    expect(ev(o, st([], over))).toBe('met');
     expect(ev(o, st([enter, enter, dec], over))).toBe('failed');
     expect(ev(o, st([enter, dec], over))).toBe('met');
     expect(ev(o, st([enter, dec]))).toBe('pending');

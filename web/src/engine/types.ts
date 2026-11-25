@@ -341,6 +341,8 @@ export interface GameState {
   threatDiscard: string[];
   /** Countermeasures waiting for their Two-Phase Threat to be cleared. */
   setAsideThreats: string[];
+  /** Countermeasures whose Two-Phase Threat escaped or was swapped / Vanished away: they never appear. */
+  voidThreats: string[];
   /** Prefix of the Threat Deck (top first) the player has legitimately seen (peek / Satellite). */
   knownTop: string[];
   /** Threats dealt into the Scene Row at setup (for Bonus Objectives). */
@@ -356,7 +358,7 @@ export interface GameState {
   log: GameEvent[];
   result: EpisodeResult | null;
   /** Internal: set on lookahead copies (bot, previews). Draws and refills are not revealed. */
-  hypothetical?: { phantomDraws: number };
+  hypothetical?: { phantomDraws: number; countermeasurePending?: boolean };
 }
 
 // ---------------------------------------------------------------------------- view
@@ -444,8 +446,10 @@ export interface ActionPreview {
   ends: EndReason | null;
   /** The action stops at a decision. */
   decision: DecisionKind | null;
-  /** The outcome depends on hidden information (e.g. decrypting) and is not shown. */
+  /** The outcome depends on hidden information (decrypting, an awakening) and is not shown. */
   hidden: boolean;
+  /** The play awakens a Conditioned Card (its Awakened Card stays secret until played). */
+  awakens: boolean;
 }
 
 // ---------------------------------------------------------------------------- campaign

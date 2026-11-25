@@ -96,6 +96,7 @@ export function createEpisode(setup: EpisodeSetup): GameState {
     threatDeck,
     threatDiscard: [],
     setAsideThreats: countermeasures,
+    voidThreats: [],
     knownTop: [],
     openingRow: [],
     perks: { unlocked: [...new Set(setup.perks)], used: [] },

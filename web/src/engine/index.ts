@@ -11,7 +11,7 @@ export {
   perkActions,
   playActionsFor,
 } from './actions.ts';
-export { BOT_WEIGHTS, chooseDecision, incoming, scoreState, suggestAction } from './bot.ts';
+export { BOT_WEIGHTS, chooseDecision, incoming, scoreState, suggestAction, unseenEncrypted } from './bot.ts';
 export {
   ALL_PERKS,
   actStars,
@@ -42,6 +42,7 @@ export {
   playerCardZones,
   slotCounts,
   threatZones,
+  willAwaken,
 } from './state.ts';
 export {
   abilitiesDisabled,

@@ -10,7 +10,6 @@ import { evaluateObjective } from './objectives.ts';
 import {
   card,
   cloneState,
-  effectiveCard,
   faceUp,
   faceUpSlots,
   gearBonusFor,
@@ -207,6 +206,14 @@ function refill(c: Ctx, slot: number): void {
   enter(c, slot, id);
 }
 
+/** A Two-Phase Threat left the row without being cleared: its Countermeasure never appears. */
+function voidCountermeasure(s: GameState, threatId: string): void {
+  const t = threat(threatId);
+  if (t.type === 'Two-Phase Threat' && t.pairsWith && removeOne(s.setAsideThreats, t.pairsWith)) {
+    s.voidThreats.push(t.pairsWith);
+  }
+}
+
 /** Remove the Threat in `slot`: its tucked cards go to the discard pile, the Threat to the Threat discard. */
 function removeThreat(s: GameState, slot: number): void {
   const sl = s.slots[slot];
@@ -313,6 +320,7 @@ function applyEffect(c: Ctx, task: Extract<Task, { t: 'effect' }>): void {
       if (!wasFaceDown && s.knownTop.length === s.threatDeck.length) s.knownTop.push(t.id);
       s.threatDeck.push(t.id);
       s.slots[slot] = null;
+      voidCountermeasure(s, t.id);
       emit(c, { type: 'swapped', slot, threatId: wasFaceDown ? null : t.id });
       pushFront(s, { t: 'refill', slot }, { t: 'checkScene' });
       return;
@@ -478,7 +486,11 @@ function exec(c: Ctx, task: Task): void {
       if (s.slots[task.slot]) return;
       const t = threat(task.threatId);
       if (t.type === 'Two-Phase Threat' && t.pairsWith && s.setAsideThreats.includes(t.pairsWith)) {
-        if (s.hypothetical) return;
+        if (s.hypothetical) {
+          // Its identity is hidden, but the slot is not empty: no Scene Cleared on this lookahead.
+          s.hypothetical.countermeasurePending = true;
+          return;
+        }
         removeOne(s.setAsideThreats, t.pairsWith);
         enter(c, task.slot, t.pairsWith, true);
         return;
@@ -490,7 +502,9 @@ function exec(c: Ctx, task: Task): void {
       refill(c, task.slot);
       return;
     case 'checkScene':
-      if (s.hypothetical || s.sceneCleared) return;
+      // Lookahead copies may check it too: the Threat Deck count is public, and refills only
+      // happen when the deck is not empty.
+      if (s.sceneCleared || s.hypothetical?.countermeasurePending) return;
       if (s.threatDeck.length === 0 && s.slots.every((x) => x === null)) {
         s.sceneCleared = true;
         emit(c, { type: 'sceneCleared' });
@@ -551,6 +565,7 @@ function exec(c: Ctx, task: Task): void {
     case 'escape': {
       const sl = s.slots[task.slot];
       if (!sl || sl.threatId !== task.threatId) return;
+      voidCountermeasure(s, sl.threatId);
       removeThreat(s, task.slot);
       pushFront(s, { t: 'refill', slot: task.slot }, { t: 'checkScene' });
       return;
@@ -638,7 +653,10 @@ function doPlay(c: Ctx, a: Extract<Action, { type: 'play' }>): void {
       const t = threat(slotThreat as string);
       const iw = a.mode === 'improvisedWeapon';
       if (iw) markUsed(c, 'improvisedWeapon');
-      const suit = iw || md ? t.pref : (pc.suit as NonNullable<typeof pc.suit>);
+      // An Awakened Card keeps the tuck the player chose with the Conditioned Card: if its own suit
+      // does not match the Threat, it counts as the Conditioned Card's suit.
+      const own = pc.suit as NonNullable<typeof pc.suit>;
+      const suit = iw || md ? t.pref : suitMatches(t, own) ? own : (orig.suit ?? own);
       tasks.push({ t: 'tuck', card: uid, slot, threatId: t.id, suit, power: iw ? pc.power * 2 : pc.power, wild: iw });
       break;
     }
@@ -685,6 +703,7 @@ function doPerk(c: Ctx, a: Extract<Action, { type: 'perk' }>): void {
       const sl = s.slots[slot];
       if (!sl) return;
       emit(c, { type: 'vanished', slot, threatId: sl.threatId });
+      voidCountermeasure(s, sl.threatId);
       removeThreat(s, slot);
       pushFront(s, { t: 'refill', slot }, { t: 'checkScene' });
       return;
@@ -809,5 +828,3 @@ export function step(state: GameState, action: Action): { state: GameState; even
   run(c);
   return { state: s, events: c.ev };
 }
-
-export { effectiveCard };

@@ -95,7 +95,12 @@ export function evaluateObjective(obj: BonusObjective, s: GameState): ObjectiveE
     case 'decryptAll': {
       const entered = ofType(log, 'threatEntered').filter((e) => e.faceDown).length;
       const done = ofType(log, 'decrypted').length;
-      return atEnd(entered > 0 && done >= entered, false, `Decrypted: ${done}/${entered}`);
+      // Literal reading: met when every Encrypted Threat that entered was decrypted (also when none entered).
+      return atEnd(
+        done >= entered,
+        false,
+        entered === 0 ? 'No Encrypted Threats entered' : `Decrypted: ${done}/${entered}`,
+      );
     }
     case 'clearsInOneTurn': {
       const best = perTurnMax(cleared);

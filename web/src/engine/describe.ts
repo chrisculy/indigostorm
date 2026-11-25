@@ -4,7 +4,7 @@ import { perksById, playerCard, threat } from '../data/index.ts';
 import type { Delta, Effect, PerkId } from '../data/types.ts';
 import { isLegal } from './actions.ts';
 import { step } from './core.ts';
-import { cloneState, effectiveCard, IllegalActionError, slotCounts } from './state.ts';
+import { cloneState, IllegalActionError, slotCounts, willAwaken } from './state.ts';
 import type { Action, ActionPreview, GameEvent, GameState, Source } from './types.ts';
 
 const cardName = (uid: string): string => playerCard(uid).name;
@@ -65,30 +65,33 @@ function effectText(s: GameState, e: Effect, a: Extract<Action, { type: 'play' }
 export function describeAction(s: GameState, a: Action): string {
   switch (a.type) {
     case 'play': {
-      const orig = playerCard(a.cardUid);
-      const pc = effectiveCard(s, a.cardUid);
-      const prefix = pc.id !== orig.id ? `Awaken ${orig.name} → ${pc.name}: ` : '';
+      // Spoiler-safe: a Conditioned Card about to awaken is named as itself, and nothing about its
+      // Awakened Card (name, text, bonus) is shown until the play happens.
+      const pc = playerCard(a.cardUid);
+      const awakens = willAwaken(s, a.cardUid);
+      const suffix = awakens ? ' — it will awaken' : '';
       const name = pc.name;
       switch (a.mode) {
         case 'deploy':
-          return `${prefix}Deploy ${name} (${pc.cls})`;
+          return `Deploy ${name} (${pc.cls})`;
         case 'tuck':
-          return `${prefix}Tuck ${name} under ${slotLabel(s, a.slot)}`;
+          return `Tuck ${name} under ${slotLabel(s, a.slot)}${suffix}`;
         case 'improvisedWeapon':
-          return `${prefix}Improvised Weapon: tuck ${name} under ${slotLabel(s, a.slot)} (any suit, double Power)`;
+          return `Improvised Weapon: tuck ${name} under ${slotLabel(s, a.slot)} (any suit, double Power)${suffix}`;
         case 'decrypt':
-          return `${prefix}Decrypt ${slotLabel(s, a.slot)} with ${name}`;
+          return `Decrypt ${slotLabel(s, a.slot)} with ${name}${suffix}`;
         case 'ability':
         case 'sleeperInstinct': {
           let body: string;
           if (s.twist === 'no_abilities') body = `play ${name} (no abilities today)`;
+          else if (awakens) body = `use ${name}'s ability${a.slot !== undefined ? ` on ${slotLabel(s, a.slot)}` : ''}`;
           else {
             const parts = pc.effects.map((e) => effectText(s, e, a)).filter(Boolean);
             body = `${name}: ${parts.join(', ') || 'no effect'}`;
           }
           if (a.mode === 'sleeperInstinct')
-            return `${prefix}Sleeper Instinct: ${body}, then tuck it under ${slotLabel(s, a.slot2)}`;
-          return `${prefix}${body}`;
+            return `Sleeper Instinct: ${body}, then tuck it under ${slotLabel(s, a.slot2)}${suffix}`;
+          return `${body}${suffix}`;
         }
       }
       return name;
@@ -157,8 +160,11 @@ export function previewAction(s: GameState, a: Action): ActionPreview {
     ends: null,
     decision: null,
     hidden: false,
+    awakens: false,
   };
   if (a.type === 'play' && a.mode === 'decrypt') return { ...empty, hidden: true };
+  // The Awakened Card is secret until played: no numbers for a play that awakens a card.
+  if (a.type === 'play' && willAwaken(s, a.cardUid)) return { ...empty, hidden: true, awakens: true };
   if (a.type === 'perk' && a.perk === 'satelliteOverwrite') return { ...empty, decision: 'satellite' };
   const hyp = cloneState(s, { keepLog: false });
   hyp.hypothetical = { phantomDraws: 0 };
@@ -182,6 +188,7 @@ export function previewAction(s: GameState, a: Action): ActionPreview {
     ends: after.phase === 'over' ? (after.result?.reason ?? null) : null,
     decision: after.pending?.kind ?? (peeked ? 'reorderTop' : null),
     hidden: false,
+    awakens: false,
   };
 }
 

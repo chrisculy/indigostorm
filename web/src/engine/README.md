@@ -73,8 +73,20 @@ Slots are indices into `state.slots` (Pursuer = last slot, `state.pursuerSlot`).
   `state: 'empty' | 'faceDown' | 'faceUp'`, symbols/Power meters, `cleanIfCleared`, dice; `threatDeckKnownTop`
   (seen through peek / Satellite), `threatDeckTopEncrypted`, perks `{unlocked, used, available, usableNow}`,
   `modifiers`, `bonusObjective {text, status, progress}`, `pending`, `log`, `result`.
-- `effectiveCard(state, uid)` gives the card that will actually be played (the Awakened card if a Conditioned
-  card's trigger is met now). `slotCounts(state, slot)` gives live counts.
+- **Flashback spoilers:** a Conditioned card's Awakened card is secret until played (Rule Card D16-R1).
+  `willAwaken(state, uid)` says a play would awaken it; `describeAction` then reads "… — it will awaken" and
+  `previewAction` returns `{ hidden: true, awakens: true }`. Legal plays are computed from the Conditioned card
+  itself. Do not display `effectiveCard(state, uid)` (it names the Awakened card); the `awakened` event after the
+  play reveals it. `slotCounts(state, slot)` gives live counts.
+
+## Rule notes
+
+- **Clean Clear** (PLAN 5.4 #3): every tucked card counts as the preferred suit AND the preferred-suit symbols
+  (tucked cards + Ally symbols) alone meet the symbol requirement — or a `clean_next` effect is active. Breach
+  clears are never Clean.
+- Improvised Weapon / Master Decryptor tucks count as the Threat's preferred suit for everything except Pursuer
+  suit penalties, which use the card's printed suit.
+- A Two-Phase Threat that escapes or is swapped / Vanished away voids its Countermeasure (`state.voidThreats`).
 
 ## Events
 
