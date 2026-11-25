@@ -1,0 +1,4 @@
+/* Global styles entry. Layer order: later layers win. App styles may stay unlayered (they win over all). */
+@layer reset, tokens, base, components, cards, gallery;
+@import "./tokens.css";
+@import "./base.css";

@@ -1,0 +1,339 @@
+/*
+ * Indigo Storm design tokens — "Midnight dossier".
+ *
+ * Themes: dark is the default. Light follows prefers-color-scheme unless the
+ * root carries data-theme="dark" | "light" | "contrast" (an explicit override).
+ * Motion: durations collapse under prefers-reduced-motion or data-motion="reduced"
+ * (data-motion="full" opts back in).
+ * Suits: data-suits="hc" (or the contrast theme, or prefers-contrast: more)
+ * swaps in the high-contrast suit colors.
+ */
+
+@layer tokens {
+  :root {
+    color-scheme: dark;
+
+    /* ---- palette (raw) ------------------------------------------------- */
+    --night-950: #070818;
+    --night-900: #0b0d24;
+    --night-850: #10132f;
+    --night-800: #161a3d;
+    --night-700: #20255a;
+    --night-600: #2e347a;
+    --storm-500: #4b3b9a;
+    --storm-400: #6d5fd0;
+    --storm-300: #9c90e0;
+    --cyan-500: #22d3ee;
+    --cyan-400: #3de3f5;
+    --cyan-300: #8af0fb;
+    --gold-400: #f2c063;
+    --gold-500: #c9a227;
+    --paper: #f6f7fb;
+    --paper-2: #eceff6;
+    --paper-3: #dfe3ee;
+    --ink: #1d2433;
+    --ink-2: #3a4152;
+    --ink-muted: #5b6170;
+
+    /* ---- suits ---------------------------------------------------------- */
+    /* Base colors (print parity). White text on each passes WCAG AA. */
+    --suit-recon-base: #1f7a8c;
+    --suit-stealth-base: #4b3b9a;
+    --suit-force-base: #b83227;
+    /* High-contrast variants (≥ 7:1 with white). */
+    --suit-recon-hc: #0b5566;
+    --suit-stealth-hc: #33257a;
+    --suit-force-hc: #8e1a12;
+    /* Bright variants for icons / text on the night background (≥ 4.5:1 on night-900). */
+    --suit-recon-bright: #5ccbe0;
+    --suit-stealth-bright: #a99cf5;
+    --suit-force-bright: #ff7a6b;
+
+    --suit-recon: var(--suit-recon-base);
+    --suit-stealth: var(--suit-stealth-base);
+    --suit-force: var(--suit-force-base);
+
+    /* ---- card class / threat-type colors (header bands, print parity) ---- */
+    --type-gear: #4e5563;
+    --type-ally: #2f7d4f;
+    --type-threat: #2b2f3a;
+    --type-encrypted: #0e5a6e;
+    --type-pursuer: #7a1e1e;
+    --type-twophase: #6b4e0f;
+    --type-countermeasure: #8a5a00;
+    --type-rule: #4b3b9a;
+    --type-story: #1d2433;
+    --type-jumpin: #5a606c;
+
+    /* Track semantics (paper and night variants). */
+    --lead: #0e7490;
+    --lead-bright: #3de3f5;
+    --exposure: #b83227;
+    --exposure-bright: #ff7a6b;
+    --star: var(--gold-400);
+
+    /* ---- semantic surface colors (dark theme) --------------------------- */
+    --bg: var(--night-900);
+    --bg-deep: var(--night-950);
+    --bg-storm: #241f63;
+    --bg-storm-2: #0d3a4f;
+    --surface-1: rgb(22 26 61 / 0.72);
+    --surface-2: rgb(32 37 90 / 0.82);
+    --surface-solid: var(--night-800);
+    --surface-raised: var(--night-700);
+    --border: rgb(156 144 224 / 0.22);
+    --border-strong: rgb(156 144 224 / 0.45);
+    --text: #e9ebf8;
+    --text-muted: #a7acd0;
+    --text-faint: #7d82ad;
+    --accent: var(--cyan-400);
+    --accent-strong: var(--cyan-300);
+    --accent-ink: #06222a; /* text on accent fills */
+    --danger: #ff6b5e;
+    --danger-fill: #b83227;
+    --success: #4ade80;
+    --warning: var(--gold-400);
+    --topo-color: rgb(156 144 224 / 0.07);
+    --scan-color: rgb(255 255 255 / 0.018);
+    --selection: rgb(61 227 245 / 0.32);
+    --focus-ring: var(--cyan-400);
+    --focus-ring-inner: var(--night-950);
+
+    /* ---- typography ------------------------------------------------------ */
+    --font-body: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-display: "Oswald Variable", "Oswald", "Arial Narrow", "Roboto Condensed", sans-serif;
+    --font-num: var(--font-display);
+    /* Modular scale, ratio 1.25 from 16px. */
+    --fs-2xs: 0.6875rem; /* 11 */
+    --fs-xs: 0.75rem; /* 12 */
+    --fs-sm: 0.875rem; /* 14 */
+    --fs-md: 1rem; /* 16 */
+    --fs-lg: 1.25rem; /* 20 */
+    --fs-xl: 1.5625rem; /* 25 */
+    --fs-2xl: 1.953rem; /* 31 */
+    --fs-3xl: 2.441rem; /* 39 */
+    --fs-4xl: 3.052rem; /* 49 */
+    --lh-tight: 1.1;
+    --lh-snug: 1.3;
+    --lh-body: 1.5;
+    --tracking-display: 0.04em;
+    --tracking-caps: 0.08em;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+
+    /* ---- spacing (4px base) ---------------------------------------------- */
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --space-7: 3rem;
+    --space-8: 4rem;
+
+    /* ---- radii ------------------------------------------------------------ */
+    --radius-xs: 3px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-pill: 999px;
+
+    /* ---- elevation (indigo-tinted) ---------------------------------------- */
+    --shadow-1: 0 1px 2px rgb(3 4 18 / 0.5), 0 1px 1px rgb(3 4 18 / 0.3);
+    --shadow-2: 0 4px 10px -2px rgb(3 4 18 / 0.55), 0 2px 4px rgb(3 4 18 / 0.35);
+    --shadow-3: 0 14px 28px -8px rgb(3 4 18 / 0.7), 0 4px 10px rgb(3 4 18 / 0.4);
+    --shadow-4: 0 30px 60px -12px rgb(3 4 18 / 0.85), 0 10px 24px rgb(3 4 18 / 0.5);
+    --glow-accent: 0 0 0 2px var(--cyan-400), 0 0 18px 2px rgb(61 227 245 / 0.55);
+    --glow-accent-soft: 0 0 0 1.5px rgb(61 227 245 / 0.75), 0 0 14px rgb(61 227 245 / 0.35);
+    --glow-gold: 0 0 0 2px var(--gold-400), 0 0 18px 2px rgb(242 192 99 / 0.5);
+    --inset-paper: inset 0 0 0 1px rgb(29 36 51 / 0.12);
+
+    /* ---- motion ------------------------------------------------------------ */
+    --dur-instant: 80ms;
+    --dur-fast: 140ms;
+    --dur-base: 220ms;
+    --dur-slow: 380ms;
+    --dur-slower: 600ms;
+    --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --ease-in: cubic-bezier(0.5, 0, 0.75, 0);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --lift: -6px; /* hover lift distance for cards */
+
+    /* ---- z layers ---------------------------------------------------------- */
+    --z-base: 0;
+    --z-raised: 10;
+    --z-card-hover: 20;
+    --z-card-selected: 30;
+    --z-sticky: 100;
+    --z-sheet: 300;
+    --z-dialog: 400;
+    --z-toast: 500;
+    --z-tooltip: 600;
+
+    /* ---- cards ------------------------------------------------------------- */
+    --card-ratio: 63 / 88;
+    --card-w-xs: 72px;
+    --card-w-sm: 120px;
+    --card-w-md: 180px;
+    --card-w-lg: 240px;
+    --card-w-xl: 340px;
+    --card-w: var(--card-w-md); /* override on a container to rescale every card in it */
+    --card-radius: 4.8cqi; /* relative to card width (cards are size containers) */
+  }
+
+  /* ---- light theme ---------------------------------------------------------- */
+  /* Values are repeated in the media query and the attribute rule (CSS cannot share a block). */
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) {
+      color-scheme: light;
+      --bg: #e7eaf4;
+      --bg-deep: #d9deec;
+      --bg-storm: #cfcaf2;
+      --bg-storm-2: #c4e6ee;
+      --surface-1: rgb(255 255 255 / 0.72);
+      --surface-2: rgb(255 255 255 / 0.9);
+      --surface-solid: #ffffff;
+      --surface-raised: #ffffff;
+      --border: rgb(46 52 122 / 0.16);
+      --border-strong: rgb(46 52 122 / 0.36);
+      --text: #161b2e;
+      --text-muted: #474e66;
+      --text-faint: #646b85;
+      --accent: #0b7f95;
+      --accent-strong: #075e6f;
+      --accent-ink: #ffffff;
+      --danger: #b3261e;
+      --success: #1f7a3d;
+      --warning: #8a5a00;
+      --topo-color: rgb(46 52 122 / 0.055);
+      --scan-color: rgb(46 52 122 / 0.02);
+      --selection: rgb(11 127 149 / 0.22);
+      --focus-ring: #0a8fa6;
+      --focus-ring-inner: #ffffff;
+      --suit-recon-bright: #146a7b;
+      --suit-stealth-bright: #4b3b9a;
+      --suit-force-bright: #a62b20;
+      --lead-bright: #0b7f95;
+      --exposure-bright: #b3261e;
+      --star: #b7860b;
+      --shadow-1: 0 1px 2px rgb(22 27 46 / 0.12), 0 1px 1px rgb(22 27 46 / 0.08);
+      --shadow-2: 0 4px 10px -2px rgb(22 27 46 / 0.16), 0 2px 4px rgb(22 27 46 / 0.08);
+      --shadow-3: 0 14px 28px -8px rgb(22 27 46 / 0.26), 0 4px 10px rgb(22 27 46 / 0.1);
+      --shadow-4: 0 30px 60px -12px rgb(22 27 46 / 0.35), 0 10px 24px rgb(22 27 46 / 0.14);
+      --glow-accent: 0 0 0 2px #0a8fa6, 0 0 16px 2px rgb(10 143 166 / 0.4);
+      --glow-accent-soft: 0 0 0 1.5px rgb(10 143 166 / 0.8), 0 0 12px rgb(10 143 166 / 0.25);
+    }
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #e7eaf4;
+    --bg-deep: #d9deec;
+    --bg-storm: #cfcaf2;
+    --bg-storm-2: #c4e6ee;
+    --surface-1: rgb(255 255 255 / 0.72);
+    --surface-2: rgb(255 255 255 / 0.9);
+    --surface-solid: #ffffff;
+    --surface-raised: #ffffff;
+    --border: rgb(46 52 122 / 0.16);
+    --border-strong: rgb(46 52 122 / 0.36);
+    --text: #161b2e;
+    --text-muted: #474e66;
+    --text-faint: #646b85;
+    --accent: #0b7f95;
+    --accent-strong: #075e6f;
+    --accent-ink: #ffffff;
+    --danger: #b3261e;
+    --success: #1f7a3d;
+    --warning: #8a5a00;
+    --topo-color: rgb(46 52 122 / 0.055);
+    --scan-color: rgb(46 52 122 / 0.02);
+    --selection: rgb(11 127 149 / 0.22);
+    --focus-ring: #0a8fa6;
+    --focus-ring-inner: #ffffff;
+    --suit-recon-bright: #146a7b;
+    --suit-stealth-bright: #4b3b9a;
+    --suit-force-bright: #a62b20;
+    --lead-bright: #0b7f95;
+    --exposure-bright: #b3261e;
+    --star: #b7860b;
+    --shadow-1: 0 1px 2px rgb(22 27 46 / 0.12), 0 1px 1px rgb(22 27 46 / 0.08);
+    --shadow-2: 0 4px 10px -2px rgb(22 27 46 / 0.16), 0 2px 4px rgb(22 27 46 / 0.08);
+    --shadow-3: 0 14px 28px -8px rgb(22 27 46 / 0.26), 0 4px 10px rgb(22 27 46 / 0.1);
+    --shadow-4: 0 30px 60px -12px rgb(22 27 46 / 0.35), 0 10px 24px rgb(22 27 46 / 0.14);
+    --glow-accent: 0 0 0 2px #0a8fa6, 0 0 16px 2px rgb(10 143 166 / 0.4);
+    --glow-accent-soft: 0 0 0 1.5px rgb(10 143 166 / 0.8), 0 0 12px rgb(10 143 166 / 0.25);
+  }
+
+  /* ---- high-contrast theme (dark, stronger edges, HC suits) ----------------- */
+  :root[data-theme="contrast"] {
+    color-scheme: dark;
+    --bg: #000000;
+    --bg-deep: #000000;
+    --bg-storm: #0c0a2a;
+    --bg-storm-2: #001820;
+    --surface-1: #0a0a14;
+    --surface-2: #12121f;
+    --surface-solid: #0a0a14;
+    --surface-raised: #16162a;
+    --border: rgb(255 255 255 / 0.55);
+    --border-strong: #ffffff;
+    --text: #ffffff;
+    --text-muted: #e0e2f0;
+    --text-faint: #c4c7dc;
+    --accent: #5ff0ff;
+    --accent-strong: #b4f8ff;
+    --topo-color: rgb(255 255 255 / 0.04);
+    --scan-color: transparent;
+    --focus-ring: #ffe600;
+    --focus-ring-inner: #000000;
+    --glow-accent: 0 0 0 3px #ffe600, 0 0 0 5px #000000;
+    --glow-accent-soft: 0 0 0 3px #5ff0ff;
+    --ink-muted: #2c3242;
+    --inset-paper: inset 0 0 0 2px #000000;
+  }
+
+  /* ---- high-contrast suit colors ------------------------------------------ */
+  :root[data-theme="contrast"],
+  :root[data-suits="hc"] {
+    --suit-recon: var(--suit-recon-hc);
+    --suit-stealth: var(--suit-stealth-hc);
+    --suit-force: var(--suit-force-hc);
+    --type-ally: #1d5c37;
+    --type-encrypted: #08404f;
+    --type-twophase: #4f3908;
+    --type-countermeasure: #6a4500;
+    --type-gear: #3a404c;
+  }
+  @media (prefers-contrast: more) {
+    :root:not([data-suits="base"]) {
+      --suit-recon: var(--suit-recon-hc);
+      --suit-stealth: var(--suit-stealth-hc);
+      --suit-force: var(--suit-force-hc);
+    }
+  }
+
+  /* ---- motion preferences --------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    :root:not([data-motion="full"]) {
+      --dur-instant: 0.01ms;
+      --dur-fast: 0.01ms;
+      --dur-base: 0.01ms;
+      --dur-slow: 0.01ms;
+      --dur-slower: 0.01ms;
+      --lift: 0px;
+    }
+  }
+  :root[data-motion="reduced"] {
+    --dur-instant: 0.01ms;
+    --dur-fast: 0.01ms;
+    --dur-base: 0.01ms;
+    --dur-slow: 0.01ms;
+    --dur-slower: 0.01ms;
+    --lift: 0px;
+  }
+}
